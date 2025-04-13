@@ -134,11 +134,12 @@
       const baki = data.perlu - data.bayar;
 
       resultDiv.innerHTML = `
-        ✅ ${data.nama}<br>
-        Jumlah perlu bayar: RM${data.perlu}<br>
-        Sudah bayar: RM${data.bayar}<br>
-        <strong>Baki: RM${baki}</strong>
+        <div style="font-size:1.2rem;">🏠 <strong>${data.nama}</strong></div>
+        💰 <strong>Jumlah perlu bayar:</strong> RM${data.perlu}<br>
+        ✅ <strong>Sudah bayar:</strong> RM${data.bayar}<br>
+        🧾 <strong>Baki:</strong> RM${baki}
       `;
+      
     } else {
       resultDiv.innerHTML = `❌ Kata kunci tidak sah. Sila semak semula.`;
     }

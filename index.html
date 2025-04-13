@@ -7,12 +7,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- NOTE: Header - Tajuk utama Family Day dan countdown -->
   <header>
     <h1>🎉 Family Day 2025</h1>
     <p>Bersama Kita Bahagia | 15-17 Mac 2025</p>
     <div id="countdown" style="font-size: 1.5rem; margin-top: 10px;"></div>
   </header>
 
+  <!-- NOTE: Menu navigasi ke bahagian lain (future plan) -->
   <nav>
     <a href="#">Home</a>
     <a href="#">Aturcara</a>
@@ -22,6 +25,8 @@
   </nav>
 
   <main>
+
+    <!-- NOTE: Info penting tentang lokasi, tarikh, penginapan -->
     <section>
       <h2>📌 Info Penting</h2>
       <ul>
@@ -31,6 +36,7 @@
       </ul>
     </section>
 
+    <!-- NOTE: Senarai kutipan bayaran (static/dummy display) -->
     <section>
       <h2>📋 Senarai Kutipan</h2>
       <table class="kutipan-table">
@@ -61,16 +67,21 @@
       </table>
     </section>
 
+    <!-- NOTE: Semakan status bayar berdasarkan kata kunci -->
     <section>
       <h2>🔐 Semak Status Bayaran Anda</h2>
       <p>Masukkan kata kunci khas keluarga anda untuk semak status kutipan.</p>
+
+      <!-- Input untuk kata kunci family -->
       <input type="password" id="accessKey" placeholder="Contoh: fam1husin" />
       <button onclick="checkPayment()">Semak</button>
 
+      <!-- NOTE: Spinner loading semasa data sedang dimuat -->
       <div id="loading" style="display: none; text-align: center; margin-top: 1rem;">
         <div style="display: inline-flex; align-items: center; gap: 10px;">
-          <svg xmlns="http://www.w3.org/2000/svg" style="margin: auto; background: none;" width="24" height="24" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-            <circle cx="50" cy="50" fill="none" stroke="#f59e0b" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+          <!-- Animated SVG spinner -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+            <circle cx="50" cy="50" fill="none" stroke="#f59e0b" stroke-width="10" r="35" stroke-dasharray="164.9 56.9">
               <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
             </circle>
           </svg>
@@ -78,95 +89,93 @@
         </div>
       </div>
 
+      <!-- NOTE: Tempat result akan dipaparkan selepas semakan -->
       <div id="result" style="margin-top: 1rem; font-weight: bold;"></div>
     </section>
 
-
+    <!-- NOTE: Link ke Google Form pengesahan kehadiran -->
     <section>
       <h2>📝 Kehadiran</h2>
       <p>Sila sahkan kehadiran anda melalui <a href="https://forms.gle/your-form-link" target="_blank">borang ini</a>.</p>
     </section>
+
   </main>
 
+  <!-- NOTE: Footer website -->
   <footer>
     <p>© 2025 Family Day Team | Bendahari: Nama Anda</p>
   </footer>
 
-<script>
-  // Tarikh Family Day: 15 Mac 2025 08:00 pagi
-  const countDownDate = new Date("May 1, 2025 08:00:00").getTime();
+  <!-- NOTE: Countdown timer ke tarikh Family Day -->
+  <script>
+    const countDownDate = new Date("May 1, 2025 08:00:00").getTime();
 
-  const countdown = setInterval(function () {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
+    const countdown = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
 
-    if (distance < 0) {
-      clearInterval(countdown);
-      document.getElementById("countdown").innerHTML = "🎉 Family Day bermula!";
-      return;
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("countdown").innerHTML = "🎉 Family Day bermula!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `⏳ Tinggal ${days} hari ${hours} jam ${minutes} minit ${seconds} saat`;
+    }, 1000);
+  </script>
+
+  <!-- NOTE: Function semak status bayaran ikut kata kunci -->
+  <script>
+  async function checkPayment() {
+    const key = document.getElementById("accessKey").value.toLowerCase();
+    const resultDiv = document.getElementById("result");
+    const loadingDiv = document.getElementById("loading"); // loading spinner element
+
+    resultDiv.innerHTML = ""; // kosongkan result sebelum fetch
+    loadingDiv.style.display = "block"; // tunjuk spinner
+
+    const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
+
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+      console.log("🔍 Raw Response:", text); // debug log
+
+      const data = JSON.parse(text);
+      loadingDiv.style.display = "none"; // hide spinner
+
+      if (data.status === "error") {
+        resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
+        return;
+      }
+
+      const percent = Math.round((data.bayar / data.perlu) * 100);
+      let barColor = "#f44336";
+      if (percent === 100) barColor = "#4CAF50";
+      else if (percent >= 50) barColor = "#FF9800";
+
+      resultDiv.innerHTML = `
+        <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
+        💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
+        ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
+        🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
+        <div class="progress-container">
+          <div class="progress-bar" style="width:${percent}%; background-color:${barColor}; transition: width 1s ease-in-out;">${percent}%</div>
+        </div>
+      `;
+    } catch (error) {
+      loadingDiv.style.display = "none";
+      resultDiv.innerHTML = "❌ Gagal semak data.";
+      console.error("Error:", error);
     }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-      `⏳ Tinggal ${days} hari ${hours} jam ${minutes} minit ${seconds} saat`;
-  }, 1000);
-</script>
-
-
-<script>
-async function checkPayment() {
-  const key = document.getElementById("accessKey").value.toLowerCase();
-  const resultDiv = document.getElementById("result");
-  const loadingDiv = document.getElementById("loading"); // ← ambil elemen loading
-
-  resultDiv.innerHTML = ""; // kosongkan result semasa loading
-  loadingDiv.style.display = "block"; // tunjuk loading
-
-  const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
-
-  try {
-    const response = await fetch(url);
-    const text = await response.text();
-    console.log("🔍 Raw Response:", text); // Ini untuk debug
-
-    const data = JSON.parse(text);
-
-    loadingDiv.style.display = "none"; // sembunyikan loading
-
-    if (data.status === "error") {
-      resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
-      return;
-    }
-
-    const percent = Math.round((data.bayar / data.perlu) * 100);
-    let barColor = "#f44336";
-    if (percent === 100) barColor = "#4CAF50";
-    else if (percent >= 50) barColor = "#FF9800";
-
-    resultDiv.innerHTML = `
-      <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
-      💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
-      ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
-      🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
-      <div class="progress-container">
-        <div class="progress-bar" style="width:${percent}%; background-color:${barColor}; transition: width 1s ease-in-out;">${percent}%</div>
-      </div>
-    `;
-  } catch (error) {
-    loadingDiv.style.display = "none"; // sembunyikan loading walaupun error
-    resultDiv.innerHTML = "❌ Gagal semak data.";
-    console.error("Error:", error);
   }
-}
-
-</script>
-
+  </script>
 
 </body>
 </html>

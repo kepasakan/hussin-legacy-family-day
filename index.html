@@ -66,7 +66,10 @@
       <p>Masukkan kata kunci khas keluarga anda untuk semak status kutipan.</p>
       <input type="password" id="accessKey" placeholder="Contoh: fam1husin" />
       <button onclick="checkPayment()">Semak</button>
-    
+
+       <div id="loading" style="display: none; text-align: center; margin-top: 1rem; font-weight: bold;">
+        ⏳ Memuatkan maklumat...
+       </div>
       <div id="result" style="margin-top: 1rem; font-weight: bold;"></div>
     </section>
 
@@ -112,6 +115,10 @@
 async function checkPayment() {
   const key = document.getElementById("accessKey").value.toLowerCase();
   const resultDiv = document.getElementById("result");
+  const loadingDiv = document.getElementById("loading"); // ← ambil elemen loading
+
+  resultDiv.innerHTML = ""; // kosongkan result semasa loading
+  loadingDiv.style.display = "block"; // tunjuk loading
 
   const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
 
@@ -121,6 +128,8 @@ async function checkPayment() {
     console.log("🔍 Raw Response:", text); // Ini untuk debug
 
     const data = JSON.parse(text);
+
+    loadingDiv.style.display = "none"; // sembunyikan loading
 
     if (data.status === "error") {
       resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
@@ -138,14 +147,16 @@ async function checkPayment() {
       ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
       🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
       <div class="progress-container">
-        <div class="progress-bar" style="width:${percent}%; background-color:${barColor};">${percent}%</div>
+        <div class="progress-bar" style="width:${percent}%; background-color:${barColor}; transition: width 1s ease-in-out;">${percent}%</div>
       </div>
     `;
   } catch (error) {
-    resultDiv.innerHTML = "❌ Gagal semak data (format salah / link problem).";
-    console.error("❌ Error during fetch or JSON parse:", error);
+    loadingDiv.style.display = "none"; // sembunyikan loading walaupun error
+    resultDiv.innerHTML = "❌ Gagal semak data.";
+    console.error("Error:", error);
   }
 }
+
 </script>
 
 

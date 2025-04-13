@@ -133,13 +133,23 @@
       const data = familyData[key];
       const baki = data.perlu - data.bayar;
 
-      resultDiv.innerHTML = `
-        <div style="font-size:1.2rem;">🏠 <strong>${data.nama}</strong></div>
-        💰 <strong>Jumlah perlu bayar:</strong> RM${data.perlu}<br>
-        ✅ <strong>Sudah bayar:</strong> RM${data.bayar}<br>
-        🧾 <strong>Baki:</strong> RM${baki}
-      `;
-      
+    const percent = Math.round((data.bayar / data.perlu) * 100);
+    let barColor = "#f44336"; // merah
+    
+    if (percent === 100) barColor = "#4CAF50"; // hijau
+    else if (percent >= 50) barColor = "#FF9800"; // oren
+    
+    resultDiv.innerHTML = `
+      <div style="font-size:1.2rem; color:#b71c1c;">🏠 <strong>${data.nama}</strong></div>
+      🪙 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
+      ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
+      📄 <strong>Baki:</strong> RM${data.perlu - data.bayar}
+    
+      <div class="progress-container">
+        <div class="progress-bar" style="width:${percent}%; background-color:${barColor};">${percent}%</div>
+      </div>
+    `;
+
     } else {
       resultDiv.innerHTML = `❌ Kata kunci tidak sah. Sila semak semula.`;
     }

@@ -109,40 +109,45 @@
 
 
 <script>
+async function checkPayment() {
+  const key = document.getElementById("accessKey").value.toLowerCase();
+  const resultDiv = document.getElementById("result");
 
-    async function checkPayment() {
-      const key = document.getElementById("accessKey").value.toLowerCase();
-      const resultDiv = document.getElementById("result");
-    
-      const response = await fetch(`https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`);
-      const data = await response.json();
-    
-      if (data.status === "error") {
-        resultDiv.innerHTML = "❌ Kata kunci tidak sah. Sila semak semula.";
-        return;
-      }
-    
-      const percent = Math.round((data.bayar / data.perlu) * 100);
-      let barColor = "#f44336";
-      if (percent === 100) barColor = "#4CAF50";
-      else if (percent >= 50) barColor = "#FF9800";
-    
-      resultDiv.innerHTML = `
-        <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
-        💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
-        ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
-        🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
-        <div class="progress-container">
-          <div class="progress-bar" style="width:${percent}%; background-color:${barColor};">${percent}%</div>
-        </div>
-      `;
+  const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
+
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    console.log("🔍 Raw Response:", text); // Ini untuk debug
+
+    const data = JSON.parse(text);
+
+    if (data.status === "error") {
+      resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
+      return;
     }
-  
-    else {
-      resultDiv.innerHTML = `❌ Kata kunci tidak sah. Sila semak semula.`;
-    }
+
+    const percent = Math.round((data.bayar / data.perlu) * 100);
+    let barColor = "#f44336";
+    if (percent === 100) barColor = "#4CAF50";
+    else if (percent >= 50) barColor = "#FF9800";
+
+    resultDiv.innerHTML = `
+      <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
+      💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
+      ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
+      🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
+      <div class="progress-container">
+        <div class="progress-bar" style="width:${percent}%; background-color:${barColor};">${percent}%</div>
+      </div>
+    `;
+  } catch (error) {
+    resultDiv.innerHTML = "❌ Gagal semak data (format salah / link problem).";
+    console.error("❌ Error during fetch or JSON parse:", error);
   }
+}
 </script>
+
 
 </body>
 </html>

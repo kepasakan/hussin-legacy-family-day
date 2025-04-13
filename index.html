@@ -179,12 +179,11 @@
       const data = await response.json();
   
       if (data.status === "success") {
-        const target = 2000; // Target utama kutipan
-        const terkumpul = data.jumlah_terkumpul;
+        const target = 2000;
+        const terkumpul = data.total_jumlah; // ← pakai dari API
         const baki = target - terkumpul;
         const percent = Math.min(Math.round((terkumpul / target) * 100), 100);
   
-        // Update elemen di paparan
         document.getElementById("jumlahTerkumpul").textContent = terkumpul;
         document.getElementById("bakiKutipan").textContent = baki <= 0 ? 0 : baki;
   
@@ -196,6 +195,7 @@
       console.error("❌ Gagal tarik data kutipan:", err);
     }
   }
+
   
   // ========================================================
   // ✅ AUTO-RUN: Bila page dibuka, auto load kutipan bar

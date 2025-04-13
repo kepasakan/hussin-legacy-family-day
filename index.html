@@ -31,35 +31,45 @@
       </ul>
     </section>
 
-<section>
-  <h2>📋 Senarai Kutipan</h2>
-  <table class="kutipan-table">
-    <thead>
-      <tr>
-        <th>Nama</th>
-        <th>Jumlah (RM)</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Pak Long</td>
-        <td>100</td>
-        <td style="color:green; font-weight: bold;">✅ Bayar</td>
-      </tr>
-      <tr>
-        <td>Mak Ngah</td>
-        <td>100</td>
-        <td style="color:red; font-weight: bold;">❌ Belum</td>
-      </tr>
-      <tr>
-        <td>Hussin Jr</td>
-        <td>50</td>
-        <td style="color:orange; font-weight: bold;">⚠️ Deposit</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+    <section>
+      <h2>📋 Senarai Kutipan</h2>
+      <table class="kutipan-table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Jumlah (RM)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pak Long</td>
+            <td>100</td>
+            <td style="color:green; font-weight: bold;">✅ Bayar</td>
+          </tr>
+          <tr>
+            <td>Mak Ngah</td>
+            <td>100</td>
+            <td style="color:red; font-weight: bold;">❌ Belum</td>
+          </tr>
+          <tr>
+            <td>Hussin Jr</td>
+            <td>50</td>
+            <td style="color:orange; font-weight: bold;">⚠️ Deposit</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>🔐 Semak Status Bayaran Anda</h2>
+      <p>Masukkan kata kunci khas keluarga anda untuk semak status kutipan.</p>
+      <input type="password" id="accessKey" placeholder="Contoh: fam1husin" />
+      <button onclick="checkPayment()">Semak</button>
+    
+      <div id="result" style="margin-top: 1rem; font-weight: bold;"></div>
+    </section>
+
 
     <section>
       <h2>📝 Kehadiran</h2>
@@ -95,6 +105,46 @@
     document.getElementById("countdown").innerHTML =
       `⏳ Tinggal ${days} hari ${hours} jam ${minutes} minit ${seconds} saat`;
   }, 1000);
+</script>
+
+
+<script>
+  const familyData = {
+    fam1husin: {
+      nama: "Keluarga Hussin",
+      perlu: 200,
+      bayar: 150
+    },
+    fam2rahmah: {
+      nama: "Keluarga Rahmah",
+      perlu: 200,
+      bayar: 200
+    },
+    fam3jalil: {
+      nama: "Keluarga Jalil",
+      perlu: 150,
+      bayar: 0
+    }
+  };
+
+  function checkPayment() {
+    const key = document.getElementById("accessKey").value.toLowerCase();
+    const resultDiv = document.getElementById("result");
+
+    if (familyData[key]) {
+      const data = familyData[key];
+      const baki = data.perlu - data.bayar;
+
+      resultDiv.innerHTML = `
+        ✅ ${data.nama}<br>
+        Jumlah perlu bayar: RM${data.perlu}<br>
+        Sudah bayar: RM${data.bayar}<br>
+        <strong>Baki: RM${baki}</strong>
+      `;
+    } else {
+      resultDiv.innerHTML = `❌ Kata kunci tidak sah. Sila semak semula.`;
+    }
+  }
 </script>
 
 </body>

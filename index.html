@@ -40,11 +40,14 @@
     <section>
       <h2>📋 Senarai Kutipan</h2>
       <table class="kutipan-table">
-        <div class="total-info">
+        
+      <!-- NOTE: Paparan jumlah kutipan secara keseluruhan -->
+      <div class="total-info">
         <p><strong>Jumlah diperlukan:</strong> RM2000</p>
         <p><strong>Jumlah terkumpul:</strong> RM<span id="jumlahTerkumpul">0</span></p>
         <p><strong>Baki:</strong> RM<span id="bakiKutipan">0</span></p>
-        
+      
+        <!-- NOTE: Progress bar kutipan (auto update ikut peratus) -->
         <div class="progress-container">
           <div id="overallProgress" class="progress-bar" style="width: 0%; background-color: #2196f3;">0%</div>
         </div>
@@ -160,35 +163,45 @@
       resultDiv.innerHTML = "❌ Gagal semak data.";
       console.error("Error:", error);
     }
-  }
-  // NOTE: Fungsi ini akan kira jumlah kutipan secara automatik dari table
-  function kiraJumlahTerkumpul() {
-    const rows = document.querySelectorAll(".kutipan-table tbody tr");
-    let total = 0;
+
+
+  // NOTE: Fungsi ini akan tarik data kutipan dari API Google Sheet
+  // Function `getJumlahKutipan()` yang kita deploy sebagai web app
+  // Gabungkan total dari Sheet1 (keluarga) + Sheet2 (tambahan)
   
-    // NOTE: Kira semua yang statusnya "Bayar" atau "Deposit"
-    rows.forEach(row => {
-      const status = row.cells[2].textContent.toLowerCase();
-      const jumlah = parseFloat(row.cells[1].textContent);
+  async function kiraKutipanAutomatik() {
+    const url = "https://script.google.com/macros/s/AKfycbyAYkTIVoWtirHtKWUDJOlkDXH0WkSNzuiwesrwtmCNCY3M_dLiZ8oDqQCeOpX628C1KA/exec"; // NOTE: URL API jumlah kutipan
   
-      if (status.includes("bayar") || status.includes("deposit")) {
-        total += jumlah;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+  
+      // NOTE: Kalau status OK, kita update jumlah & progress
+      if (data.status === "success") {
+        const target = 2000; // NOTE: Sasaran jumlah yang perlu dicapai
+        const terkumpul = data.jumlah_terkumpul; // dari Sheet1 + Sheet2
+        const baki = target - terkumpul;
+        const percent = Math.min(Math.round((terkumpul / target) * 100), 100);
+  
+        // NOTE: Update HTML DOM - nilai paparan
+        document.getElementById("jumlahTerkumpul").textContent = terkumpul;
+        document.getElementById("bakiKutipan").textContent = baki <= 0 ? 0 : baki;
+  
+        const bar = document.getElementById("overallProgress");
+        bar.style.width = percent + "%";
+        bar.textContent = percent + "%";
       }
-    });
-  
-    const target = 2000; // NOTE: Tukar nilai ini ikut jumlah target sebenar
-    const baki = target - total;
-    const percent = Math.min(Math.round((total / target) * 100), 100);
-  
-    // NOTE: Kemaskini paparan HTML
-    document.getElementById("jumlahTerkumpul").textContent = total;
-    document.getElementById("bakiKutipan").textContent = baki <= 0 ? 0 : baki;
-    document.getElementById("overallProgress").style.width = percent + "%";
-    document.getElementById("overallProgress").textContent = percent + "%";
+    } catch (err) {
+      // NOTE: Debug error kalau tak dapat fetch dari API
+      console.error("❌ Gagal tarik data kutipan:", err);
+    }
   }
   
-  // NOTE: Jalan function ini setiap kali laman dimuat
-  window.onload = kiraJumlahTerkumpul;
+  // NOTE: Auto-jalankan bila page dibuka
+  window.onload = function () {
+    kiraKutipanAutomatik();
+  };
+
   </script>
 
 </body>

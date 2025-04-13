@@ -40,30 +40,16 @@
     <section>
       <h2>📋 Senarai Kutipan</h2>
       <table class="kutipan-table">
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Jumlah (RM)</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Pak Long</td>
-            <td>100</td>
-            <td style="color:green; font-weight: bold;">✅ Bayar</td>
-          </tr>
-          <tr>
-            <td>Mak Ngah</td>
-            <td>100</td>
-            <td style="color:red; font-weight: bold;">❌ Belum</td>
-          </tr>
-          <tr>
-            <td>Hussin Jr</td>
-            <td>50</td>
-            <td style="color:orange; font-weight: bold;">⚠️ Deposit</td>
-          </tr>
-        </tbody>
+        <div class="total-info">
+        <p><strong>Jumlah diperlukan:</strong> RM2000</p>
+        <p><strong>Jumlah terkumpul:</strong> RM<span id="jumlahTerkumpul">0</span></p>
+        <p><strong>Baki:</strong> RM<span id="bakiKutipan">0</span></p>
+        
+        <div class="progress-container">
+          <div id="overallProgress" class="progress-bar" style="width: 0%; background-color: #2196f3;">0%</div>
+        </div>
+      </div>
+
       </table>
     </section>
 
@@ -175,6 +161,34 @@
       console.error("Error:", error);
     }
   }
+  // NOTE: Fungsi ini akan kira jumlah kutipan secara automatik dari table
+  function kiraJumlahTerkumpul() {
+    const rows = document.querySelectorAll(".kutipan-table tbody tr");
+    let total = 0;
+  
+    // NOTE: Kira semua yang statusnya "Bayar" atau "Deposit"
+    rows.forEach(row => {
+      const status = row.cells[2].textContent.toLowerCase();
+      const jumlah = parseFloat(row.cells[1].textContent);
+  
+      if (status.includes("bayar") || status.includes("deposit")) {
+        total += jumlah;
+      }
+    });
+  
+    const target = 2000; // NOTE: Tukar nilai ini ikut jumlah target sebenar
+    const baki = target - total;
+    const percent = Math.min(Math.round((total / target) * 100), 100);
+  
+    // NOTE: Kemaskini paparan HTML
+    document.getElementById("jumlahTerkumpul").textContent = total;
+    document.getElementById("bakiKutipan").textContent = baki <= 0 ? 0 : baki;
+    document.getElementById("overallProgress").style.width = percent + "%";
+    document.getElementById("overallProgress").textContent = percent + "%";
+  }
+  
+  // NOTE: Jalan function ini setiap kali laman dimuat
+  window.onload = kiraJumlahTerkumpul;
   </script>
 
 </body>

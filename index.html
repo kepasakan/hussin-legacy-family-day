@@ -10,6 +10,7 @@
   <header>
     <h1>🎉 Family Day 2025</h1>
     <p>Bersama Kita Bahagia | 15-17 Mac 2025</p>
+    <div id="countdown" style="font-size: 1.5rem; margin-top: 10px;"></div>
   </header>
 
   <nav>
@@ -46,5 +47,32 @@
   <footer>
     <p>© 2025 Family Day Team | Bendahari: Nama Anda</p>
   </footer>
+
+<script>
+  // Tarikh Family Day: 15 Mac 2025 08:00 pagi
+  const countDownDate = new Date("March 15, 2025 08:00:00").getTime();
+
+  const countdown = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    if (distance < 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerHTML = "🎉 Family Day bermula!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      `⏳ Tinggal ${days} hari ${hours} jam ${minutes} minit ${seconds} saat`;
+  }, 1000);
+</script>
+
 </body>
 </html>

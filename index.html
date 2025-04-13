@@ -39,22 +39,20 @@
     <!-- NOTE: Senarai kutipan bayaran (static/dummy display) -->
     <section>
       <h2>📋 Senarai Kutipan</h2>
-      <table class="kutipan-table">
-        
-      <!-- NOTE: Paparan jumlah kutipan secara keseluruhan -->
+    
+      <!-- ✅ Info kutipan total -->
       <div class="total-info">
         <p><strong>Jumlah diperlukan:</strong> RM2000</p>
         <p><strong>Jumlah terkumpul:</strong> RM<span id="jumlahTerkumpul">0</span></p>
         <p><strong>Baki:</strong> RM<span id="bakiKutipan">0</span></p>
-      
-        <!-- NOTE: Progress bar kutipan (auto update ikut peratus) -->
+    
+        <!-- ✅ Progress bar auto-update -->
         <div class="progress-container">
           <div id="overallProgress" class="progress-bar" style="width: 0%; background-color: #2196f3;">0%</div>
         </div>
       </div>
-
-      </table>
     </section>
+
 
     <!-- NOTE: Semakan status bayar berdasarkan kata kunci -->
     <section>
@@ -120,35 +118,39 @@
   </script>
 
   <!-- NOTE: Function semak status bayaran ikut kata kunci -->
+  
   <script>
+  // =============================================
+  // ✅ FUNCTION: SEMAK STATUS KATA KUNCI (Sheet1)
+  // =============================================
   async function checkPayment() {
     const key = document.getElementById("accessKey").value.toLowerCase();
     const resultDiv = document.getElementById("result");
     const loadingDiv = document.getElementById("loading"); // loading spinner element
-
+  
     resultDiv.innerHTML = ""; // kosongkan result sebelum fetch
     loadingDiv.style.display = "block"; // tunjuk spinner
-
+  
     const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
-
+  
     try {
       const response = await fetch(url);
       const text = await response.text();
       console.log("🔍 Raw Response:", text); // debug log
-
+  
       const data = JSON.parse(text);
       loadingDiv.style.display = "none"; // hide spinner
-
+  
       if (data.status === "error") {
         resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
         return;
       }
-
+  
       const percent = Math.round((data.bayar / data.perlu) * 100);
       let barColor = "#f44336";
       if (percent === 100) barColor = "#4CAF50";
       else if (percent >= 50) barColor = "#FF9800";
-
+  
       resultDiv.innerHTML = `
         <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
         💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
@@ -162,28 +164,27 @@
       loadingDiv.style.display = "none";
       resultDiv.innerHTML = "❌ Gagal semak data.";
       console.error("Error:", error);
-    } 
-  </script>
-  <script>
-  // NOTE: Fungsi ini akan tarik data kutipan dari API Google Sheet
-  // Function `getJumlahKutipan()` yang kita deploy sebagai web app
-  // Gabungkan total dari Sheet1 (keluarga) + Sheet2 (tambahan)
+    }
+  }
   
+  
+  // ========================================================
+  // ✅ FUNCTION: TOTAL KUTIPAN Sheet1 + Sheet2 (auto onload)
+  // ========================================================
   async function kiraKutipanAutomatik() {
-    const url = "https://script.google.com/macros/s/AKfycbyAYkTIVoWtirHtKWUDJOlkDXH0WkSNzuiwesrwtmCNCY3M_dLiZ8oDqQCeOpX628C1KA/exec"; // NOTE: URL API jumlah kutipan
+    const url = "https://script.google.com/macros/s/AKfycbyAYkTIVoWtirHtKWUDJOlkDXH0WkSNzuiwesrwtmCNCY3M_dLiZ8oDqQCeOpX628C1KA/exec";
   
     try {
       const response = await fetch(url);
       const data = await response.json();
   
-      // NOTE: Kalau status OK, kita update jumlah & progress
       if (data.status === "success") {
-        const target = 2000; // NOTE: Sasaran jumlah yang perlu dicapai
-        const terkumpul = data.jumlah_terkumpul; // dari Sheet1 + Sheet2
+        const target = 2000; // Target utama kutipan
+        const terkumpul = data.jumlah_terkumpul;
         const baki = target - terkumpul;
         const percent = Math.min(Math.round((terkumpul / target) * 100), 100);
   
-        // NOTE: Update HTML DOM - nilai paparan
+        // Update elemen di paparan
         document.getElementById("jumlahTerkumpul").textContent = terkumpul;
         document.getElementById("bakiKutipan").textContent = baki <= 0 ? 0 : baki;
   
@@ -192,17 +193,18 @@
         bar.textContent = percent + "%";
       }
     } catch (err) {
-      // NOTE: Debug error kalau tak dapat fetch dari API
       console.error("❌ Gagal tarik data kutipan:", err);
     }
   }
   
-  // NOTE: Auto-jalankan bila page dibuka
+  // ========================================================
+  // ✅ AUTO-RUN: Bila page dibuka, auto load kutipan bar
+  // ========================================================
   window.onload = function () {
     kiraKutipanAutomatik();
   };
-
   </script>
+
 
 </body>
 </html>

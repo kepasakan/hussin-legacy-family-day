@@ -60,3 +60,23 @@ footer {
   font-weight: bold;
 }
 
+.kutipan-table {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.kutipan-table th, .kutipan-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.kutipan-table th {
+  background-color: #f2f2f2;
+}
+

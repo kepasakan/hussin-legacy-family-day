@@ -108,6 +108,7 @@ footer {
 }
 
 .progress-bar {
+  transition: width 1s ease-in-out;
   height: 100%;
   text-align: center;
   color: white;

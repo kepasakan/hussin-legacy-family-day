@@ -99,3 +99,19 @@ footer {
   color: #d32f2f;
 }
 
+.progress-container {
+  background-color: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  text-align: center;
+  color: white;
+  line-height: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}

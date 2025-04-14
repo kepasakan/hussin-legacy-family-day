@@ -155,3 +155,15 @@ footer {
 .total-info .progress-container {
   margin-top: 10px;
 }
+
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.nav-links a:hover,
+.nav-login a:hover {
+  text-decoration: underline;
+}

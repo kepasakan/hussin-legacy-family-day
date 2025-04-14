@@ -47,7 +47,7 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
       body: JSON.stringify({ key, kehadiran }),
       headers: { "Content-Type": "application/json" },
     });
-
+    
     const result = await response.json();
     if (result.status === "success") {
       resultDiv.textContent = "✅ Kehadiran berjaya dihantar!";

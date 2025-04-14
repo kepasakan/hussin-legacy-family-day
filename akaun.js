@@ -5,6 +5,9 @@ const key = urlParams.get('key');
 // ✅ API URL login yang kau buat tadi
 const LOGIN_API = "https://script.google.com/macros/s/AKfycbwd7yyyEplzw6DwpP9hhQj8fgRxF2e2JR2oCxQymwzQel2bg_88k8sQVrgHot2eoTdaGQ/exec";
 
+// ✅ API URL untuk kehadiran (guna doGet)
+const KEHADIRAN_API = "https://script.google.com/macros/s/AKfycbyHYbfwty1HZEny75Sj8qZycLjryUI_6v4ccG9CaFgadDEDbeJeBDZj1hXbPzjO7txE/exec";
+
 // ✅ Fetch nama keluarga & bayaran
 async function loadDashboard() {
   if (!key) return;
@@ -15,7 +18,6 @@ async function loadDashboard() {
 
     if (data.status === "success") {
       document.getElementById("namaKeluarga").textContent = `Selamat datang, ${data.nama}`;
-      // Optional: kalau nak tunjuk juga status bayaran dummy
       document.getElementById("bayaranInfo").innerHTML = `
         🔒 Key anda: <code>${data.key}</code><br>
         💬 Status bayaran akan dimasukkan kemudian.
@@ -28,7 +30,7 @@ async function loadDashboard() {
   }
 }
 
-// ✅ Function bila user submit kehadiran
+// ✅ Function bila user submit kehadiran (guna GET untuk elak CORS)
 document.getElementById("formKehadiran").addEventListener("submit", async function(e) {
   e.preventDefault();
 
@@ -41,14 +43,11 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
   }
 
   try {
-    // Replace this URL with your kehadiran Google Apps Script
-    const response = await fetch("https://script.google.com/macros/s/AKfycbyHYbfwty1HZEny75Sj8qZycLjryUI_6v4ccG9CaFgadDEDbeJeBDZj1hXbPzjO7txE/exec", {
-      method: "POST",
-      body: JSON.stringify({ key, kehadiran }),
-      headers: { "Content-Type": "application/json" },
-    });
-    
+    // ✅ Hantar melalui GET request dengan parameter dalam URL
+    const url = `${KEHADIRAN_API}?key=${encodeURIComponent(key)}&kehadiran=${encodeURIComponent(kehadiran)}`;
+    const response = await fetch(url);
     const result = await response.json();
+
     if (result.status === "success") {
       resultDiv.textContent = "✅ Kehadiran berjaya dihantar!";
     } else {
@@ -61,5 +60,5 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
   }
 });
 
-// Auto-run bila page dibuka
+// ✅ Auto-run bila page dibuka
 window.onload = loadDashboard;

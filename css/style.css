@@ -233,3 +233,32 @@ nav a {
     text-align: center;
   }
 }
+
+#kehadiranTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#kehadiranTable th,
+#kehadiranTable td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+#kehadiranTable th {
+  background-color: #f5f5f5;
+}
+
+.hadir-box {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-weight: bold;
+}
+
+.tidak-box {
+  background-color: #fee2e2;
+  color: #991b1b;
+  font-weight: bold;
+}

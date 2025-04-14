@@ -1,8 +1,5 @@
-// ======================================================
-// 🎉 COUNTDOWN TARIKH FAMILY DAY (May 1, 2025 - 8:00 AM)
-// ======================================================
+// 🎉 Countdown Family Day
 const countDownDate = new Date("May 1, 2025 08:00:00").getTime();
-
 const countdown = setInterval(function () {
   const now = new Date().getTime();
   const distance = countDownDate - now;
@@ -23,12 +20,9 @@ const countdown = setInterval(function () {
 }, 1000);
 
 
-// ==================================================
-// 📊 KIRA JUMLAH KUTIPAN DARI Sheet2
-// ==================================================
+// 📊 Kutipan Data dari Sheet2
 async function kiraKutipanAutomatik() {
   const url = "https://script.google.com/macros/s/AKfycbyAYkTIVoWtirHtKWUDJOlkDXH0WkSNzuiwesrwtmCNCY3M_dLiZ8oDqQCeOpX628C1KA/exec";
-
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -58,7 +52,40 @@ function toggleMenu() {
   document.getElementById("navLinks").classList.toggle("show");
 }
 
-// ✅ Auto load bila buka page
+// ✅ Status Kehadiran dari Tab 'kehadiran-dashboard'
+async function paparkanStatusKehadiran() {
+  const tableBody = document.querySelector("#kehadiranTable tbody");
+  const loading = document.getElementById("kehadiranLoading");
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbyzIGPIqBizA05PhBPSIW5sVQgE1uiklRL5sbiGXc_WWBtCEhzPQ_D7Kz6NvMUu-pyIAA/exec");
+    const data = await res.json();
+    loading.style.display = "none";
+
+    data.forEach(item => {
+      const row = document.createElement("tr");
+
+      const statusLower = item.status.toLowerCase();
+      let statusClass = "";
+      if (statusLower === "hadir") statusClass = "hadir-box";
+      else if (statusLower === "tidak hadir") statusClass = "tidak-box";
+
+      row.innerHTML = `
+        <td>${item.nama}</td>
+        <td class="${statusClass}">${item.status}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+  } catch (error) {
+    loading.textContent = "❌ Gagal ambil data kehadiran.";
+    console.error("Error fetch kehadiran:", error);
+  }
+}
+
+
+// ✅ Auto run semua bila page buka
 window.onload = function () {
   kiraKutipanAutomatik();
+  paparkanStatusKehadiran();
 };

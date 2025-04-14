@@ -36,17 +36,23 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
 
   const kehadiran = document.getElementById("kehadiranSelect").value;
   const resultDiv = document.getElementById("kehadiranResult");
+  const loadingDiv = document.getElementById("kehadiranLoading");
 
   if (!kehadiran) {
     resultDiv.textContent = "⚠️ Sila pilih kehadiran dahulu.";
     return;
   }
 
+  // ✅ Tunjuk loading
+  resultDiv.textContent = "";
+  loadingDiv.style.display = "inline-block";
+
   try {
-    // ✅ Hantar melalui GET request dengan parameter dalam URL
     const url = `${KEHADIRAN_API}?key=${encodeURIComponent(key)}&kehadiran=${encodeURIComponent(kehadiran)}`;
     const response = await fetch(url);
     const result = await response.json();
+
+    loadingDiv.style.display = "none"; // ✅ Sembunyi spinner
 
     if (result.status === "success") {
       resultDiv.textContent = "✅ Kehadiran berjaya dihantar!";
@@ -55,6 +61,7 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
     }
 
   } catch (error) {
+    loadingDiv.style.display = "none"; // ✅ Sembunyi spinner walaupun error
     console.error("❌ Error:", error);
     resultDiv.textContent = "❌ Masalah semasa hantar data.";
   }

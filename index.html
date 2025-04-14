@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Family Day 2025</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -15,15 +15,13 @@
     <div id="countdown" style="font-size: 1.5rem; margin-top: 10px;"></div>
   </header>
 
-  
-
-  <!-- NOTE: Menu navigasi ke bahagian lain (future plan) -->
+  <!-- NOTE: Menu navigasi ke bahagian lain -->
   <nav>
     <a href="index.html">Home</a>
-    <a href="aturcara.html">Aturcara</a>
-    <a href="bayaran.html">Bayaran</a>
-    <a href="kehadiran.html">Kehadiran</a>
-    <a href="kenangan.html">Kenangan</a>
+    <a href="pages/aturcara.html">Aturcara</a>
+    <a href="pages/bayaran.html">Bayaran</a>
+    <a href="pages/kehadiran.html">Kehadiran</a>
+    <a href="pages/kenangan.html">Kenangan</a>
   </nav>
 
   <main>
@@ -42,33 +40,25 @@
     <section>
       <h2>📋 Senarai Kutipan</h2>
     
-      <!-- ✅ Info kutipan total -->
       <div class="total-info">
         <p><strong>Jumlah diperlukan:</strong> RM2000</p>
         <p><strong>Jumlah terkumpul:</strong> RM<span id="jumlahTerkumpul">0</span></p>
         <p><strong>Baki:</strong> RM<span id="bakiKutipan">0</span></p>
     
-        <!-- ✅ Progress bar auto-update -->
         <div class="progress-container">
           <div id="overallProgress" class="progress-bar" style="width: 0%; background-color: #2196f3;">0%</div>
         </div>
       </div>
     </section>
 
-
-    <!-- NOTE: Semakan status bayar berdasarkan kata kunci -->
     <section>
       <h2>🔐 Semak Status Bayaran Anda</h2>
       <p>Masukkan kata kunci khas keluarga anda untuk semak status kutipan.</p>
-
-      <!-- Input untuk kata kunci family -->
       <input type="password" id="accessKey" placeholder="Contoh: fam1husin" />
       <button onclick="checkPayment()">Semak</button>
 
-      <!-- NOTE: Spinner loading semasa data sedang dimuat -->
       <div id="loading" style="display: none; text-align: center; margin-top: 1rem;">
         <div style="display: inline-flex; align-items: center; gap: 10px;">
-          <!-- Animated SVG spinner -->
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
             <circle cx="50" cy="50" fill="none" stroke="#f59e0b" stroke-width="10" r="35" stroke-dasharray="164.9 56.9">
               <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
@@ -78,11 +68,9 @@
         </div>
       </div>
 
-      <!-- NOTE: Tempat result akan dipaparkan selepas semakan -->
       <div id="result" style="margin-top: 1rem; font-weight: bold;"></div>
     </section>
 
-    <!-- NOTE: Link ke Google Form pengesahan kehadiran -->
     <section>
       <h2>📝 Kehadiran</h2>
       <p>Sila sahkan kehadiran anda melalui <a href="https://forms.gle/your-form-link" target="_blank">borang ini</a>.</p>
@@ -90,12 +78,11 @@
 
   </main>
 
-  <!-- NOTE: Footer website -->
   <footer>
     <p>© 2025 Family Day Team | Bendahari: Nama Anda</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 </html>

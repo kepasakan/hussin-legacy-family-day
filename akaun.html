@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akaun Keluarga</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>👨‍👩‍👧‍👦 Dashboard Keluarga</h1>
+    <p id="namaKeluarga" style="font-weight: bold;"></p>
+  </header>
+
+  <main>
+    <section>
+      <h2>💰 Status Bayaran</h2>
+      <div id="bayaranInfo">Memuatkan...</div>
+    </section>
+
+    <section>
+      <h2>📝 Kehadiran</h2>
+      <form id="formKehadiran">
+        <label>
+          Kehadiran:
+          <select id="kehadiranSelect">
+            <option value="">-- Pilih --</option>
+            <option value="Hadir">✅ Hadir</option>
+            <option value="Tidak Hadir">❌ Tidak Hadir</option>
+          </select>
+        </label>
+        <button type="submit">Hantar</button>
+      </form>
+      <div id="kehadiranResult"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Family Day | Akaun Peribadi</p>
+  </footer>
+
+  <script src="akaun.js"></script>
+</body>
+</html>

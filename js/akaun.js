@@ -17,10 +17,10 @@ async function loadDashboard() {
     const data = await res.json();
 
     if (data.status === "success") {
-      document.getElementById("namaKeluarga").textContent = `Selamat datang, ${data.nama}`;
+      document.getElementById("namaKeluarga").innerHTML = `Selamat datang, <strong>${data.nama}</strong>!`;
+      document.getElementById("namaKey").innerHTML = `🔑 (key: <code>${data.key}</code>)`;
       document.getElementById("bayaranInfo").innerHTML = `
         🔒 Key anda: <code>${data.key}</code><br>
-        💬 Status bayaran akan dimasukkan kemudian.
       `;
     } else {
       document.getElementById("namaKeluarga").textContent = "❌ Akaun tidak dijumpai.";
@@ -67,5 +67,51 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
   }
 });
 
-// ✅ Auto-run bila page dibuka
-window.onload = loadDashboard;
+
+// ✅ SEMAK STATUS KUTIPAN untuk akaun ini (guna key)
+async function semakKutipanKeluargaIni() {
+  const loadingDiv = document.getElementById("loadingSemak");
+  const resultDiv = document.getElementById("resultKutipan");
+
+  if (!key) return;
+
+  resultDiv.innerHTML = "";
+  loadingDiv.style.display = "block";
+
+  const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    loadingDiv.style.display = "none";
+
+    if (data.status === "error") {
+      resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
+      return;
+    }
+
+    const percent = Math.round((data.bayar / data.perlu) * 100);
+    let barColor = "#f44336";
+    if (percent === 100) barColor = "#4CAF50";
+    else if (percent >= 50) barColor = "#FF9800";
+
+    resultDiv.innerHTML = `
+      <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
+      💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
+      ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
+      🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
+      <div class="progress-container">
+        <div class="progress-bar" style="width:${percent}%; background-color:${barColor}; transition: width 1s ease-in-out;">${percent}%</div>
+      </div>
+    `;
+  } catch (error) {
+    loadingDiv.style.display = "none";
+    resultDiv.innerHTML = "❌ Gagal semak data.";
+    console.error("❌ Error:", error);
+  }
+}
+
+window.onload = function () {
+  loadDashboard();
+  semakKutipanKeluargaIni(); // ✅ Panggil semakan automatik
+};

@@ -51,6 +51,13 @@ async function kiraKutipanAutomatik() {
   }
 }
 
+// ==================================================
+// 🍔 TOGGLE HAMBURGER MENU UNTUK MOBILE
+// ==================================================
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
 // ✅ Auto load bila buka page
 window.onload = function () {
   kiraKutipanAutomatik();

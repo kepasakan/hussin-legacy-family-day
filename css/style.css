@@ -291,3 +291,19 @@ nav a {
   color: #991b1b;
   font-weight: bold;
 }
+
+/* NOTE: Gaya untuk table info bank supaya lebih kemas */
+.bank-info-table {
+  margin: 1.5rem auto 0;      /* Jarak dari atas & centerkan */
+  font-size: 1.05rem;         /* Saiz tulisan sederhana besar */
+  line-height: 1.8;           /* Spacing antara baris */
+  border-collapse: collapse;  /* Buang gap default table */
+}
+
+/* NOTE: Gaya untuk sel dalam jadual bank info */
+.bank-info-table td {
+  padding: 6px 12px;          /* Ruang dalam sel */
+  vertical-align: top;        /* Teks align ke atas */
+  text-align: left;           /* Teks rata kiri */
+  color: #222;                /* Warna teks gelap */
+}

@@ -292,18 +292,39 @@ nav a {
   font-weight: bold;
 }
 
-/* NOTE: Gaya untuk table info bank supaya lebih kemas */
+/* NOTE: Gaya table info bank untuk paparan biasa */
 .bank-info-table {
-  margin: 1.5rem auto 0;      /* Jarak dari atas & centerkan */
-  font-size: 1.05rem;         /* Saiz tulisan sederhana besar */
-  line-height: 1.8;           /* Spacing antara baris */
-  border-collapse: collapse;  /* Buang gap default table */
+  width: 100%;
+  max-width: 500px;       /* Had lebar supaya tak terlalu besar di desktop */
+  margin: 1rem auto;       /* Tengah secara automatik */
+  border-collapse: collapse;
+  font-size: 1rem;
 }
 
-/* NOTE: Gaya untuk sel dalam jadual bank info */
+/* NOTE: Gaya untuk sel dalam table */
 .bank-info-table td {
-  padding: 6px 12px;          /* Ruang dalam sel */
-  vertical-align: top;        /* Teks align ke atas */
-  text-align: left;           /* Teks rata kiri */
-  color: #222;                /* Warna teks gelap */
+  padding: 6px 10px;
+  vertical-align: top;
+}
+
+/* NOTE: Responsive khusus untuk tablet & phone */
+@media (max-width: 1024px) {
+  .bank-info-table {
+    font-size: 0.95rem;     /* Kecilkan sedikit font untuk muat */
+    text-align: left;
+  }
+
+  .qr-bank img {
+    max-width: 100%;        /* QR code tak melebihi skrin */
+    height: auto;
+  }
+
+  .qr-bank {
+    padding: 0 1rem;        /* Tambah sedikit padding kiri kanan */
+  }
+}
+
+/* OPTIONAL: Kalau nak pastikan table sentiasa boleh scroll kalau sempit */
+.table-wrapper {
+  overflow-x: auto;
 }

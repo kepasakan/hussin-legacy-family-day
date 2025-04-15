@@ -19,17 +19,19 @@
   <nav class="nav-container">
     <!-- Hamburger for mobile -->
     <button class="hamburger" onclick="toggleMenu()">☰</button>
-  
+
     <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="pages/aturcara.html">Aturcara</a>
       <a href="pages/bayaran.html">Bayaran</a>
-      <a href="pages/kehadiran.html">Kehadiran</a>
-      <a href="pages/kenangan.html">Kenangan</a>
-      <a href="pages/login.html" class="login-btn">🔐 Log Masuk</a>
+
+      <!-- ✅ Wrap login link in div only for centering in mobile -->
+      <div class="login-wrapper">
+        <a href="pages/login.html" class="login-btn">🔐 Log Masuk</a>
+      </div>
     </div>
   </nav>
-  
+
   
   
   <main>

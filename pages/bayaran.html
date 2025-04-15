@@ -6,6 +6,7 @@
   <title>Proses Pembayaran</title>
   <link rel="stylesheet" href="../css/style.css" />
   <style>
+    /* NOTE: Styling form container dan elemen asas */
     .form-container {
       max-width: 600px;
       margin: auto;
@@ -51,35 +52,22 @@
 </head>
 <body>
   <main class="form-container">
-    <!-- NOTE: Blok paparan QR Code dan info bank -->
+    <!-- NOTE: Blok QR Code dan info bank -->
     <div class="qr-bank">
-      <!-- Gambar QR Code bank -->
       <img src="../asset/qr_code.jpg" alt="QR Code Bank" style="width: 500px; max-width: 100%;" />
-        
-    <!-- NOTE: Table info bank dibalut dalam wrapper (optional jika perlu scroll auto) -->
-    <div class="table-wrapper">
-      <table class="bank-info-table">
-        <tr>
-          <td><strong>Nama</strong></td>
-          <td>: Nor Mohamad Naim</td>
-        </tr>
-        <tr>
-          <td><strong>Bank</strong></td>
-          <td>: GX Bank</td>
-        </tr>
-        <tr>
-          <td><strong>No Akaun</strong></td>
-          <td>: 8888-01189939-0</td>
-        </tr>
-        <tr>
-          <td><strong>Jenis Bank</strong></td>
-          <td>: Online Transfer / QR Pay</td>
-        </tr>
-      </table>
+
+      <!-- NOTE: Table info bank -->
+      <div class="table-wrapper">
+        <table class="bank-info-table">
+          <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>
+          <tr><td><strong>Bank</strong></td><td>: GX Bank</td></tr>
+          <tr><td><strong>No Akaun</strong></td><td>: 8888-01189939-0</td></tr>
+          <tr><td><strong>Jenis Bank</strong></td><td>: Online Transfer / QR Pay</td></tr>
+        </table>
+      </div>
     </div>
 
-    
-
+    <!-- NOTE: Borang pembayaran -->
     <form id="paymentForm">
       <div class="form-group">
         <label for="nama">Nama Keluarga</label>
@@ -120,23 +108,7 @@
     </form>
   </main>
 
-  <script>
-    const namaEl = document.getElementById("nama");
-    const jenisEl = document.getElementById("jenis");
-    const referenceEl = document.getElementById("reference");
-
-    function updateReference() {
-      const nama = namaEl.value;
-      const jenis = jenisEl.value;
-      if (nama && jenis) {
-        referenceEl.value = `${nama}-${jenis}`;
-      } else {
-        referenceEl.value = "";
-      }
-    }
-
-    namaEl.addEventListener("change", updateReference);
-    jenisEl.addEventListener("change", updateReference);
-  </script>
+  <!-- NOTE: Pautan ke fail JS luaran -->
+  <script src="../js/bayaran.js"></script>
 </body>
 </html>

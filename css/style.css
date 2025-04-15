@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 
-/* NOTE: Header utama - Tajuk & sub info */
+/* NOTE: Tajuk utama dan subinfo dalam header */
 header {
   background-color: #4CAF50;
   color: white;
@@ -14,7 +14,7 @@ header {
   padding: 2rem;
 }
 
-/* NOTE: Navigasi menu bar */
+/* NOTE: Navigasi menu bar utama */
 nav {
   background-color: #333;
   overflow: hidden;
@@ -32,12 +32,12 @@ nav a:hover {
   background-color: #575757;
 }
 
-/* NOTE: Bahagian kandungan utama */
+/* NOTE: Kandungan utama halaman */
 main {
   padding: 2rem;
 }
 
-/* NOTE: Setiap section (kandungan utama) */
+/* NOTE: Setiap blok section untuk content */
 section {
   background-color: white;
   margin: 1rem auto;
@@ -47,7 +47,7 @@ section {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* NOTE: Footer bawah laman */
+/* NOTE: Kaki laman (footer) */
 footer {
   background-color: #eee;
   text-align: center;
@@ -55,7 +55,7 @@ footer {
   margin-top: 2rem;
 }
 
-/* NOTE: Paparan countdown (masa ke Family Day) */
+/* NOTE: Paparan countdown ke Family Day */
 #countdown {
   background-color: #fff;
   color: #333;
@@ -67,7 +67,7 @@ footer {
   font-weight: bold;
 }
 
-/* NOTE: Jadual kutipan bayaran keluarga */
+/* NOTE: Jadual kutipan bayaran untuk setiap keluarga */
 .kutipan-table {
   width: 100%;
   max-width: 600px;
@@ -78,19 +78,19 @@ footer {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* NOTE: Gaya untuk sel dalam jadual */
+/* NOTE: Sel dalam jadual kutipan */
 .kutipan-table th, .kutipan-table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-/* NOTE: Header untuk jadual */
+/* NOTE: Header jadual */
 .kutipan-table th {
   background-color: #f2f2f2;
 }
 
-/* NOTE: Paparan kad result semakan kutipan */
+/* NOTE: Kad result semakan kutipan untuk keluarga */
 #result {
   background-color: #ffffff;
   border-left: 8px solid #4CAF50;
@@ -106,12 +106,12 @@ footer {
   color: #333;
 }
 
-/* NOTE: Warna untuk tulisan bold (nama keluarga) */
+/* NOTE: Nama keluarga bold merah dalam result */
 #result strong {
   color: #d32f2f;
 }
 
-/* NOTE: Container progress bar (latar belakang kelabu) */
+/* NOTE: Bar latar belakang untuk progress kutipan */
 .progress-container {
   background-color: #eee;
   border-radius: 20px;
@@ -120,7 +120,7 @@ footer {
   margin-top: 10px;
 }
 
-/* NOTE: Progress bar sebenar (berwarna, ikut status) */
+/* NOTE: Bar kemajuan kutipan sebenar */
 .progress-bar {
   transition: width 1s ease-in-out;
   height: 100%;
@@ -131,18 +131,18 @@ footer {
   font-weight: bold;
 }
 
-/* NOTE: Gaya animasi fade-in untuk loading */
+/* NOTE: Gaya fade-in animasi (untuk loading) */
 #loading {
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* NOTE: Keyframe animasi untuk fade-in effect */
+/* NOTE: Keyframe fade-in animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* NOTE: Blok paparan jumlah kutipan keseluruhan */
+/* NOTE: Paparan jumlah terkumpul & target */
 .total-info {
   margin-top: 1rem;
   text-align: center;
@@ -151,11 +151,12 @@ footer {
   color: #333;
 }
 
-/* NOTE: Jarak untuk progress bar dalam total info */
+/* NOTE: Progress bar dalam total-info section */
 .total-info .progress-container {
   margin-top: 10px;
 }
 
+/* NOTE: Margin dan gaya tambahan untuk nav link */
 nav a {
   margin-right: 10px;
   text-decoration: none;
@@ -163,18 +164,20 @@ nav a {
   font-weight: bold;
 }
 
+/* NOTE: Hover effect untuk nav & login button */
 .nav-links a:hover,
 .nav-login a:hover {
   text-decoration: underline;
 }
 
-/* --- Base style --- */
+/* NOTE: Container navigasi bar desktop */
 .nav-container {
   background-color: #2b2b2b;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   position: relative;
 }
 
+/* NOTE: Style nav link dalam container */
 .nav-links a {
   color: white;
   text-decoration: none;
@@ -183,6 +186,7 @@ nav a {
   margin: 0 10px;
 }
 
+/* NOTE: Butang Log Masuk biru */
 .login-btn {
   background-color: #0d6efd;
   color: white;
@@ -191,7 +195,7 @@ nav a {
   font-weight: bold;
 }
 
-/* --- Hamburger Button --- */
+/* NOTE: Butang hamburger (tiga bar) untuk mobile */
 .hamburger {
   display: none;
   font-size: 1.5rem;
@@ -202,12 +206,13 @@ nav a {
   cursor: pointer;
 }
 
-/* --- Mobile Style --- */
+/* NOTE: Media Query untuk paparan mobile */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
   }
 
+  /* NOTE: Nav link jadi column susun ke bawah */
   .nav-links {
     display: none;
     flex-direction: column;
@@ -216,6 +221,7 @@ nav a {
     gap: 12px;
   }
 
+  /* NOTE: Bila aktif class show */
   .nav-links.show {
     display: flex;
   }
@@ -226,6 +232,7 @@ nav a {
     text-align: center;
   }
 
+  /* NOTE: Login button versi mobile */
   .login-btn {
     width: 80%;
     max-width: 200px;
@@ -234,12 +241,31 @@ nav a {
   }
 }
 
+/* Move Log Masuk to the right (desktop only) */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-links a {
+    margin-right: 1rem;
+  }
+
+  .login-wrapper {
+    margin-left: auto; /* Push Log Masuk to far right */
+  }
+}
+
+/* NOTE: Jadual Kehadiran di index */
 #kehadiranTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
 }
 
+/* NOTE: Sel jadual kehadiran */
 #kehadiranTable th,
 #kehadiranTable td {
   border: 1px solid #ccc;
@@ -247,19 +273,21 @@ nav a {
   text-align: left;
 }
 
+/* NOTE: Header jadual kehadiran */
 #kehadiranTable th {
   background-color: #f5f5f5;
 }
 
+/* NOTE: Kotak status HADIR (hijau cair) */
 .hadir-box {
   background-color: #d1fae5;
   color: #065f46;
   font-weight: bold;
 }
 
+/* NOTE: Kotak status TIDAK HADIR (merah cair) */
 .tidak-box {
   background-color: #fee2e2;
   color: #991b1b;
   font-weight: bold;
 }
-

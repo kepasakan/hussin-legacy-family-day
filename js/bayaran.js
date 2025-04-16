@@ -1,10 +1,10 @@
 // ✅ Ambil elemen-elemen dari form HTML
-const namaEl = document.getElementById("nama");         // dropdown nama keluarga
-const jenisEl = document.getElementById("jenis");       // dropdown jenis bayaran (bulan/tambahan)
-const referenceEl = document.getElementById("reference"); // input reference auto generate
-const jumlahEl = document.getElementById("jumlah");     // jumlah bayaran
-const resitEl = document.getElementById("resit");       // upload gambar resit
-const resultBox = document.getElementById("resultBox"); // paparan status upload
+const namaEl = document.getElementById("nama");
+const jenisEl = document.getElementById("jenis");
+const referenceEl = document.getElementById("reference");
+const jumlahEl = document.getElementById("jumlah");
+const resitEl = document.getElementById("resit");
+const resultBox = document.getElementById("resultBox");
 
 // ✅ Auto-generate "reference" bila user pilih nama + jenis
 function updateReference() {
@@ -13,15 +13,13 @@ function updateReference() {
   referenceEl.value = nama && jenis ? `${nama}-${jenis}` : "";
 }
 
-// ✅ Trigger auto-generate bila user tukar dropdown
 namaEl.addEventListener("change", updateReference);
 jenisEl.addEventListener("change", updateReference);
 
 // ✅ Bila user tekan butang "Hantar"
 document.getElementById("paymentForm").addEventListener("submit", async function (e) {
-  e.preventDefault(); // prevent default reload behavior
+  e.preventDefault();
 
-  // ✅ Ambil semua nilai dari form
   const nama = namaEl.value;
   const jenis = jenisEl.value;
   const jumlah = jumlahEl.value;
@@ -30,16 +28,15 @@ document.getElementById("paymentForm").addEventListener("submit", async function
 
   const receipt = resitFile ? resitFile.name : "";
 
-  // ✅ Validation – pastikan semua wajib isi
   if (!nama || !jenis || !jumlah || !receipt || !reference) {
     alert("⚠️ Sila lengkapkan semua maklumat sebelum hantar.");
     return;
   }
 
   try {
-    // ✅ Upload gambar ke Telegram dahulu
+    // ✅ Step 1: Upload ke Telegram
     const botToken = "7740099280:AAGy5g6SME7yeuxXUgSSnSUwma6uJyH-g94";
-    const chatId = "-1002518767864"; // channel username with @
+    const chatId = "-1002518767864";
 
     const formData = new FormData();
     formData.append("chat_id", chatId);
@@ -54,11 +51,12 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     const tgJson = await tgRes.json();
 
     if (!tgJson.ok) {
-      alert("❌ Gagal upload resit ke Telegram: " + tgJson.description);
+      console.error("❌ Telegram Error:", tgJson.description);
+      window.location.href = "bayaran_gagal.html"; // ❌ redirect ke halaman gagal
       return;
     }
 
-    // ✅ Upload data ke Google Sheet (guna doGet)
+    // ✅ Step 2: Hantar ke Google Sheet (via doGet)
     const endpoint = "https://script.google.com/macros/s/AKfycbyI-DJk0Q8z1erH2XQFcaCb9uyR1NBrOJHteWse8gPQG6UT8h7h53gA9xEjn96iaNDi/exec";
     const url = `${endpoint}?nama=${encodeURIComponent(nama)}&jenis=${encodeURIComponent(jenis)}&jumlah=${encodeURIComponent(jumlah)}&receipt=${encodeURIComponent(receipt)}&reference=${encodeURIComponent(reference)}`;
 
@@ -66,15 +64,13 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     const text = await res.text();
 
     if (text.includes("✅")) {
-      alert("✅ Bayaran berjaya dihantar!");
-      document.getElementById("paymentForm").reset();
-      referenceEl.value = "";
+      window.location.href = "bayaran_berjaya.html"; // ✅ redirect ke halaman berjaya
     } else {
-      alert("❌ Gagal hantar data ke Sheet: " + text);
+      window.location.href = "bayaran_gagal.html"; // ❌ jika gagal masuk ke Google Sheet
     }
 
   } catch (err) {
-    console.error("❌ Ralat:", err);
-    alert("❌ Ralat semasa proses penghantaran.");
+    console.error("❌ Error:", err);
+    window.location.href = "bayaran_gagal.html"; // ❌ Error semasa proses
   }
 });

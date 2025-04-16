@@ -52,6 +52,16 @@
 </head>
 <body>
   <main class="form-container">
+
+        <!-- ✅ Butang Kembali di sebelah kiri QR -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+      <a href="../index.html" style="text-decoration: none;">
+        <button type="button" style="background-color: #0d6efd; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; cursor: pointer;">
+          ⬅️ Kembali ke Laman Utama
+        </button>
+      </a>
+    </div>
+
     <!-- NOTE: Blok QR Code dan info bank -->
     <div class="qr-bank">
       <img src="../asset/qr_code.jpg" alt="QR Code Bank" style="width: 500px; max-width: 100%;" />
@@ -105,7 +115,27 @@
       </div>
 
       <button class="submit-btn" type="submit">Hantar</button>
+
+      <div id="loadingStatus" style="display:none; margin-top: 10px; text-align: center;">
+        <svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="35" fill="none" stroke="#0d6efd" stroke-width="10" stroke-dasharray="164.9 56.9">
+            <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+          </circle>
+        </svg>
+        <span style="color:#0d6efd; font-weight:bold;">Sedang menghantar bayaran...</span>
+      </div>
+      
     </form>
+
+        <!-- ✅ Butang kembali ke home -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="../index.html" style="text-decoration: none;">
+        <button type="button" style="background-color: #0d6efd; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; font-size: 1rem; cursor: pointer;">
+          ⬅️ Kembali ke Laman Utama
+        </button>
+      </a>
+    </div>
+
   </main>
 
   <!-- NOTE: Pautan ke fail JS luaran -->

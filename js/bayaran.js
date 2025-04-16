@@ -6,6 +6,8 @@ const jumlahEl = document.getElementById("jumlah");
 const resitEl = document.getElementById("resit");
 const resultBox = document.getElementById("resultBox");
 
+const loadingStatus = document.getElementById("loadingStatus");
+
 // ✅ Auto-generate "reference" bila user pilih nama + jenis
 function updateReference() {
   const nama = namaEl.value;
@@ -20,6 +22,9 @@ jenisEl.addEventListener("change", updateReference);
 document.getElementById("paymentForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
+  // ✅ Tunjuk loading
+  loadingStatus.style.display = "block";
+
   const nama = namaEl.value;
   const jenis = jenisEl.value;
   const jumlah = jumlahEl.value;
@@ -30,6 +35,7 @@ document.getElementById("paymentForm").addEventListener("submit", async function
 
   if (!nama || !jenis || !jumlah || !receipt || !reference) {
     alert("⚠️ Sila lengkapkan semua maklumat sebelum hantar.");
+    loadingStatus.style.display = "none"; // Sembunyi semula
     return;
   }
 
@@ -72,5 +78,7 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   } catch (err) {
     console.error("❌ Error:", err);
     window.location.href = "bayaran_gagal.html"; // ❌ Error semasa proses
+  } finally {
+    loadingStatus.style.display = "none"; // Sembunyi semula (fallback)
   }
 });

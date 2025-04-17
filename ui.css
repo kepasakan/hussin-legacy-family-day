@@ -9,8 +9,8 @@
 
 body {
   background: #8b7979;
-  position: relative; /* penting untuk layer glow bawah */
-  overflow-x: hidden; /* block scroll ke kiri-kanan je */
+  position: relative;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -42,13 +42,13 @@ body::before {
   }
 }
 
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-gap: 20px;
+  padding: 10px; /* 🆕 Add padding to prevent content hugging edges */
 }
 
 header {
@@ -65,7 +65,7 @@ header h1 {
 
 header p {
   font-size: 1rem;
-  color: #888;
+  color: black;
 }
 
 .sidebar {
@@ -89,6 +89,7 @@ header p {
   text-align: center;
   font-weight: 500;
   color: white;
+  margin-bottom: 15px; /* 🆕 Add spacing between box sections */
 }
 
 .bottom-nav {
@@ -167,29 +168,16 @@ header p {
 
 .kehadiran-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
   margin-top: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 @media (max-width: 768px) {
   .kehadiran-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row on phone */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .kehadiran-grid {
-    grid-template-columns: repeat(3, 1fr); /* tablet */
-  }
-}
-
-@media (min-width: 1025px) {
-  .kehadiran-grid {
-    grid-template-columns: repeat(4, 1fr); /* desktop */
-  }
-}
-
 
 .chip {
   background-color: #fbb034;
@@ -267,4 +255,3 @@ header p {
   margin-bottom: 6px;
   font-size: 0.95rem;
 }
-

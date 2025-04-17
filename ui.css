@@ -8,9 +8,40 @@
 }
 
 body {
-  background-color: #f9f9f9;
-  padding: 20px;
+  background: #8b7979;
+  position: relative; /* penting untuk layer glow bawah */
+  overflow-x: hidden; /* block scroll ke kiri-kanan je */
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 20%, #ff9800 10%, transparent 30%),
+              radial-gradient(circle at 80% 80%, #ffc107 15%, transparent 40%);
+  animation: floatGlow 20s linear infinite;
+  opacity: 0.08;
+  z-index: -1;
+}
+
+@keyframes floatGlow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20%, 20%);
+  }
+}
+
+@media (max-width: 768px) {
+  body::before {
+    background: none;
+  }
+}
+
 
 .container {
   max-width: 1200px;

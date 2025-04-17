@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hussin Legacy Family Day</title>
+  <link rel="stylesheet" href="ui.css">
+  <script src="ui.js" defer></script>
+  <script src="js/kehadiran-status.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HUSSIN LEGACY FAMILY DAY</h1>
+      <p>1 JANUARY 2026</p>
+    </header>
+
+    <div class="bottom-nav">
+      <div class="button">📝 ATURCARA</div>
+      <div class="button" onclick="window.location.href='pages/bayaran.html'">💳 PEMBAYARAN</div>
+      <div class="button" onclick="window.location.href='pages/login.html'">🔐 LOG MASUK</div>
+    </div>
+
+    <div class="sidebar">
+      
+      <!-- countdown -->
+      <h3 style="text-align: center; color: black; margin-bottom: 1px;">COUNTDOWN</h3>
+      <div class="flip-clock">
+        <div class="unit">
+          <div class="number" id="days">00</div>
+          <div class="label">DAYS</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="hours">00</div>
+          <div class="label">HOURS</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="minutes">00</div>
+          <div class="label">MINUTES</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="seconds">00</div>
+          <div class="label">SECONDS</div>
+        </div>
+      </div>
+      
+
+      <!--box info penting -->
+      <div class="box info-penting">
+        <h3>INFO PENTING</h3>
+        <ul>
+          <li><strong>Lokasi:</strong> Port Dickson, Negeri Sembilan</li>
+          <li><strong>Tarikh:</strong> 15 - 17 Mac 2025</li>
+          <li><strong>Tempat penginapan:</strong> Homestay tepi pantai</li>
+        </ul>
+      </div>
+      
+
+      <!-- kehadiran -->
+      <div class="box">
+        <h3>STATUS KEHADIRAN</h3>
+        <div class="kehadiran-grid">
+          <div class="chip" data-key="pakcik">PAKCIK</div>
+          <div class="chip" data-key="pakjang">PAKJANG</div>
+          <div class="chip" data-key="fahmi">FAHMI</div>                 
+          <div class="chip" data-key="hafiz">HAFIZ</div>
+          <div class="chip" data-key="hanis">HANIS</div>
+          <div class="chip" data-key="wani">WANI</div>
+          <div class="chip" data-key="wan">WAN</div>
+          <div class="chip" data-key="ika">IKA</div>
+          <div class="chip" data-key="makteh">MAKTEH</div>
+          <div class="chip" data-key="yana">YANA</div>
+          <div class="chip" data-key="faiz">FAIZ</div>
+          <div class="chip" data-key="paksu">PAKSU</div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="main">
+      <div class="box" style="height: 100%; min-height: 260px;">KUTIPAN DUIT</div>
+    </div>
+
+  </div>
+</body>
+</html>

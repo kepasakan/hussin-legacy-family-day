@@ -1,0 +1,220 @@
+/* family_day_style.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
+}
+
+header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #222;
+}
+
+header p {
+  font-size: 1rem;
+  color: #888;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.box, .button {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-weight: 500;
+  color: white;
+}
+
+.bottom-nav {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.login-button {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.login-button:hover {
+  background-color: #2c2c2c;
+}
+
+.button {
+  cursor: pointer;
+  flex: 1;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2c2c2c;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .bottom-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.flip-clock {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.flip-clock .unit {
+  background-color: #1e1e1e;
+  padding: 15px 10px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  min-width: 60px;
+  flex: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.flip-clock .number {
+  font-size: 2.2rem;
+  font-weight: bold;
+  line-height: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 5px;
+}
+
+.flip-clock .label {
+  font-size: 0.75rem;
+  color: #fbb034;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Kehadiran Grid */
+
+.kehadiran-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.chip {
+  background-color: #fbb034;
+  color: #1e1e1e;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: default;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.chip:hover {
+  transform: scale(1.05);
+}
+
+.chip.hadir {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.chip.tak-hadir {
+  background-color: #e53935;
+  color: white;
+}
+
+.chip.belum-pasti {
+  background-color: #818180;
+  color: #1e1e1e;
+}
+
+/* Spinner Kehadiran */
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #555;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* box info penting */
+
+.info-penting {
+  text-align: center;
+}
+
+.info-penting h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+}
+
+.info-penting ul {
+  padding-left: 0;
+  list-style: disc;
+  display: block;
+  text-align: left;
+  margin: 0 auto;
+  max-width: max-content;
+}
+
+.info-penting li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+

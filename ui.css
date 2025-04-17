@@ -136,6 +136,8 @@ header p {
   gap: 10px;
   width: 100%;
   flex-wrap: wrap;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .flip-clock .unit {
@@ -252,6 +254,6 @@ header p {
 }
 
 .info-penting li {
-  margin-bottom: 6px;
+  margin-bottom: 15px;
   font-size: 0.95rem;
 }

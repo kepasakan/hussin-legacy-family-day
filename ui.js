@@ -14,5 +14,11 @@ function updateCountdown() {
   document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
 }
 
+function toggleMenu() {
+  const menu = document.getElementById("hamburgerMenu");
+  menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+}
+
+
 setInterval(updateCountdown, 1000);
 window.onload = updateCountdown;

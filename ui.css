@@ -48,7 +48,7 @@ body::before {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-gap: 20px;
-  padding: 10px; /* 🆕 Add padding to prevent content hugging edges */
+  padding: 10px;
 }
 
 header {
@@ -89,7 +89,7 @@ header p {
   text-align: center;
   font-weight: 500;
   color: white;
-  margin-bottom: 15px; /* 🆕 Add spacing between box sections */
+  margin-bottom: 15px;
 }
 
 .bottom-nav {
@@ -97,6 +97,7 @@ header p {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  gap: 10px;
 }
 
 .login-button {
@@ -120,13 +121,25 @@ header p {
   background-color: #2c2c2c;
 }
 
+/* Mobile tweaks */
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
   }
   .bottom-nav {
+    display: none; /* hide main nav on mobile */
+  }
+  .hamburger-menu {
+    display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 15px;
+  }
+  .hamburger-menu .button {
+    margin: 0;
+  }
+  .box {
+    margin-bottom: 20px; /* more spacing for mobile */
   }
 }
 
@@ -136,8 +149,7 @@ header p {
   gap: 10px;
   width: 100%;
   flex-wrap: wrap;
-  margin-bottom: 15px;
-  margin-top: 15px;
+  margin-bottom: 15px; /* spacing from next section */
 }
 
 .flip-clock .unit {
@@ -167,18 +179,11 @@ header p {
 }
 
 /* Kehadiran Grid */
-
 .kehadiran-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
   margin-top: 15px;
-}
-
-@media (max-width: 768px) {
-  .kehadiran-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
 }
 
 .chip {
@@ -213,8 +218,6 @@ header p {
   color: #1e1e1e;
 }
 
-/* Spinner Kehadiran */
-
 .spinner {
   border: 3px solid #f3f3f3;
   border-top: 3px solid #555;
@@ -230,8 +233,6 @@ header p {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-/* box info penting */
 
 .info-penting {
   text-align: center;
@@ -254,6 +255,44 @@ header p {
 }
 
 .info-penting li {
-  margin-bottom: 15px;
+  margin-bottom: 6px;
   font-size: 0.95rem;
+}
+
+/*hamburger mobile option*/
+
+.hamburger-container {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.hamburger-toggle {
+  background-color: #1e1e1e;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.hamburger-menu .button {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: none;
+  }
+  .hamburger-container {
+    display: block;
+  }
 }

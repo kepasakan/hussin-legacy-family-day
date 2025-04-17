@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="ui.css">
   <script src="ui.js" defer></script>
   <script src="js/kehadiran-status.js" defer></script>
+  <script src="js/kutipan.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -88,7 +89,27 @@
     </div>
 
     <div class="main">
-      <div class="box" style="height: 100%; min-height: 260px;">KUTIPAN DUIT</div>
+      <div class="box">
+        <h3>KUTIPAN DUIT</h3>
+        <p><strong>JUMLAH TERKUMPUL</strong></p>
+        <p id="totalKutipan" style="font-size: 1.8rem; font-weight: bold; color: #fbb034;">Loading...</p>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nama Keluarga</th>
+                <th>Bayaran</th>
+                <th>Jumlah</th>
+                <th>Resit</th>
+                <th>Tarikh</th>
+              </tr>
+            </thead>
+            <tbody id="kutipan-table-body">
+              <tr><td colspan="5" style="text-align:center;">Memuatkan data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>      
     </div>
 
   </div>

@@ -296,3 +296,39 @@ header p {
     display: block;
   }
 }
+
+/* Kutipan Duit */
+
+.table-container {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  font-size: 0.9rem;
+}
+
+thead th {
+  background-color: #2a2a2a;
+  padding: 8px;
+  text-align: center;
+  color: #fbb034;
+  position: sticky;
+  top: 0;
+}
+
+tbody td {
+  background-color: #111;
+  padding: 10px;
+  border-top: 1px solid #333;
+  text-align: center;
+}
+
+tbody tr:hover {
+  background-color: #1f1f1f;
+}

@@ -25,13 +25,19 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
     const reversed = data.data.reverse();
     reversed.forEach(item => {
       const row = document.createElement("tr");
+
+      const resitLink = item.receipt?.startsWith("http")
+        ? `<a href="${item.receipt}" target="_blank" style="color:white; text-decoration:underline;">📎 Lihat</a>`
+        : "-";
+
       row.innerHTML = `
         <td>${item.nama}</td>
         <td>${item.bayaran}</td>
         <td>RM ${item.jumlah}</td>
-        <td>${item.receipt}</td>
+        <td>${resitLink}</td>
         <td>${item.tarikh}</td>
       `;
+    
       tableBody.appendChild(row);
     });
   })

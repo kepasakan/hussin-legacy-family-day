@@ -90,11 +90,23 @@
 
     <div class="main">
       <div class="box">
-        <h3>KUTIPAN DUIT</h3>
-        <p><strong>JUMLAH TERKUMPUL</strong></p>
-        <p id="totalKutipan" style="font-size: 1.8rem; font-weight: bold; color: #fbb034;">Loading...</p>
+        <h3 style="margin-bottom: 10px;">KUTIPAN DUIT</h3>
+
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <div style="font-size: 0.9rem; letter-spacing: 1px; color: #ccc; text-transform: uppercase;">
+            Jumlah Terkumpul
+          </div>
+          <div id="totalKutipan" style="
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fbb034;
+            text-shadow: 0 0 8px rgba(251, 176, 52, 0.3);
+            margin-top: 4px;
+          ">Loading...</div>
+        </div>
+
         <div class="table-container">
-          <table>
+          <table class="kutipan-table">
             <thead>
               <tr>
                 <th>Nama Keluarga</th>
@@ -111,6 +123,7 @@
         </div>
       </div>      
     </div>
+
 
   </div>
 </body>

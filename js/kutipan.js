@@ -26,6 +26,11 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
     reversed.forEach(item => {
       const row = document.createElement("tr");
 
+      // Format tarikh ISO kepada dd/mm/yyyy
+      const rawDate = new Date(item.tarikh);
+      const formattedDate = rawDate.toLocaleDateString("en-GB"); // output: 15/04/2025
+
+
       const resitLink = item.receipt?.startsWith("http")
         ? `<a href="${item.receipt}" target="_blank" style="color:white; text-decoration:underline;">📎 Lihat</a>`
         : "-";
@@ -35,9 +40,9 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
         <td>${item.bayaran}</td>
         <td>RM ${item.jumlah}</td>
         <td>${resitLink}</td>
-        <td>${item.tarikh}</td>
+        <td>${formattedDate}</td>
       `;
-    
+      
       tableBody.appendChild(row);
     });
   })

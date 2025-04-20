@@ -68,9 +68,11 @@ body::before {
 
 @media (max-width: 768px) {
   body::before {
-  /*  background: none; */
+    background: radial-gradient(circle at 30% 30%, #fbb034 10%, transparent 50%);
+    opacity: 0.1;
   }
 }
+
 
 .container {
   max-width: 1200px;

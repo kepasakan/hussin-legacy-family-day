@@ -26,7 +26,7 @@ window.onload = () => {
 
 async function loginAuto(key) {
   const statusDiv = document.getElementById("loginStatus");
-  statusDiv.innerHTML = "🔄 Log masuk sedang diproses...";
+  statusDiv.innerHTML = `<span class="spinner"></span> Log masuk sedang diproses...`;
 
   try {
     const url = `https://script.google.com/macros/s/AKfycbwd7yyyEplzw6DwpP9hhQj8fgRxF2e2JR2oCxQymwzQel2bg_88k8sQVrgHot2eoTdaGQ/exec?key=${key}`;

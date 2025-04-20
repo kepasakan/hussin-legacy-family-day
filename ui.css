@@ -9,12 +9,33 @@
 
 /* Font Header Hussing Legacy Family Day */
 header h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem;
-  letter-spacing: 2px;
-  color: white;
+  text-align: center;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
+  line-height: 1.1; /* 💥 INI yang akan rapatkan */
 }
+
+header h1 .atas {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4.5rem;
+  color: white;
+  letter-spacing: 10px;
+  display: block;
+  margin-bottom: -50px; /* 💥 rapatkan */
+}
+
+header h1 .bawah {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 0; /* 💥 kosongkan margin atas */
+}
+
+
+
+/* Body */
 
 body {
   background: #696868;

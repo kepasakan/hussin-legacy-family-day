@@ -4,70 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proses Pembayaran</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <style>
-    /* NOTE: Styling form container dan elemen asas */
-    .form-container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .qr-bank {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .qr-bank img {
-      max-width: 200px;
-    }
-    .submit-btn {
-      display: block;
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/bayaran.css" />
 </head>
 <body>
-  <main class="form-container">
+  <div class="container">
 
-        <!-- ✅ Butang Kembali di sebelah kiri QR -->
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-      <a href="../index.html" style="text-decoration: none;">
-        <button type="button" style="background-color: #0d6efd; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; cursor: pointer;">
-          ⬅️ Kembali ke Laman Utama
+      <!-- ✅ Butang Kembali ke Laman Utama (Center Style) -->
+    <div style="text-align: center; margin: 1.5rem 0;">
+      <a href="../ui.html" style="text-decoration: none;">
+        <button type="button" style="
+          background-color: #fbb034;
+          color: black;
+          border: none;
+          padding: 0.6rem 1.5rem;
+          border-radius: 12px;
+          font-size: 0.95rem;
+          font-weight: 600;
+          font-family: 'Poppins', sans-serif;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          cursor: pointer;
+        ">
+          🏠 Kembali ke Laman Utama
         </button>
       </a>
     </div>
 
-    <!-- NOTE: Blok QR Code dan info bank -->
-    <div class="qr-bank">
-      <img src="../asset/qr_code.jpg" alt="QR Code Bank" style="width: 500px; max-width: 100%;" />
 
-      <!-- NOTE: Table info bank -->
-      <div class="table-wrapper">
+    <div class="form-box">
+      <div class="qr-bank">
+        <img src="../asset/qr_code.jpg" alt="QR Code Bank" class="qr-image" />
+
         <table class="bank-info-table">
           <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>
           <tr><td><strong>Bank</strong></td><td>: GX Bank</td></tr>
@@ -75,70 +42,57 @@
           <tr><td><strong>Jenis Bank</strong></td><td>: Online Transfer / QR Pay</td></tr>
         </table>
       </div>
+
+      <form id="paymentForm">
+        <div class="form-group">
+          <label for="nama">Nama Keluarga</label>
+          <select id="nama" name="nama" required>
+            <option value="">-- Pilih --</option>
+            <option value="pakcik">Keluarga Pakcik</option>
+            <option value="pakjang">Keluarga Pakjang</option>
+            <option value="faiz">Keluarga Faiz</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="jenis">Pembayaran Bulan / Tambahan</label>
+          <select id="jenis" name="jenis" required>
+            <option value="">-- Pilih --</option>
+            <option value="januari">Januari</option>
+            <option value="februari">Februari</option>
+            <option value="tambahan">Tambahan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reference">Reference - *sila letak reference ini</label>
+          <input type="text" id="reference" name="reference" readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="jumlah">Jumlah Bayaran (RM)</label>
+          <input type="number" id="jumlah" name="jumlah" required />
+        </div>
+
+        <div class="form-group">
+          <label for="resit">Upload Resit</label>
+          <input type="file" id="resit" name="resit" accept="image/*" required />
+        </div>
+
+        <button class="submit-btn" type="submit">Hantar</button>
+
+        <div id="loadingStatus" class="spinner-wrapper" style="display:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
+              <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+            </circle>
+          </svg>
+          <span>Sedang menghantar bayaran...</span>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- NOTE: Borang pembayaran -->
-    <form id="paymentForm">
-      <div class="form-group">
-        <label for="nama">Nama Keluarga</label>
-        <select id="nama" name="nama">
-          <option value="">-- Pilih --</option>
-          <option value="pakcik">Keluarga Pakcik</option>
-          <option value="pakjang">Keluarga Pakjang</option>
-          <option value="faiz">Keluarga Faiz</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="jenis">Pembayaran Bulan / Tambahan</label>
-        <select id="jenis" name="jenis">
-          <option value="">-- Pilih --</option>
-          <option value="januari">Januari</option>
-          <option value="februari">Februari</option>
-          <option value="tambahan">Tambahan</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="reference">Reference - *sila letak reference ini</label>
-        <input type="text" id="reference" name="reference" readonly />
-      </div>
-
-      <div class="form-group">
-        <label for="jumlah">Jumlah Bayaran (RM)</label>
-        <input type="number" id="jumlah" name="jumlah" required />
-      </div>
-
-      <div class="form-group">
-        <label for="resit">Upload Resit</label>
-        <input type="file" id="resit" name="resit" accept="image/*" required />
-      </div>
-
-      <button class="submit-btn" type="submit">Hantar</button>
-
-      <div id="loadingStatus" style="display:none; margin-top: 10px; text-align: center;">
-        <svg class="spinner" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="35" fill="none" stroke="#0d6efd" stroke-width="10" stroke-dasharray="164.9 56.9">
-            <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-          </circle>
-        </svg>
-        <span style="color:#0d6efd; font-weight:bold;">Sedang menghantar bayaran...</span>
-      </div>
-      
-    </form>
-
-        <!-- ✅ Butang kembali ke home -->
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="../index.html" style="text-decoration: none;">
-        <button type="button" style="background-color: #0d6efd; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; font-size: 1rem; cursor: pointer;">
-          ⬅️ Kembali ke Laman Utama
-        </button>
-      </a>
-    </div>
-
-  </main>
-
-  <!-- NOTE: Pautan ke fail JS luaran -->
   <script src="../js/bayaran.js"></script>
 </body>
 </html>

@@ -1,0 +1,148 @@
+/* bayaran_style.css */
+
+body {
+    background-color: #1e1e1e;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  main {
+    background: #2b2b2b;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .return-btn {
+    background-color: #fbb034;
+    color: #2b2b2b;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+  }
+  
+  .return-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .qr-bank {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .qr-bank img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  
+  .bank-info-table {
+    margin: 1rem auto;
+    font-size: 0.95rem;
+    text-align: left;
+    color: #eee;
+  }
+  
+  .bank-info-table td {
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+  
+  .submit-btn {
+    background-color: #fbb034;
+    color: #2b2b2b;
+    padding: 0.8rem;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .submit-btn:hover {
+    transform: scale(1.03);
+  }
+  
+  .spinner {
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  #loadingStatus {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fbb034;
+    font-weight: bold;
+  }
+  
+  /* border payment */
+
+  .form-box {
+    background-color: #2b2b2b;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 8px 24px rgba(0, 0, 0, 0.2),
+      0 12px 48px rgba(0, 0, 0, 0.3); /* 🟡 Layered shadows for depth */
+    color: white;
+  }
+  
+  
+  .container {
+    padding: 1rem;
+    background-color: #1e1e1e;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+  }
+  

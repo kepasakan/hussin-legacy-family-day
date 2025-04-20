@@ -68,7 +68,7 @@ body::before {
 
 @media (max-width: 768px) {
   body::before {
-    background: none;
+  /*  background: none; */
   }
 }
 

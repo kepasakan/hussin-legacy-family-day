@@ -22,6 +22,7 @@ header h1 .atas {
   letter-spacing: 10px;
   display: block;
   margin-bottom: -50px; /* 💥 rapatkan */
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* 💡 soft white glow */
 }
 
 header h1 .bawah {
@@ -31,6 +32,7 @@ header h1 .bawah {
   letter-spacing: 2px;
   display: block;
   margin-top: 0; /* 💥 kosongkan margin atas */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* 🟠 warm orange glow */
 }
 
 

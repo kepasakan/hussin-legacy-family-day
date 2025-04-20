@@ -1,4 +1,3 @@
-// ✅ Data hardcoded atau ambil dari Google Sheet kalau perlu
 const users = [
   { key: "pakcik", nama: "Keluarga Pakcik" },
   { key: "pakjang", nama: "Keluarga Pakjang" },
@@ -11,11 +10,9 @@ const users = [
   { key: "makteh", nama: "Keluarga Makteh" },
   { key: "yana", nama: "Keluarga Yana" },
   { key: "faiz", nama: "Keluarga Faiz" },
-  { key: "paksu", nama: "Keluarga Paksu" },
-  { key: "naim", nama: "testing" }
+  { key: "paksu", nama: "Keluarga Paksu" }
 ];
 
-// ✅ Paparkan senarai button login secara automatik
 window.onload = () => {
   const container = document.getElementById("loginList");
   users.forEach(user => {
@@ -27,7 +24,6 @@ window.onload = () => {
   });
 };
 
-// ✅ Auto login bila klik nama keluarga
 async function loginAuto(key) {
   const statusDiv = document.getElementById("loginStatus");
   statusDiv.innerHTML = "🔄 Log masuk sedang diproses...";

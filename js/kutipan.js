@@ -52,3 +52,66 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
       <tr><td colspan="5" style="text-align:center;">Gagal dapatkan data</td></tr>`;
   });
   
+  // Kutipan Digunakan
+
+const totalKutipanEl = document.getElementById("totalKutipan");
+const jumlahDigunakanEl = document.getElementById("jumlahDigunakan");
+const bakiKutipanEl = document.getElementById("bakiKutipan");
+
+let totalKutipan = 0;
+let totalDigunakan = 0;
+
+fetch("https://script.google.com/macros/s/AKfycbyAYkTIVoWtirHtKWUDJOlkDXH0WkSNzuiwesrwtmCNCY3M_dLiZ8oDqQCeOpX628C1KA/exec")
+  .then(res => res.json())
+  .then(data => {
+    totalKutipan = data.total_jumlah;
+    totalKutipanEl.textContent = `RM ${totalKutipan.toFixed(2)}`;
+    updateBakiKutipan(); // panggil lepas fetch pertama
+  });
+
+
+fetch("https://script.google.com/macros/s/AKfycbz4OZOoQOsvhWKvAeGtkDGSfBeZk-EMTe1F5XcStzTLp52M-_rKUZLGbCyQTb_1cF5FBA/exec")
+  .then(res => res.json())
+  .then(data => {
+    const tableBody = document.getElementById("digunakan-table-body");
+    tableBody.innerHTML = "";
+
+    const reversed = Array.isArray(data.data) ? data.data.reverse() : [];
+
+    reversed.forEach(item => {
+      const resitLink = item.resit?.startsWith("http")
+        ? `<a href="${item.resit}" target="_blank" style="color: white;">📎 Lihat</a>`
+        : "-";
+
+
+      const tarikhFormatted = new Date(item.tarikh).toLocaleDateString("ms-MY");
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.pembelian}</td>
+        <td>${item.pembeli}</td>
+        <td>RM ${Number(item.jumlah).toFixed(2)}</td>
+        <td>${resitLink}</td>
+        <td>${tarikhFormatted}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    totalDigunakan = data.total_digunakan;
+    jumlahDigunakanEl.textContent = `RM ${totalDigunakan.toFixed(2)}`;
+    updateBakiKutipan();
+  })
+  .catch(err => {
+    console.error("❌ Gagal fetch penggunaan:", err);
+    document.getElementById("digunakan-table-body").innerHTML = `
+      <tr><td colspan="5" style="text-align:center;">Gagal dapatkan data</td></tr>`;
+  });
+
+
+function updateBakiKutipan() {
+  if (totalKutipan > 0 || totalDigunakan > 0) {
+    const baki = totalKutipan - totalDigunakan;
+    bakiKutipanEl.textContent = `RM ${baki.toFixed(2)}`;
+  }
+}
+

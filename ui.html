@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hussin Legacy Family Day</title>
@@ -13,7 +15,7 @@
   <div class="container">
     <header>
       <h1>HUSSIN LEGACY FAMILY DAY</h1>
-      <p style="color: black;">1 JANUARY 2026</p>
+      <p style="color: rgb(255, 255, 255);">1 JANUARY 2026</p>
     </header>
 
     <!-- HAMBURGER MENU MOBILE ONLY -->
@@ -102,7 +104,11 @@
             color: #fbb034;
             text-shadow: 0 0 8px rgba(251, 176, 52, 0.3);
             margin-top: 4px;
-          ">Loading...</div>
+          ">
+          <div class="loader" style="margin: 0.5rem auto;"></div>
+            </span>
+          
+          </div>
         </div>
 
         <div class="table-container">
@@ -127,9 +133,20 @@
       <!-- jumlah digunakan -->
       <div class="box double-border">
         <div class="row-title">
-          <div><strong>JUMLAH DIGUNAKAN</strong><br><span id="jumlahDigunakan">RM XX.XX</span></div>
-          <div><strong>BAKI KUTIPAN</strong><br><span id="bakiKutipan">RM XX.XX</span></div>
+          <div>
+            <strong>JUMLAH DIGUNAKAN</strong><br>
+            <span id="jumlahDigunakan">
+              <div class="loader"></div>
+            </span>
+          </div>
+          <div>
+            <strong>BAKI KUTIPAN</strong><br>
+            <span id="bakiKutipan">
+              <div class="loader"></div>
+            </span>
+          </div>
         </div>
+
       
         <div class="table-container" style="margin-top: 1rem;">
           <table class="kutipan-table">

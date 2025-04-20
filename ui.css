@@ -7,8 +7,17 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Font Header Hussing Legacy Family Day */
+header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: 2px;
+  color: white;
+  text-transform: uppercase;
+}
+
 body {
-  background: #8b7979;
+  background: #696868;
   position: relative;
   overflow-x: hidden;
 }
@@ -22,7 +31,7 @@ body::before {
   height: 200%;
   background: radial-gradient(circle at 20% 20%, #ff9800 10%, transparent 30%),
               radial-gradient(circle at 80% 80%, #ffc107 15%, transparent 40%);
-  animation: floatGlow 20s linear infinite;
+  animation: floatGlow 10s linear infinite;
   opacity: 0.08;
   z-index: -1;
 }
@@ -359,4 +368,21 @@ tbody tr:hover {
   font-size: 1.6rem;
   font-weight: bold;
   text-shadow: 0 0 6px rgba(251, 176, 52, 0.4);
+}
+
+/* Spinner Duit Table */
+
+.loader {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #fbb034;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

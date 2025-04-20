@@ -109,7 +109,7 @@ fetch("https://script.google.com/macros/s/AKfycbz4OZOoQOsvhWKvAeGtkDGSfBeZk-EMTe
 
 
 function updateBakiKutipan() {
-  if (totalKutipan > 0 || totalDigunakan > 0) {
+  if (totalKutipan > 0 && totalDigunakan > 0) {
     const baki = totalKutipan - totalDigunakan;
     bakiKutipanEl.textContent = `RM ${baki.toFixed(2)}`;
   }

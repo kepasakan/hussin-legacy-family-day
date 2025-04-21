@@ -1,16 +1,16 @@
 const users = [
-  { key: "pakcik", nama: "Keluarga Pakcik" },
-  { key: "pakjang", nama: "Keluarga Pakjang" },
-  { key: "fahmi", nama: "Keluarga Fahmi" },
-  { key: "hafiz", nama: "Keluarga Hafiz" },
-  { key: "hanis", nama: "Keluarga Hanis" },
-  { key: "wani", nama: "Keluarga Wani" },
-  { key: "wan", nama: "Keluarga Wan" },
-  { key: "ika", nama: "Keluarga Ika" },
-  { key: "makteh", nama: "Keluarga Makteh" },
-  { key: "yana", nama: "Keluarga Yana" },
-  { key: "faiz", nama: "Keluarga Faiz" },
-  { key: "paksu", nama: "Keluarga Paksu" }
+  { key: "pakcik", nama: "PAKCIK" },
+  { key: "pakjang", nama: "PAKJANG" },
+  { key: "fahmi", nama: "FAHMI" },
+  { key: "hafiz", nama: "HAFIZ" },
+  { key: "hanis", nama: "HANIS" },
+  { key: "wani", nama: "WANI" },
+  { key: "wan", nama: "WAN" },
+  { key: "ika", nama: "IKA" },
+  { key: "makteh", nama: "MAKTEH" },
+  { key: "yana", nama: "YANA" },
+  { key: "faiz", nama: "FAIZ" },
+  { key: "paksu", nama: "PAKSU" }
 ];
 
 window.onload = () => {

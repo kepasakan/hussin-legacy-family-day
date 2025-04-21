@@ -16,13 +16,14 @@ async function loadDashboard() {
   try {
     const res = await fetch(`${LOGIN_API}?key=${key}`);
     const data = await res.json();
+    const infoBox = document.getElementById("bayaranInfo");
+    if (infoBox) {
+      infoBox.innerHTML = `...`;
+    }
 
     if (data.status === "success") {
       document.getElementById("namaKeluarga").innerHTML = `Selamat datang, <strong>${data.nama}</strong>!`;
       document.getElementById("namaKey").innerHTML = `🔑 (key: <code>${data.key}</code>)`;
-      document.getElementById("bayaranInfo").innerHTML = `
-        🔒 Key anda: <code>${data.key}</code><br>
-      `;
     } else {
       document.getElementById("namaKeluarga").textContent = "❌ Akaun tidak dijumpai.";
     }
@@ -112,7 +113,66 @@ async function semakKutipanKeluargaIni() {
   }
 }
 
+// monthly payment //
+async function semakBayaranBulan() {
+  const resultBox = document.getElementById("resultBayaranTable");
+  resultBox.innerHTML = ""; // Kosongkan dulu sebelum isi
+
+  try {
+    const res = await fetch(`https://script.google.com/macros/s/AKfycbx7A5ZjxGoAkocbWdJR2a2ZHiemeUXqjrvdVK_FsTEFa2TQVxEqlUygtZZEmaZ_7ZORag/exec?key=${key}`);
+    const data = await res.json();
+
+    if (data.status !== "success") throw new Error("Gagal fetch");
+
+    const bulanPenuh = [
+      "januari", "februari", "mac", "april",
+      "mei", "jun", "julai", "ogos",
+      "september", "oktober", "november", "disember"
+    ];
+    const paid = data.paid || [];
+
+    const gridWrapper = document.createElement("div");
+    gridWrapper.className = "bayaran-grid";
+
+    bulanPenuh.forEach(bulan => {
+      const item = document.createElement("div");
+      item.className = paid.includes(bulan) ? "grid-item bayar" : "grid-item belum";
+
+      const statusIcon = document.createElement("div");
+      statusIcon.className = "status-icon";
+      statusIcon.textContent = paid.includes(bulan) ? "✅" : "❌";
+
+      const bulanText = document.createElement("div");
+      bulanText.className = "bulan-text";
+      bulanText.textContent = bulan;
+
+      item.appendChild(statusIcon);
+      item.appendChild(bulanText);
+      gridWrapper.appendChild(item);
+    });
+
+    resultBox.appendChild(gridWrapper);
+
+    // Tambahan
+    if (paid.includes("tambahan") && data.totalTambahan) {
+      const tambahan = document.createElement("div");
+      tambahan.className = "tambahan-box";
+      tambahan.innerHTML = `
+        <strong>💼 Tambahan:</strong><br>
+        💸 Jumlah: RM${parseFloat(data.totalTambahan).toFixed(2)}
+      `;
+      resultBox.appendChild(tambahan);
+    }
+
+  } catch (err) {
+    console.error("❌ Gagal load bayaran bulan:", err);
+    resultBox.innerHTML = "❌ Gagal load bayaran bulan.";
+  }
+}
+
+
 window.onload = function () {
   loadDashboard();
-  semakKutipanKeluargaIni(); // ✅ Panggil semakan automatik
+  semakKutipanKeluargaIni();
+  semakBayaranBulan();
 };

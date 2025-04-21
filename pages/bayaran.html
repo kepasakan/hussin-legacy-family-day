@@ -72,23 +72,11 @@
 
       <form id="paymentForm">
         <div class="form-group">
-          <label for="nama">Nama Keluarga</label>
-          <select id="nama" name="nama" required>
-            <option value="">-- Pilih --</option>
-            <option value="pakcik">Keluarga Pakcik</option>
-            <option value="pakjang">Keluarga Pakjang</option>
-            <option value="faiz">Keluarga Faiz</option>
-            <option value="fahmi">Keluarga Fahmi</option>
-            <option value="hafiz">Keluarga Hafiz</option>
-            <option value="hanis">Keluarga Hanis</option>
-            <option value="wani">Keluarga Wani</option>
-            <option value="wan">Keluarga Wan</option>
-            <option value="ika">Keluarga Ika</option>
-            <option value="makteh">Keluarga Makteh</option>
-            <option value="yana">Keluarga Yana</option>
-            <option value="paksu">Keluarga Paksu</option>
-          </select>
+          <label>Nama Keluarga</label>
+          <input type="hidden" id="nama" name="nama" />
+          <div id="namaContainer" class="nama-button-grid"></div>
         </div>
+        
       
         <!-- ✅ Bulan/Tambahan Buttons -->
         <div class="form-group">

@@ -6,13 +6,57 @@ const jumlahEl = document.getElementById("jumlah");
 const resitEl = document.getElementById("resit");
 const resultBox = document.getElementById("resultBox");
 const bulanContainer = document.getElementById("bulanContainer");
+const namaContainer = document.getElementById("namaContainer");
 const loadingStatus = document.getElementById("loadingStatus");
 const bulanLoading = document.getElementById("bulanLoading");
 
 let selectedBulanBtn = null;
-const bulanPenuh = ["JAN", "FEB", "MAC", "APR", "MEI", "JUN", "JUL", "OGS", "SEP", "OKT", "NOV", "DIS"];
+let selectedNamaBtn = null;
 
-// ✅ Generate butang bulan berdasarkan senarai paid
+const bulanPenuh = ["JAN", "FEB", "MAC", "APR", "MEI", "JUN", "JUL", "OGS", "SEP", "OKT", "NOV", "DIS"];
+const namaData = [
+  { nama: "Keluarga Pakcik", key: "pakcik" },
+  { nama: "Keluarga Pakjang", key: "pakjang" },
+  { nama: "Keluarga Fahmi", key: "fahmi" },
+  { nama: "Keluarga Hafiz", key: "hafiz" },
+  { nama: "Keluarga Hanis", key: "hanis" },
+  { nama: "Keluarga Wani", key: "wani" },
+  { nama: "Keluarga Wan", key: "wan" },
+  { nama: "Keluarga Ika", key: "ika" },
+  { nama: "Keluarga Makteh", key: "makteh" },
+  { nama: "Keluarga Yana", key: "yana" },
+  { nama: "Keluarga Faiz", key: "faiz" },
+  { nama: "Keluarga Paksu", key: "paksu" }
+];
+
+// ✅ Generate button nama keluarga
+function renderNamaButtons() {
+  namaContainer.innerHTML = "";
+
+  namaData.forEach(item => {
+    const btn = document.createElement("button");
+    btn.textContent = item.nama;
+    btn.type = "button";
+    btn.className = "bulan-btn";
+
+    btn.addEventListener("click", () => {
+      if (selectedNamaBtn) selectedNamaBtn.classList.remove("selected-bulan");
+      btn.classList.add("selected-bulan");
+      selectedNamaBtn = btn;
+
+      namaEl.value = item.key;
+      jenisEl.value = "";
+      referenceEl.value = "";
+      if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
+
+      fetchBulanForKey(item.key);
+    });
+
+    namaContainer.appendChild(btn);
+  });
+}
+
+// ✅ Generate butang bulan
 function renderBulanButtons(paid = [], isAfterSelection = false) {
   bulanContainer.innerHTML = "";
   const currentMonthIndex = new Date().getMonth();
@@ -23,18 +67,14 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
     btn.type = "button";
     btn.className = "bulan-btn";
 
-    const isPaid = paid.includes(bulan);
-    const isFuture = index >= currentMonthIndex;
-    const isBeforeNow = index < currentMonthIndex;
-
-    // ✅ Disable jika telah dibayar
-    if (isPaid) {
+    // ✅ Disable jika telah bayar
+    if (paid.includes(bulan)) {
       btn.disabled = true;
       btn.style.opacity = 0.3;
     }
 
-    // ✅ JAN hanya disable kalau memang sudah dibayar
-    if (index === 0 && isPaid) {
+    // ✅ Disable JAN hanya jika sudah dibayar
+    if (index === 0 && isAfterSelection && paid.includes("JAN")) {
       btn.disabled = true;
       btn.style.opacity = 0.3;
     }
@@ -64,19 +104,8 @@ function updateReferenceManual() {
   referenceEl.value = nama && bulan ? `${nama}-${bulan}` : "";
 }
 
-// ✅ Bila user tukar nama keluarga
-namaEl.addEventListener("change", async () => {
-  jenisEl.value = "";
-  referenceEl.value = "";
-  if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
-
-  const key = namaEl.value;
-  if (!key) {
-    bulanContainer.innerHTML = "";
-    renderBulanButtons(); // render normal bila belum pilih family
-    return;
-  }
-
+// ✅ Fetch bulan berdasarkan nama (key)
+async function fetchBulanForKey(key) {
   bulanContainer.innerHTML = "";
   bulanLoading.style.display = "flex";
 
@@ -94,9 +123,9 @@ namaEl.addEventListener("change", async () => {
   } finally {
     bulanLoading.style.display = "none";
   }
-});
+}
 
-// ✅ Bila user tekan butang "Hantar"
+// ✅ Hantar borang
 document.getElementById("paymentForm").addEventListener("submit", async function (e) {
   e.preventDefault();
   loadingStatus.style.display = "block";
@@ -155,5 +184,6 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   }
 });
 
-// ✅ Init default button bila belum pilih apa-apa
+// ✅ Init
 renderBulanButtons();
+renderNamaButtons();

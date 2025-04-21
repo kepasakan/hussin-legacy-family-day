@@ -146,13 +146,20 @@ body {
   }
   
   .grid-item.bayar {
-    background-color: #4caf50;
-    color: white;
+    background-color: #2e7d32; /* hijau gelap premium */
+    color: #fff;
   }
   
   .grid-item.belum {
-    background-color: #f44336;
-    color: white;
+    background-color: #c62828; /* merah gelap profesional */
+    color: #fff;
+  }
+  
+  .bulan-text {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    text-transform: uppercase;
   }
   
   .status-icon {
@@ -161,9 +168,49 @@ body {
   }
   
   .grid-item:hover {
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
     transition: all 0.25s ease-in-out;
-    cursor: default;
+  }
+  
+  /* Kutipan Dashboard */
+  .kutipan-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* Tengah betul-betul */
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: nowrap; /* Takkan turun ke bawah */
+  }
+  
+  .info-box {
+    background-color: #2e2e2e;
+    padding: 1.2rem 1.2rem; /* kurang dari 2rem */
+    border-radius: 20px;
+    width: 240px;
+    height: 140px; /* rendah sikit */
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .info-title {
+    color: #cfd9e6;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem; /* rapatkan ke bawah */
+  }
+  
+  .info-value {
+    color: #fbb034;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 0; /* rapatkan ke atas */
   }
   

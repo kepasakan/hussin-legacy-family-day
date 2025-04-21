@@ -21,6 +21,7 @@
       <p id="namaKeluarga" class="akaun-subtitle"></p>
       <p id="namaKey" class="akaun-key"></p>
 
+      <!-- Semakan Kutipan -->
       <div class="section">
         <h3>📋 Semakan Kutipan Keluarga Ini</h3>
         <div id="loadingSemak" class="spinner-wrapper" style="display: none;">
@@ -31,12 +32,22 @@
           </svg>
           <span>Memuatkan maklumat kutipan...</span>
         </div>
-        <div id="resultKutipan" class="result-box"></div>
+        <div id="resultKutipan" class="kutipan-grid"></div>
       </div>
+
 
       <!-- Bulan Bayaran Section -->
       <div class="section">
         <h3>📆 Bayaran Bulanan</h3>
+          <!-- Spinner Waiting -->
+          <div id="loadingBayaran" class="spinner-wrapper" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
+                <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+              </circle>
+            </svg>
+            <span>Memuatkan bayaran bulanan...</span>
+          </div>
         <div id="resultBayaranTable" class="bayaran-grid"></div>
       </div>
 

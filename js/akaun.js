@@ -70,53 +70,53 @@ document.getElementById("formKehadiran").addEventListener("submit", async functi
 });
 
 
-// ✅ SEMAK STATUS KUTIPAN untuk akaun ini (guna key)
 async function semakKutipanKeluargaIni() {
-  const loadingDiv = document.getElementById("loadingSemak");
-  const resultDiv = document.getElementById("resultKutipan");
-
-  if (!key) return;
-
-  resultDiv.innerHTML = "";
-  loadingDiv.style.display = "block";
-
-  const url = `https://script.google.com/macros/s/AKfycbw5899UUEP5g3so6vn_DkMA7s2ou2EHNd_UY0pmFYge23Ka1jdMxHsI9qWAsbBSAP6cHA/exec?key=${key}`;
+  const resultBox = document.getElementById("resultKutipan");
+  resultBox.innerHTML = `
+    <div class="spinner-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
+          <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+        </circle>
+      </svg>
+      <span>Memuatkan maklumat kutipan...</span>
+    </div>
+  `;
 
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    loadingDiv.style.display = "none";
+    const res = await fetch(`https://script.google.com/macros/s/AKfycby8lsWaj4hrHeGKs_MjDzDIj9uhlK7vBeocLOoqEMgnUg_00TxscAoVdfikDCcXg6l7WA/exec?key=${key}`);
+    const data = await res.json();
+    if (data.status !== "success") throw new Error("Gagal fetch");
 
-    if (data.status === "error") {
-      resultDiv.innerHTML = "❌ Kata kunci tidak sah.";
-      return;
-    }
-
-    const percent = Math.round((data.bayar / data.perlu) * 100);
-    let barColor = "#f44336";
-    if (percent === 100) barColor = "#4CAF50";
-    else if (percent >= 50) barColor = "#FF9800";
-
-    resultDiv.innerHTML = `
-      <div style="font-size:1.2rem; color:#b71c1c;">🏡 <strong>${data.nama}</strong></div>
-      💰 <span style="color:#f57c00;"><strong>Jumlah perlu bayar:</strong> RM${data.perlu}</span><br>
-      ✅ <span style="color:#388e3c;"><strong>Sudah bayar:</strong> RM${data.bayar}</span><br>
-      🧾 <strong>Baki:</strong> RM${data.perlu - data.bayar}
-      <div class="progress-container">
-        <div class="progress-bar" style="width:${percent}%; background-color:${barColor}; transition: width 1s ease-in-out;">${percent}%</div>
+    resultBox.innerHTML = `
+      <div class="kutipan-column">
+        <div class="info-box">
+          <div class="info-title">Jumlah Bayaran</div>
+          <div class="info-value">RM ${parseFloat(data.jumlah_bayaran).toFixed(2)}</div>
+        </div>
+        <div class="info-box">
+          <div class="info-title">Jumlah Perlu Bayar</div>
+          <div class="info-value">RM ${parseFloat(data.jumlah_perlu).toFixed(2)}</div>
+        </div>
+        <div class="info-box">
+          <div class="info-title">Jumlah Tambahan</div>
+          <div class="info-value">RM ${parseFloat(data.jumlah_tambahan).toFixed(2)}</div>
+        </div>
       </div>
     `;
-  } catch (error) {
-    loadingDiv.style.display = "none";
-    resultDiv.innerHTML = "❌ Gagal semak data.";
-    console.error("❌ Error:", error);
+  } catch (err) {
+    console.error("❌ Gagal load kutipan:", err);
+    resultBox.innerHTML = `<p style="color:red">❌ Gagal load maklumat kutipan.</p>`;
   }
 }
 
-// monthly payment //
+
+// ✅ Monthly Payment (with loading spinner)
 async function semakBayaranBulan() {
   const resultBox = document.getElementById("resultBayaranTable");
-  resultBox.innerHTML = ""; // Kosongkan dulu sebelum isi
+  const loading = document.getElementById("loadingBayaran");
+  resultBox.innerHTML = ""; // Kosongkan dulu
+  loading.style.display = "flex"; // Tunjuk spinner
 
   try {
     const res = await fetch(`https://script.google.com/macros/s/AKfycbx7A5ZjxGoAkocbWdJR2a2ZHiemeUXqjrvdVK_FsTEFa2TQVxEqlUygtZZEmaZ_7ZORag/exec?key=${key}`);
@@ -125,50 +125,38 @@ async function semakBayaranBulan() {
     if (data.status !== "success") throw new Error("Gagal fetch");
 
     const bulanPenuh = [
-      "januari", "februari", "mac", "april",
-      "mei", "jun", "julai", "ogos",
-      "september", "oktober", "november", "disember"
+      "JAN", "FEB", "MAC", "APR",
+      "MEI", "JUN", "JUL", "OGS",
+      "SEP", "OKT", "NOV", "DIS"
     ];
-    const paid = data.paid || [];
+    const paid = (data.paid || []).map(b => b.slice(0, 3).toUpperCase());
 
     const gridWrapper = document.createElement("div");
     gridWrapper.className = "bayaran-grid";
 
     bulanPenuh.forEach(bulan => {
       const item = document.createElement("div");
-      item.className = paid.includes(bulan) ? "grid-item bayar" : "grid-item belum";
-
-      const statusIcon = document.createElement("div");
-      statusIcon.className = "status-icon";
-      statusIcon.textContent = paid.includes(bulan) ? "✅" : "❌";
+      item.className = paid.includes(bulan)
+        ? "grid-item bayar"
+        : "grid-item belum";
 
       const bulanText = document.createElement("div");
       bulanText.className = "bulan-text";
       bulanText.textContent = bulan;
 
-      item.appendChild(statusIcon);
       item.appendChild(bulanText);
       gridWrapper.appendChild(item);
     });
 
     resultBox.appendChild(gridWrapper);
-
-    // Tambahan
-    if (paid.includes("tambahan") && data.totalTambahan) {
-      const tambahan = document.createElement("div");
-      tambahan.className = "tambahan-box";
-      tambahan.innerHTML = `
-        <strong>💼 Tambahan:</strong><br>
-        💸 Jumlah: RM${parseFloat(data.totalTambahan).toFixed(2)}
-      `;
-      resultBox.appendChild(tambahan);
-    }
-
   } catch (err) {
     console.error("❌ Gagal load bayaran bulan:", err);
     resultBox.innerHTML = "❌ Gagal load bayaran bulan.";
+  } finally {
+    loading.style.display = "none"; // Sembunyi spinner lepas load
   }
 }
+
 
 
 window.onload = function () {

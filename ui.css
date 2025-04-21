@@ -267,29 +267,40 @@ header p {
   100% { transform: rotate(360deg); }
 }
 
-.info-penting {
-  text-align: center;
-}
+/* Info Penting Spacing */
 
-.info-penting h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  display: block;
-  text-align: center;
-}
-
-.info-penting ul {
-  padding-left: 0;
-  list-style: disc;
-  display: block;
-  text-align: left;
-  margin: 0 auto;
-  max-width: max-content;
-}
-
-.info-penting li {
-  margin-bottom: 6px;
+.info-table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 0.5rem;
   font-size: 0.95rem;
+  text-align: left;
+  max-width: max-content;
+  margin-left: 2rem;
+  margin-right: 0;
+}
+
+.info-row {
+  display: flex;
+  gap: 4px; /* ✅ Kurangkan gap antara elemen */
+  align-items: flex-start;
+}
+
+.info-label {
+  font-weight: 600;
+  width: 80px;       /* Tetap lebar supaya semua label sejajar */
+  text-align: left;  /* Teks label align ke kanan */
+}
+
+.info-sep {
+  font-weight: 600;
+  padding-left: 2px; /* Optional: tambah sikit padding */
+}
+
+.info-value {
+  color: white;
+  margin-left: 10px; /* Coming Soon */
 }
 
 /*hamburger mobile option*/

@@ -6,11 +6,40 @@
   <title>Proses Pembayaran</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/bayaran.css" />
+
+  <style>
+    .bulan-button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .bulan-btn {
+      background-color: #222;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .bulan-btn:hover {
+      background-color: #444;
+    }
+
+    .selected-bulan {
+      background-color: #fbb034;
+      color: black;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
 
-      <!-- ✅ Butang Kembali ke Laman Utama (Center Style) -->
+    <!-- ✅ Button Back to Homepage -->
     <div style="text-align: center; margin: 1.5rem 0;">
       <a href="../ui.html" style="text-decoration: none;">
         <button type="button" style="
@@ -30,11 +59,9 @@
       </a>
     </div>
 
-
     <div class="form-box">
       <div class="qr-bank">
         <img src="../asset/qr_code.jpg" alt="QR Code Bank" class="qr-image" />
-
         <table class="bank-info-table">
           <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>
           <tr><td><strong>Bank</strong></td><td>: GX Bank</td></tr>
@@ -51,18 +78,37 @@
             <option value="pakcik">Keluarga Pakcik</option>
             <option value="pakjang">Keluarga Pakjang</option>
             <option value="faiz">Keluarga Faiz</option>
+            <option value="fahmi">Keluarga Fahmi</option>
+            <option value="hafiz">Keluarga Hafiz</option>
+            <option value="hanis">Keluarga Hanis</option>
+            <option value="wani">Keluarga Wani</option>
+            <option value="wan">Keluarga Wan</option>
+            <option value="ika">Keluarga Ika</option>
+            <option value="makteh">Keluarga Makteh</option>
+            <option value="yana">Keluarga Yana</option>
+            <option value="paksu">Keluarga Paksu</option>
           </select>
         </div>
-
+      
+        <!-- ✅ Bulan/Tambahan Buttons -->
         <div class="form-group">
-          <label for="jenis">Pembayaran Bulan / Tambahan</label>
-          <select id="jenis" name="jenis" required>
-            <option value="">-- Pilih --</option>
-            <option value="januari">Januari</option>
-            <option value="februari">Februari</option>
-            <option value="tambahan">Tambahan</option>
-          </select>
+          <label>Pembayaran Bulan / Tambahan</label>
+          <input type="hidden" id="jenis" name="jenis" />
+        
+          <!-- ✅ Spinner (pindah ke luar container untuk elak terpadam) -->
+          <div id="bulanLoading" class="spinner-wrapper" style="display:none; justify-content: center; margin: 1rem 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
+                <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
+              </circle>
+            </svg>
+            <span style="margin-left: 10px;">Memuatkan pilihan bulan...</span>
+          </div>
+        
+          <!-- ✅ Container untuk butang bulan -->
+          <div id="bulanContainer" class="bulan-button-grid"></div>
         </div>
+        
 
         <div class="form-group">
           <label for="reference">Reference - *sila letak reference ini</label>
@@ -93,6 +139,7 @@
     </div>
   </div>
 
+  <!-- ✅ Your Bayaran Logic -->
   <script src="../js/bayaran.js"></script>
 </body>
 </html>

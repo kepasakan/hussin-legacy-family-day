@@ -5,24 +5,100 @@ const referenceEl = document.getElementById("reference");
 const jumlahEl = document.getElementById("jumlah");
 const resitEl = document.getElementById("resit");
 const resultBox = document.getElementById("resultBox");
-
+const bulanContainer = document.getElementById("bulanContainer");
 const loadingStatus = document.getElementById("loadingStatus");
+const bulanLoading = document.getElementById("bulanLoading");
 
-// ✅ Auto-generate "reference" bila user pilih nama + jenis
-function updateReference() {
-  const nama = namaEl.value;
-  const jenis = jenisEl.value;
-  referenceEl.value = nama && jenis ? `${nama}-${jenis}` : "";
+let selectedBulanBtn = null;
+const bulanPenuh = ["JAN", "FEB", "MAC", "APR", "MEI", "JUN", "JUL", "OGS", "SEP", "OKT", "NOV", "DIS"];
+
+// ✅ Generate butang bulan berdasarkan senarai paid
+function renderBulanButtons(paid = [], isAfterSelection = false) {
+  bulanContainer.innerHTML = "";
+  const currentMonthIndex = new Date().getMonth();
+
+  bulanPenuh.forEach((bulan, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = bulan;
+    btn.type = "button";
+    btn.className = "bulan-btn";
+
+    const isPaid = paid.includes(bulan);
+    const isFuture = index >= currentMonthIndex;
+    const isBeforeNow = index < currentMonthIndex;
+
+    // ✅ Disable jika telah dibayar
+    if (isPaid) {
+      btn.disabled = true;
+      btn.style.opacity = 0.3;
+    }
+
+    // ✅ JAN hanya disable kalau memang sudah dibayar
+    if (index === 0 && isPaid) {
+      btn.disabled = true;
+      btn.style.opacity = 0.3;
+    }
+
+    btn.addEventListener("click", () => {
+      if (!namaEl.value) {
+        alert("⚠️ Sila pilih nama keluarga dahulu.");
+        return;
+      }
+
+      if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
+      btn.classList.add("selected-bulan");
+      selectedBulanBtn = btn;
+
+      jenisEl.value = bulan;
+      updateReferenceManual();
+    });
+
+    bulanContainer.appendChild(btn);
+  });
 }
 
-namaEl.addEventListener("change", updateReference);
-jenisEl.addEventListener("change", updateReference);
+// ✅ Auto-generate reference
+function updateReferenceManual() {
+  const nama = namaEl.value;
+  const bulan = jenisEl.value;
+  referenceEl.value = nama && bulan ? `${nama}-${bulan}` : "";
+}
+
+// ✅ Bila user tukar nama keluarga
+namaEl.addEventListener("change", async () => {
+  jenisEl.value = "";
+  referenceEl.value = "";
+  if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
+
+  const key = namaEl.value;
+  if (!key) {
+    bulanContainer.innerHTML = "";
+    renderBulanButtons(); // render normal bila belum pilih family
+    return;
+  }
+
+  bulanContainer.innerHTML = "";
+  bulanLoading.style.display = "flex";
+
+  try {
+    const res = await fetch(`https://script.google.com/macros/s/AKfycbx7A5ZjxGoAkocbWdJR2a2ZHiemeUXqjrvdVK_FsTEFa2TQVxEqlUygtZZEmaZ_7ZORag/exec?key=${key}`);
+    const data = await res.json();
+    if (data.status !== "success") throw new Error("Fetch gagal");
+
+    const paid = (data.paid || []).map(b => b.slice(0, 3).toUpperCase());
+    renderBulanButtons(paid, true);
+
+  } catch (err) {
+    console.error("❌ Gagal fetch bayaran bulan:", err);
+    bulanContainer.innerHTML = "Gagal load butang bulan.";
+  } finally {
+    bulanLoading.style.display = "none";
+  }
+});
 
 // ✅ Bila user tekan butang "Hantar"
 document.getElementById("paymentForm").addEventListener("submit", async function (e) {
   e.preventDefault();
-
-  // ✅ Tunjuk loading
   loadingStatus.style.display = "block";
 
   const nama = namaEl.value;
@@ -30,17 +106,15 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   const jumlah = jumlahEl.value;
   const reference = referenceEl.value;
   const resitFile = resitEl.files[0];
-
   const receipt = resitFile ? resitFile.name : "";
 
   if (!nama || !jenis || !jumlah || !receipt || !reference) {
     alert("⚠️ Sila lengkapkan semua maklumat sebelum hantar.");
-    loadingStatus.style.display = "none"; // Sembunyi semula
+    loadingStatus.style.display = "none";
     return;
   }
 
   try {
-    // ✅ Step 1: Upload ke Telegram
     const botToken = "7740099280:AAGy5g6SME7yeuxXUgSSnSUwma6uJyH-g94";
     const chatId = "-1002518767864";
 
@@ -55,14 +129,12 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     });
 
     const tgJson = await tgRes.json();
-
     if (!tgJson.ok) {
       console.error("❌ Telegram Error:", tgJson.description);
-      window.location.href = "bayaran_gagal.html"; // ❌ redirect ke halaman gagal
+      window.location.href = "bayaran_gagal.html";
       return;
     }
 
-    // ✅ Step 2: Hantar ke Google Sheet (via doGet)
     const endpoint = "https://script.google.com/macros/s/AKfycbyI-DJk0Q8z1erH2XQFcaCb9uyR1NBrOJHteWse8gPQG6UT8h7h53gA9xEjn96iaNDi/exec";
     const url = `${endpoint}?nama=${encodeURIComponent(nama)}&jenis=${encodeURIComponent(jenis)}&jumlah=${encodeURIComponent(jumlah)}&receipt=${encodeURIComponent(receipt)}&reference=${encodeURIComponent(reference)}`;
 
@@ -70,15 +142,18 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     const text = await res.text();
 
     if (text.includes("✅")) {
-      window.location.href = "bayaran_berjaya.html"; // ✅ redirect ke halaman berjaya
+      window.location.href = "bayaran_berjaya.html";
     } else {
-      window.location.href = "bayaran_gagal.html"; // ❌ jika gagal masuk ke Google Sheet
+      window.location.href = "bayaran_gagal.html";
     }
 
   } catch (err) {
     console.error("❌ Error:", err);
-    window.location.href = "bayaran_gagal.html"; // ❌ Error semasa proses
+    window.location.href = "bayaran_gagal.html";
   } finally {
-    loadingStatus.style.display = "none"; // Sembunyi semula (fallback)
+    loadingStatus.style.display = "none";
   }
 });
+
+// ✅ Init default button bila belum pilih apa-apa
+renderBulanButtons();

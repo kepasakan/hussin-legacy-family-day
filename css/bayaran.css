@@ -146,3 +146,37 @@ body {
     font-family: 'Poppins', sans-serif;
   }
   
+  /* Button Pembayaran bulan / tambahanan */
+
+  .bulan-btn {
+    background-color: #222;
+    color: white;
+    padding: 0.6rem 1rem;
+    margin: 0.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+  
+  .bulan-btn:hover {
+    background-color: #444;
+  }
+  
+  .selected-bulan {
+    background-color: #fbb034;
+    color: black;
+  }
+  
+  /* Spinner Pembayaran Bulan/Tambahan */
+
+  .spinner-bulan {
+    display: flex;
+    align-items: center;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: #fbb034;
+    font-weight: bold;
+  }
+  

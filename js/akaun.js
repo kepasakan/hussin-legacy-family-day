@@ -115,8 +115,8 @@ async function semakKutipanKeluargaIni() {
 async function semakBayaranBulan() {
   const resultBox = document.getElementById("resultBayaranTable");
   const loading = document.getElementById("loadingBayaran");
-  resultBox.innerHTML = ""; // Kosongkan dulu
-  loading.style.display = "flex"; // Tunjuk spinner
+  resultBox.innerHTML = "";
+  loading.style.display = "flex";
 
   try {
     const res = await fetch(`https://script.google.com/macros/s/AKfycbx7A5ZjxGoAkocbWdJR2a2ZHiemeUXqjrvdVK_FsTEFa2TQVxEqlUygtZZEmaZ_7ZORag/exec?key=${key}`);
@@ -134,15 +134,22 @@ async function semakBayaranBulan() {
     const gridWrapper = document.createElement("div");
     gridWrapper.className = "bayaran-grid";
 
-    bulanPenuh.forEach(bulan => {
-      const item = document.createElement("div");
-      item.className = paid.includes(bulan)
-        ? "grid-item bayar"
-        : "grid-item belum";
+    // Dapatkan bulan semasa (0 = Jan, 3 = April)
+    const currentMonthIndex = new Date().getMonth();
 
+    bulanPenuh.forEach((bulan, index) => {
+      const item = document.createElement("div");
       const bulanText = document.createElement("div");
       bulanText.className = "bulan-text";
       bulanText.textContent = bulan;
+
+      if (paid.includes(bulan)) {
+        item.className = "grid-item bayar"; // Hijau
+      } else if (index < currentMonthIndex) {
+        item.className = "grid-item belum"; // Merah
+      } else {
+        item.className = "grid-item belum-akan"; // Kelabu
+      }
 
       item.appendChild(bulanText);
       gridWrapper.appendChild(item);
@@ -153,9 +160,10 @@ async function semakBayaranBulan() {
     console.error("❌ Gagal load bayaran bulan:", err);
     resultBox.innerHTML = "❌ Gagal load bayaran bulan.";
   } finally {
-    loading.style.display = "none"; // Sembunyi spinner lepas load
+    loading.style.display = "none";
   }
 }
+
 
 
 

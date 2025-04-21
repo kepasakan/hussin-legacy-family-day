@@ -1,222 +1,227 @@
 body {
-    margin: 0;
-    background-color: #1e1e1e;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-  }
-  
-  .akaun-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-  }
-  
-  .kembali-wrapper {
-    margin-bottom: 1.5rem;
-  }
-  
-  .kembali-btn {
-    background-color: #fbb034;
-    padding: 0.6rem 1.4rem;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #1e1e1e;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-  }
-  .kembali-btn:hover {
-    background-color: #ffc647;
-  }
-  
-  .akaun-box {
-    background-color: #2b2b2b;
-    padding: 2rem;
-    border-radius: 20px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-  
-  .akaun-title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-  
-  .akaun-subtitle {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .akaun-key {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-top: -5px;
-  }
-  
-  .section {
-    margin-top: 2rem;
-  }
-  
-  .section h3 {
-    font-size: 1.2rem;
-    color: #fbb034;
-    margin-bottom: 0.8rem;
-  }
-  
-  .spinner-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #fbb034;
-    font-weight: bold;
-  }
-  
-  .kehadiran-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  
-  .kehadiran-form select,
-  .kehadiran-form button {
-    padding: 0.5rem;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .kehadiran-form button {
-    background-color: #0d6efd;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .kehadiran-form button:hover {
-    background-color: #2563eb;
-  }
-  
-  .result-box {
-    background-color: #3b3b3b;
-    padding: 1rem;
-    border-radius: 12px;
-    margin-top: 1rem;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .akaun-footer {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #999;
-  }
-  
-  /* Box Bayaran Bulanan */
+  margin: 0;
+  background-color: #1e1e1e;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
 
-  .bayaran-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
+.akaun-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.kembali-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.kembali-btn {
+  background-color: #fbb034;
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #1e1e1e;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+.kembali-btn:hover {
+  background-color: #ffc647;
+}
+
+.akaun-box {
+  background-color: #2b2b2b;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.akaun-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.akaun-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.akaun-key {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: -5px;
+}
+
+.section {
+  margin-top: 2rem;
+}
+
+.section h3 {
+  font-size: 1.2rem;
+  color: #fbb034;
+  margin-bottom: 0.8rem;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fbb034;
+  font-weight: bold;
+}
+
+.kehadiran-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.kehadiran-form select,
+.kehadiran-form button {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.kehadiran-form button {
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.kehadiran-form button:hover {
+  background-color: #2563eb;
+}
+
+.result-box {
+  background-color: #3b3b3b;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.akaun-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+/* Box Bayaran Bulanan */
+.bayaran-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.grid-item {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.grid-item.bayar {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
+.grid-item.belum {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.bulan-text {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.grid-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease-in-out;
+}
+
+.grid-item.belum-akan {
+  background-color: #555;
+  color: white;
+  opacity: 0.7;
+}
+
+/* Responsive Kutipan */
+.kutipan-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+.info-box {
+  background-color: #2e2e2e;
+  padding: 1.2rem 1.2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.info-title {
+  color: #cfd9e6;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.3rem;
+}
+
+.info-value {
+  color: #fbb034;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+@media (max-width: 480px) {
   .grid-item {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    width: 72px;
+    height: 72px;
+    font-size: 0.8rem;
   }
-  
-  .grid-item.bayar {
-    background-color: #2e7d32; /* hijau gelap premium */
-    color: #fff;
-  }
-  
-  .grid-item.belum {
-    background-color: #c62828; /* merah gelap profesional */
-    color: #fff;
-  }
-  
-  .bulan-text {
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  
-  .status-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.3rem;
-  }
-  
-  .grid-item:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-    transition: all 0.25s ease-in-out;
-  }
-  
-  .grid-item.belum-akan {
-    background-color: #555; /* warna kelabu */
-    color: white;
-    opacity: 0.7;
-  }
-  
-
-  /* Kutipan Dashboard */
-  .kutipan-column {
-    display: flex;
-    flex-direction: row;
-    justify-content: center; /* Tengah betul-betul */
-    align-items: flex-start;
-    gap: 2rem;
-    margin-top: 1.5rem;
-    flex-wrap: nowrap; /* Takkan turun ke bawah */
-  }
-  
   .info-box {
-    background-color: #2e2e2e;
-    padding: 1.2rem 1.2rem; /* kurang dari 2rem */
-    border-radius: 20px;
-    width: 240px;
-    height: 140px; /* rendah sikit */
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: transform 0.3s ease;
+    padding: 1rem;
   }
-  
-  .info-title {
-    color: #cfd9e6;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.3rem; /* rapatkan ke bawah */
-  }
-  
-  .info-value {
-    color: #fbb034;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 0; /* rapatkan ke atas */
-  }
-  
+}

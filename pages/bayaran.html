@@ -81,7 +81,7 @@
             </a>
 
             <!-- Copy Account Number -->
-            <button onclick="copyAccount()" style="
+            <button onclick="copyAccount()" id="copyButton" style="
               padding: 0.6rem 1.2rem;
               background-color: #fbb034;
               color: black;
@@ -90,8 +90,10 @@
               font-weight: bold;
               cursor: pointer;
               box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            ">📋 Salin No Akaun</button>
-          </div>
+            ">
+              📋 <span id="copyText">Salin No Akaun</span>
+            </button>
+
 
 
           <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>

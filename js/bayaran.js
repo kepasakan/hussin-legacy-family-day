@@ -224,6 +224,20 @@ function copyAccount() {
     });
 }
 
+function copyAccount() {
+  const accountNumber = "8888011899390"; // without dash
+  navigator.clipboard.writeText(accountNumber).then(() => {
+    const copyText = document.getElementById("copyText");
+    copyText.innerText = "✔️ Disalin!";
+
+    setTimeout(() => {
+      copyText.innerText = "Salin No Akaun";
+    }, 1500);
+  });
+}
+
+
+
 
 // ✅ Init
 renderBulanButtons();

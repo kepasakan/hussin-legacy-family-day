@@ -169,6 +169,23 @@ body {
     color: black;
   }
   
+/* Button Tambahan */
+
+.tambahan-btn {
+  background-color: #222 !important;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tambahan-btn:hover {
+  background-color: #444 !important;
+}
+
+
   /* Spinner Pembayaran Bulan/Tambahan */
 
   .spinner-bulan {
@@ -180,3 +197,36 @@ body {
     font-weight: bold;
   }
   
+  /* Button Nama Family */
+
+  /* Grid wrapper for nama keluarga buttons */
+.nama-button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Fixed width */
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.nama-button-grid button {
+  background-color: #222;
+  color: white;
+  padding: 0.5rem 0.4rem;       /* ⬅️ Less padding */
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 100%;
+  min-height: 42px;             /* ⬅️ Slightly shorter */
+  font-size: 0.85rem;           /* ⬅️ Optional: smaller font */
+  text-align: center;
+}
+
+.nama-button-grid button:hover {
+  background-color: #444;
+}
+
+.nama-button-grid .selected-bulan {
+  background-color: #fbb034;
+  color: black;
+}

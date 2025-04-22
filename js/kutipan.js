@@ -107,6 +107,23 @@ fetch("https://script.google.com/macros/s/AKfycbz4OZOoQOsvhWKvAeGtkDGSfBeZk-EMTe
       <tr><td colspan="5" style="text-align:center;">Gagal dapatkan data</td></tr>`;
   });
 
+// Last Update Sah Date & Time
+
+fetch('https://script.google.com/macros/s/AKfycbyHNah09hhUGBjwXzx22Ho8JxHpGYgJjUGog86hLHIw1-vwZ2UzxWakp4qVTQb4hYanSA/exec')
+  .then(res => res.json())
+  .then(data => {
+    const el = document.getElementById("lastVerified");
+    if (data.status === "success" && data.date && data.time) {
+      el.textContent = `✔️ Disemak & disahkan pada ${data.date}, jam ${data.time}`;
+    } else {
+      el.textContent = "❌ Gagal dapatkan tarikh semakan terkini.";
+    }
+  })
+  .catch(() => {
+    const el = document.getElementById("lastVerified");
+    el.textContent = "❌ Gagal sambung ke server semakan.";
+  });
+
 
 function updateBakiKutipan() {
   if (totalKutipan > 0 && totalDigunakan > 0) {

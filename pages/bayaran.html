@@ -63,6 +63,37 @@
       <div class="qr-bank">
         <img src="../asset/qr_code.jpg" alt="QR Code Bank" class="qr-image" />
         <table class="bank-info-table">
+          
+          <!-- ✅ QR Action Buttons -->
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <!-- Download QR -->
+            <a href="../asset/qr_code.jpg" download="QR_GXBank_FamilyDay.jpg">
+              <button style="
+                padding: 0.6rem 1.2rem;
+                background-color: #fbb034;
+                color: black;
+                border: none;
+                border-radius: 10px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+              ">⬇️ Muat Turun QR</button>
+            </a>
+
+            <!-- Copy Account Number -->
+            <button onclick="copyAccount()" style="
+              padding: 0.6rem 1.2rem;
+              background-color: #fbb034;
+              color: black;
+              border: none;
+              border-radius: 10px;
+              font-weight: bold;
+              cursor: pointer;
+              box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            ">📋 Salin No Akaun</button>
+          </div>
+
+
           <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>
           <tr><td><strong>Bank</strong></td><td>: GX Bank</td></tr>
           <tr><td><strong>No Akaun</strong></td><td>: 8888-01189939-0</td></tr>

@@ -212,6 +212,19 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   }
 });
 
+// ✅ Copy No Akaun Function
+function copyAccount() {
+  const text = "8888011899390";
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("✔️ No akaun disalin: " + text);
+    })
+    .catch(() => {
+      alert("❌ Gagal salin no akaun");
+    });
+}
+
+
 // ✅ Init
 renderBulanButtons();
 renderNamaButtons();

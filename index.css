@@ -1,4 +1,4 @@
-/* family_day_style.css */
+/* index.css */
 
 * {
   margin: 0;
@@ -420,4 +420,31 @@ tbody tr:hover {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Bayar Sekarang Button */
+
+.bayar-cta-wrapper {
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+.cta-bayar-btn {
+  background-color: #fbb034;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.cta-bayar-btn:hover {
+  background-color: #ffc84a;
 }

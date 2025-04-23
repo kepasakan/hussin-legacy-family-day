@@ -1,90 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Family Day 2025</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hussin Legacy Family Day</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+  <script src="js/kehadiran-status.js" defer></script>
+  <script src="js/kutipan.js" defer></script>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1><span class="atas">HUSSIN LEGACY</span><br><span class="bawah">FAMILY DAY</span></h1>
+    </header>
 
-  <!-- NOTE: Header - Tajuk utama Family Day dan countdown -->
-  <header>
-    <h1>🎉 Family Day 2025</h1>
-    <p>Bersama Kita Bahagia | 15-17 Mac 2025</p>
-    <div id="countdown" style="font-size: 1.5rem; margin-top: 10px;"></div>
-  </header>
-
-  <!-- NOTE: Menu navigasi ke bahagian lain -->
-  <nav class="nav-container">
-    <!-- Hamburger for mobile -->
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
-
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="pages/aturcara.html">Aturcara</a>
-      <a href="pages/bayaran.html">Bayaran</a>
-
-      <!-- ✅ Wrap login link in div only for centering in mobile -->
-      <div class="login-wrapper">
-        <a href="pages/login.html" class="login-btn">🔐 Log Masuk</a>
+    <!-- HAMBURGER MENU MOBILE ONLY -->
+    <div class="hamburger-container">
+      <div class="hamburger-toggle" onclick="toggleMenu()">☰ Menu</div>
+      <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="button">📝 ATURCARA</div>
+        <div class="button" onclick="window.location.href='pages/bayaran.html'">💳 PEMBAYARAN</div>
+        <div class="button" onclick="window.location.href='pages/login.html'">🔐 LOG MASUK</div>
       </div>
     </div>
-  </nav>
 
-  
-  
-  <main>
+    <div class="bottom-nav">
+      <div class="button">📝 ATURCARA</div>
+      <div class="button" onclick="window.location.href='pages/bayaran.html'">💳 PEMBAYARAN</div>
+      <div class="button" onclick="window.location.href='pages/login.html'">🔐 LOG MASUK</div>
+    </div>  
 
-    <!-- NOTE: Info penting tentang lokasi, tarikh, penginapan -->
-    <section>
-      <h2>📌 Info Penting</h2>
-      <ul>
-        <li>Lokasi: Port Dickson, Negeri Sembilan</li>
-        <li>Tarikh: 15 - 17 Mac 2025</li>
-        <li>Tempat penginapan: Homestay tepi pantai</li>
-      </ul>
-    </section>
-
-    <!-- NOTE: Senarai kutipan bayaran (static/dummy display) -->
-    <section>
-      <h2>📋 Senarai Kutipan</h2>
-    
-      <div class="total-info">
-        <p><strong>Jumlah diperlukan:</strong> RM2000</p>
-        <p><strong>Jumlah terkumpul:</strong> RM<span id="jumlahTerkumpul">0</span></p>
-        <p><strong>Baki:</strong> RM<span id="bakiKutipan">0</span></p>
-    
-        <div class="progress-container">
-          <div id="overallProgress" class="progress-bar" style="width: 0%; background-color: #2196f3;">0%</div>
+    <div class="sidebar">
+      
+      <!-- countdown -->
+      <h3 style="text-align: center; color: rgb(255, 255, 255); margin-bottom: 1px; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);">
+        COUNTDOWN
+      </h3>
+      
+            <div class="flip-clock">
+        <div class="unit">
+          <div class="number" id="days">00</div>
+          <div class="label">DAYS</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="hours">00</div>
+          <div class="label">HOURS</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="minutes">00</div>
+          <div class="label">MINUTES</div>
+        </div>
+        <div class="unit">
+          <div class="number" id="seconds">00</div>
+          <div class="label">SECONDS</div>
         </div>
       </div>
-    </section>
+      
 
-    <section>
-      <h2>🧾 Status Kehadiran Keluarga</h2>
-      <div id="kehadiranLoading" style="display:none;">Memuatkan data kehadiran...</div>
-      <table id="kehadiranTable">
-        <thead>
-          <tr>
-            <th>Nama Keluarga</th>
-            <th>Status Kehadiran</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data akan disuntik di sini -->
-        </tbody>
-      </table>
-    </section>
-    
+      <!--box info penting -->
+      <div class="box info-penting">
+        <h3>INFO PENTING</h3>
+        <div class="info-table">
+          <div class="info-row">
+            <div class="info-label">Lokasi</div>
+            <div class="info-sep">:</div>
+            <div class="info-value">⏳ Coming Soon</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Tarikh</div>
+            <div class="info-sep">:</div>
+            <div class="info-value">⏳ Coming Soon</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Tempat</div>
+            <div class="info-sep">:</div>
+            <div class="info-value">⏳ Coming Soon</div>
+          </div>
+        </div>
+      </div>
 
-  </main>
 
-  <footer>
-    <p>© 2025 Family Day Team | Bendahari: Nama Anda</p>
-  </footer>
+      <!-- kehadiran -->
+      <div class="box">
+        <h3>STATUS KEHADIRAN</h3>
+        <div class="kehadiran-grid">
+          <div class="chip" data-key="pakcik">PAKCIK</div>
+          <div class="chip" data-key="pakjang">PAKJANG</div>
+          <div class="chip" data-key="fahmi">FAHMI</div>                 
+          <div class="chip" data-key="hafiz">HAFIZ</div>
+          <div class="chip" data-key="hanis">HANIS</div>
+          <div class="chip" data-key="wani">WANI</div>
+          <div class="chip" data-key="wan">WAN</div>
+          <div class="chip" data-key="ika">IKA</div>
+          <div class="chip" data-key="makteh">MAKTEH</div>
+          <div class="chip" data-key="yana">YANA</div>
+          <div class="chip" data-key="faiz">FAIZ</div>
+          <div class="chip" data-key="paksu">PAKSU</div>
+        </div>
+      </div>
+      
+    </div>
 
-  <script src="js/script.js"></script>
+    <div class="main">
+      <div class="box">
+        <h3 style="margin-bottom: 10px;">KUTIPAN DUIT</h3>
 
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <div style="font-size: 0.9rem; letter-spacing: 1px; color: #ccc; text-transform: uppercase;">
+            Jumlah Terkumpul
+          </div>
+          <div id="totalKutipan" style="
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fbb034;
+            text-shadow: 0 0 8px rgba(251, 176, 52, 0.3);
+            margin-top: 4px;
+          ">
+          <div class="loader" style="margin: 0.5rem auto;"></div>
+            </span>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="kutipan-table">
+            <thead>
+              <tr>
+                <th>Nama Keluarga</th>
+                <th>Bayaran</th>
+                <th>Jumlah</th>
+                <th>Resit</th>
+                <th>Tarikh</th>
+              </tr>
+            </thead>
+            <tbody id="kutipan-table-body">
+              <tr><td colspan="5" style="text-align:center;">Memuatkan data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="lastVerified" style="
+          text-align: center;
+          margin-top: 1rem;
+          font-size: 0.85rem;
+          color: #999;
+          font-style: italic;
+        ">
+          Memuatkan status semakan terkini...
+        </div>
+      </div>     
+      
+
+      <!-- jumlah digunakan -->
+      <div class="box double-border">
+        <div class="row-title">
+          <div>
+            <strong>JUMLAH DIGUNAKAN</strong><br>
+            <span id="jumlahDigunakan">
+              <div class="loader"></div>
+            </span>
+          </div>
+          <div>
+            <strong>BAKI KUTIPAN</strong><br>
+            <span id="bakiKutipan">
+              <div class="loader"></div>
+            </span>
+          </div>
+        </div>
+
+      
+        <div class="table-container" style="margin-top: 1rem;">
+          <table class="kutipan-table">
+            <thead>
+              <tr>
+                <th>Jenis Pembelian</th>
+                <th>Nama Pembeli</th>
+                <th>Jumlah</th>
+                <th>Resit</th>
+                <th>Tarikh</th>
+              </tr>
+            </thead>
+            <tbody id="digunakan-table-body">
+              <tr>
+                <td colspan="5" style="text-align:center;">Memuatkan data...</td>
+              </tr>
+            </tbody>            
+          </table>
+        </div>
+      </div>
+      
+      
+    </div>
+
+
+
+  </div>
 </body>
 </html>

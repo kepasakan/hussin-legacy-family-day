@@ -17,7 +17,6 @@ body {
   text-align: center;
 }
 h1 {
-  color: #fbb034;
   margin-bottom: 0.5rem;
 }
 .subtext {
@@ -33,4 +32,16 @@ h1 {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+.back-btn {
+  background-color: #fbb034;
+  color: black;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
 }

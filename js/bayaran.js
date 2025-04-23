@@ -66,33 +66,37 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
     btn.textContent = bulan;
     btn.type = "button";
     btn.className = "bulan-btn";
-
-    if (paid.includes(bulan)) {
+  
+    const noPayBulan = ["JAN", "FEB", "MAC"];
+  
+    if (noPayBulan.includes(bulan)) {
+      btn.disabled = true;
+      btn.style.backgroundColor = "#111";
+      btn.style.color = "#666";
+      btn.style.cursor = "not-allowed";
+      btn.title = "Bulan ini tidak dikutip";
+    } else if (paid.includes(bulan)) {
       btn.disabled = true;
       btn.style.opacity = 0.3;
     }
-
-    if (index === 0 && isAfterSelection && paid.includes("JAN")) {
-      btn.disabled = true;
-      btn.style.opacity = 0.3;
-    }
-
+  
     btn.addEventListener("click", () => {
       if (!namaEl.value) {
         alert("⚠️ Sila pilih nama keluarga dahulu.");
         return;
       }
-
+  
       if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
       btn.classList.add("selected-bulan");
       selectedBulanBtn = btn;
-
+  
       jenisEl.value = bulan;
       updateReferenceManual();
     });
-
+  
     bulanContainer.appendChild(btn);
   });
+  
 
   // ✅ Tambah butang TAMBAHAN (tidak akan disable walaupun pernah bayar)
   renderTambahanButton();

@@ -133,7 +133,17 @@ function renderTambahanButton() {
 function updateReferenceManual() {
   const nama = namaEl.value;
   const bulan = jenisEl.value;
+
   referenceEl.value = nama && bulan ? `${nama}-${bulan}` : "";
+
+  // ✅ Auto-set jumlah to 50 if bukan TAMBAHAN
+  if (nama && bulan && bulan !== "TAMBAHAN") {
+    jumlahEl.value = 50;
+    jumlahEl.readOnly = true;
+  } else {
+    jumlahEl.value = "";
+    jumlahEl.readOnly = false;
+  }
 }
 
 // ✅ Fetch bulan berdasarkan nama (key)

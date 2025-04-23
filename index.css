@@ -36,7 +36,6 @@ header h1 .bawah {
 }
 
 
-
 /* Body */
 
 body {
@@ -462,7 +461,6 @@ tbody tr:hover {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   transition: background-color 0.3s ease;
-  margin-top: 50px;
 }
 
 .kehadiran-login-btn:hover {
@@ -470,6 +468,7 @@ tbody tr:hover {
 }
 
 .kehadiran-login-wrapper {
-  margin-top: 1.5rem; /* jarak dari grid ke button */
-  text-align: right;  /* boleh juga center atau left */
+  margin-top: 10px; /* jarak dari grid ke button */
+  margin-bottom: 18px;
+  text-align: center;  /* boleh juga center atau left */
 }

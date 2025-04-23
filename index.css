@@ -448,3 +448,28 @@ tbody tr:hover {
 .cta-bayar-btn:hover {
   background-color: #ffc84a;
 }
+
+/* Kehadiran Log Masuk Button */
+
+
+.kehadiran-login-btn {
+  text-decoration: none;
+  background-color: #fbb034;
+  color: black;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+  margin-top: 50px;
+}
+
+.kehadiran-login-btn:hover {
+  background-color: #ffc84a;
+}
+
+.kehadiran-login-wrapper {
+  margin-top: 1.5rem; /* jarak dari grid ke button */
+  text-align: right;  /* boleh juga center atau left */
+}

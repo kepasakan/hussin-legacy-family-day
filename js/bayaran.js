@@ -67,7 +67,7 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
     btn.type = "button";
     btn.className = "bulan-btn";
   
-    const noPayBulan = ["JAN", "FEB", "MAC"];
+    const noPayBulan = ["JAN", "FEB", "MAC", "APR" ];
   
     if (noPayBulan.includes(bulan)) {
       btn.disabled = true;

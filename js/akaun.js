@@ -134,7 +134,7 @@ async function semakBayaranBulan() {
     gridWrapper.className = "bayaran-grid";
 
     const currentMonthIndex = new Date().getMonth();
-    const noPayBulan = ["JAN", "FEB", "MAC"];
+    const noPayBulan = ["JAN", "FEB", "MAC", "APR" ];
 
     bulanPenuh.forEach((bulan, index) => {
       const item = document.createElement("div");

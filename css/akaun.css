@@ -178,6 +178,18 @@ body {
   opacity: 0.7;
 }
 
+/* glowing effect for the current payable month */
+.grid-item.sekarang {
+  background-color: #fbb034;
+  color: #2b2b2b;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 8px #fbb034; }
+  to   { box-shadow: 0 0 20px #fbb034; }
+}
+
 /* Responsive Kutipan */
 .kutipan-column {
   display: grid;

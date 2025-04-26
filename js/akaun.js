@@ -154,6 +154,11 @@ async function semakBayaranBulan() {
       else if (paid.includes(bulan)) {
         item.className = "grid-item bayar";
       }
+      // ✅ Highlight current month with glowing effect to indicate payment is due
+      else if (index === currentMonthIndex) {
+        item.className = "grid-item sekarang";
+        item.title = "Bulan semasa - boleh dibayar";
+      }
       // ✅ Jika bulan lepas & belum bayar
       else if (index < currentMonthIndex) {
         item.className = "grid-item belum";

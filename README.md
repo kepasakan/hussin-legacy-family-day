@@ -1,5 +1,7 @@
 # 🏡 Family Day - Hussin Legacy 2025
 
+https://kepasakan.github.io/hussin-legacy-family-day/index.html
+
 This is a dynamic website built for the **Hussin Legacy Family Day 2025** event. It includes:
 
 - Real-time dashboard to monitor kutipan & kehadiran

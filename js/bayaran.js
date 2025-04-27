@@ -191,13 +191,24 @@ document.getElementById("paymentForm").addEventListener("submit", async function
 
     const formData = new FormData();
     formData.append("chat_id", chatId);
-    formData.append("photo", resitFile);
+
+    // Detect PDF vs Image and append accordingly
+    const isPdf = resitFile.type === "application/pdf";
+    if (isPdf) {
+      formData.append("document", resitFile);
+    } else {
+      formData.append("photo", resitFile);
+    }
     formData.append("caption", `Resit dari ${nama} untuk ${jenis} (RM${jumlah})\nRef: ${reference}`);
 
-    const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-      method: "POST",
-      body: formData
-    });
+    // Send either a document or a photo
+    const tgRes = await fetch(
+      `https://api.telegram.org/bot${botToken}/${isPdf ? "sendDocument" : "sendPhoto"}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     const tgJson = await tgRes.json();
     if (!tgJson.ok) {

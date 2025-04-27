@@ -481,3 +481,37 @@ tbody tr:hover {
   margin-bottom: 18px;
   text-align: center;  /* boleh juga center atau left */
 }
+
+/* Support Button */
+.support-wrapper {
+  text-align: center;
+  margin: 20px 0;
+}
+.support-btn {
+  background-color: #25D366;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+.support-btn:hover {
+  background-color: #1DA851;
+}
+@media (max-width: 768px) {
+  .support-wrapper {
+    margin: 10px 0;
+  }
+  .support-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+  }
+}

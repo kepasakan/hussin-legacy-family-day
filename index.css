@@ -110,6 +110,7 @@ header p {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-height: 0; /* allow child flex items to grow/shrink */
 }
 
 .box, .button {
@@ -513,5 +514,11 @@ tbody tr:hover {
     padding: 0.75rem 1rem;
     font-size: 1.1rem;
     border-radius: 4px;
+  }
+}
+
+@media (min-width: 769px) {
+  .main > .box {
+    flex: 1; /* stretch both kutipan duit and jumlah digunakan boxes equally */
   }
 }

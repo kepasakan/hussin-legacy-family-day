@@ -302,18 +302,13 @@ header p {
   margin-left: 10px; /* Coming Soon */
 }
 
-/* Professional styling for info-penting message */
-.info-message {
-  margin: 0.75rem 2rem;
-  padding: 0.75rem 1rem;
-  background-color: #2a2a2a;
-  border: 1px solid #fbb034;
-  border-radius: 8px;
-  color: #fbb034;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-align: center;
+/* Ensure the info-penting image fits within its container */
+.info-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 /*hamburger mobile option*/

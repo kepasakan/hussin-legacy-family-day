@@ -60,6 +60,7 @@ function renderNamaButtons() {
 function renderBulanButtons(paid = [], isAfterSelection = false) {
   bulanContainer.innerHTML = "";
   const currentMonthIndex = new Date().getMonth();
+  const currentMonthAbbrev = bulanPenuh[currentMonthIndex];
 
   bulanPenuh.forEach((bulan, index) => {
     const btn = document.createElement("button");
@@ -78,6 +79,13 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
     } else if (paid.includes(bulan)) {
       btn.disabled = true;
       btn.style.opacity = 0.3;
+    }
+  
+    // Highlight the button for the current month only if its index is 4 (MEI) or above
+    if (bulan === currentMonthAbbrev && index >= 4) {
+      btn.style.border = "2px solid #FFD700";
+      btn.style.boxShadow = "0 0 8px #FFD700";
+      btn.title = "Pembayaran untuk bulan ini dibuka!";
     }
   
     btn.addEventListener("click", () => {

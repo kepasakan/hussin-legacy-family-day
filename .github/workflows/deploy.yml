@@ -6,6 +6,7 @@ on:
       - main
       - master  # Adding both main and master branch triggers
 
+# Workflow to deploy the website and generate config.js with secrets
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

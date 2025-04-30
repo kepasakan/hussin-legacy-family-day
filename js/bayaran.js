@@ -194,8 +194,28 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   }
 
   try {
-    const botToken = config.telegram.botToken;
-    const chatId = config.telegram.chatId;
+    // Check if config exists
+    if (!window.config) {
+      console.error("❌ Config not found!");
+      alert("❌ Error: Configuration not loaded properly. Please contact administrator.");
+      window.location.href = "bayaran_gagal.html";
+      return;
+    }
+
+    // Check if telegram config exists
+    if (!window.config.telegram || !window.config.telegram.botToken || !window.config.telegram.chatId) {
+      console.error("❌ Telegram config not found!", window.config);
+      alert("❌ Error: Telegram configuration missing. Please contact administrator.");
+      window.location.href = "bayaran_gagal.html";
+      return;
+    }
+
+    const botToken = window.config.telegram.botToken;
+    const chatId = window.config.telegram.chatId;
+
+    console.log("📤 Sending payment...");
+    console.log("Bot Token length:", botToken.length);
+    console.log("Chat ID length:", chatId.length);
 
     const formData = new FormData();
     formData.append("chat_id", chatId);
@@ -209,6 +229,8 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     }
     formData.append("caption", `Resit dari ${nama} untuk ${jenis} (RM${jumlah})\nRef: ${reference}`);
 
+    console.log("🔄 Sending to Telegram...");
+    
     // Send either a document or a photo
     const tgRes = await fetch(
       `https://api.telegram.org/bot${botToken}/${isPdf ? "sendDocument" : "sendPhoto"}`,
@@ -221,9 +243,12 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     const tgJson = await tgRes.json();
     if (!tgJson.ok) {
       console.error("❌ Telegram Error:", tgJson.description);
+      alert("❌ Error sending to Telegram: " + tgJson.description);
       window.location.href = "bayaran_gagal.html";
       return;
     }
+
+    console.log("✅ Telegram response:", tgJson);
 
     const endpoint = "https://script.google.com/macros/s/AKfycbyI-DJk0Q8z1erH2XQFcaCb9uyR1NBrOJHteWse8gPQG6UT8h7h53gA9xEjn96iaNDi/exec";
     const url = `${endpoint}?nama=${encodeURIComponent(nama)}&jenis=${encodeURIComponent(jenis)}&jumlah=${encodeURIComponent(jumlah)}&receipt=${encodeURIComponent(receipt)}&reference=${encodeURIComponent(reference)}`;
@@ -239,6 +264,7 @@ document.getElementById("paymentForm").addEventListener("submit", async function
 
   } catch (err) {
     console.error("❌ Error:", err);
+    alert("❌ Error: " + err.message);
     window.location.href = "bayaran_gagal.html";
   } finally {
     loadingStatus.style.display = "none";
@@ -268,9 +294,6 @@ function copyAccount() {
     }, 1500);
   });
 }
-
-
-
 
 // ✅ Init
 renderBulanButtons();

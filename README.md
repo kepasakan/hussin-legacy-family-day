@@ -73,11 +73,36 @@ HUSSIN-LEGACY-FAMILY-DAY/
 
 ## 🔐 Configuration Setup
 
-This project uses a configuration file to store sensitive information like API keys and tokens. To set up the configuration:
+This project uses GitHub Actions secrets to store sensitive information like API keys and tokens. To set up the configuration:
 
+### For Local Development:
 1. Copy `js/config.example.js` to `js/config.js`
 2. Fill in your actual values in `js/config.js`
 3. The `config.js` file is already added to `.gitignore` to prevent it from being committed to GitHub
+
+Alternatively, you can run the setup script:
+```bash
+node setup-local.js
+```
+This will automatically create the config.js file from config.example.js if it doesn't exist.
+
+Or using npm:
+```bash
+npm run setup
+```
+
+To start a local development server:
+```bash
+npm start
+```
+
+### For GitHub Pages Deployment:
+1. Go to your GitHub repository
+2. Navigate to Settings > Secrets and variables > Actions
+3. Add the following secrets:
+   - `TELEGRAM_BOT_TOKEN`: Your Telegram bot token
+   - `TELEGRAM_CHAT_ID`: Your Telegram chat ID
+4. The GitHub Actions workflow will automatically generate the config.js file during deployment
 
 **Important:** Never commit the actual `config.js` file with real credentials to version control.
 

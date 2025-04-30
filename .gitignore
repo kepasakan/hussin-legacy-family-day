@@ -2,7 +2,7 @@
 node_modules/
 
 # Environment variables and configuration
-js/config.js
+#js/config.js
 
 # OS specific files
 .DS_Store

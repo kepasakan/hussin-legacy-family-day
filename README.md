@@ -4,32 +4,32 @@ https://kepasakan.github.io/hussin-legacy-family-day/index.html
 
 This is a dynamic website built for the **Hussin Legacy Family Day 2025** event. It includes:
 
-- Real-time dashboard to monitor kutipan & kehadiran  
-- Family login system  
-- Telegram-integrated payment form with resit upload  
-- Countdown timer  
-- Modern dark UI  
-- Aturcara (event itinerary) section  
+- Real-time dashboard to monitor kutipan & kehadiran
+- Family login system
+- Telegram-integrated payment form with resit upload
+- Countdown timer
+- Modern dark UI
+- Aturcara (event itinerary) section
 
 ## ✨ Features
 
-- 🔐 Family login by unique key  
-- 📊 Kutipan & dashboard view per family  
-- 🧾 Resit upload integrated with Telegram bot  
-- 📅 Kehadiran submission form  
-- 📸 QR bank details + copy number/download options  
-- 🖥️ Fully responsive layout for mobile/desktop  
-- 🧩 Powered by Google Sheets + Apps Script backend  
+- 🔐 Family login by unique key
+- 📊 Kutipan & dashboard view per family
+- 🧾 Resit upload integrated with Telegram bot
+- 📅 Kehadiran submission form
+- 📸 QR bank details + copy number/download options
+- 🖥️ Fully responsive layout for mobile/desktop
+- 🧩 Powered by Google Sheets + Apps Script backend
 
 ## 📸 Screenshots
 
-### 🏠 Main Dashboard  
+### 🏠 Main Dashboard
 ![dashboard](asset/dashboard.PNG)
 
-### 🧾 Payment Page  
+### 🧾 Payment Page
 ![account](asset/payment.PNG)
 
-### 🧑‍💼 Akaun Family View  
+### 🧑‍💼 Akaun Family View
 ![account](asset/account.PNG)
 
 ## 📁 Project Structure
@@ -49,8 +49,6 @@ HUSSIN-LEGACY-FAMILY-DAY/
 │   ├── akaun.js
 │   ├── aturcara.js
 │   ├── bayaran.js
-│   ├── config.js
-│   ├── config.example.js
 │   ├── kehadiran-status.js
 │   ├── kutipan.js
 │   ├── login.js
@@ -67,47 +65,28 @@ HUSSIN-LEGACY-FAMILY-DAY/
 ├── index.html
 ├── index.css
 ├── index.js
-├── .gitignore
 └── README.md
 ```
 
-## 🔐 Configuration Setup
 
-This project uses GitHub Actions secrets to store sensitive information like API keys and tokens.  
-To set up the configuration:
-
-### For Local Development:
-1. Copy `js/config.example.js` to `js/config.js`  
-2. Fill in your actual values in `js/config.js`  
-3. The `config.js` file is already added to `.gitignore` to prevent it from being committed to GitHub  
-
-### For GitHub Pages Deployment:
-1. Go to your GitHub repository  
-2. Navigate to **Settings > Secrets and variables > Actions**  
-3. Add the following secrets:  
-   - `TELEGRAM_BOT_TOKEN`: Your Telegram bot token  
-   - `TELEGRAM_CHAT_ID`: Your Telegram chat ID  
-4. The GitHub Actions workflow will automatically generate the `config.js` file during deployment  
-
-> **Important:** Never commit the actual `config.js` file with real credentials to version control.
 
 ## 🔧 Integrations
 
-- **Google Sheets** – backend data storage  
-- **Google Apps Script** – API layer (GET support)  
-- **Telegram Bot API** – automatic resit image forwarding  
-- **GitHub Pages** – static site hosting  
+- **Google Sheets** – backend data storage
+- **Google Apps Script** – API layer (GET support)
+- **Telegram Bot API** – automatic resit image forwarding
+- **GitHub Pages** – static site hosting
 
 ## 👨‍💻 Developer
 
 Built by: **Nor Mohamad Naim (aka treasurer 🧾)**  
 Contact: ayiemfassal@gmail.com  
-Timeline: April 2025 – completed after 15+ rounds of real-user testing & debugging  
+Timeline: April 2025 – completed after 15+ rounds of real-user testing & debugging 
 
 ## 🙏 Acknowledgement
 
 Big thanks to **Hussin Legacy family members** for supporting and testing the system.  
-This project was done **100% manually by code and heart ❤️**  
+This project was done **100% manually by code and heart ❤️** 
 
 ## 📄 License
 

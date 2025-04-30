@@ -3,7 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or master, depending on your default branch name
+      - main
+      - master  # Adding both main and master branch triggers
 
 jobs:
   build-and-deploy:
@@ -12,17 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
       - name: Debug Info
         run: |
           echo "Current directory contents:"
           ls -la
           echo "Branch name:"
           git branch --show-current
+          echo "Git status:"
+          git status
 
       - name: Create Config File
         run: |
@@ -56,8 +54,20 @@ jobs:
           echo "First few lines of config.js (without sensitive data):"
           head -n 5 js/config.js
 
+      - name: List Files Before Deploy
+        run: |
+          echo "Contents of repository before deploy:"
+          ls -la
+          echo "Contents of js directory:"
+          ls -la js/
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: . # The folder the action should deploy.
-          branch: gh-pages # The branch the action should deploy to. 
+          branch: gh-pages # The branch the action should deploy to.
+          token: ${{ secrets.GITHUB_TOKEN }}  # Using GITHUB_TOKEN for authentication
+
+      - name: Verify Deployment
+        run: |
+          echo "Deployment completed. Check the gh-pages branch for the deployed files." 

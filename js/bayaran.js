@@ -194,8 +194,8 @@ document.getElementById("paymentForm").addEventListener("submit", async function
   }
 
   try {
-    const botToken = "7740099280:AAGy5g6SME7yeuxXUgSSnSUwma6uJyH-g94";
-    const chatId = "-1002518767864";
+    const botToken = config.telegram.botToken;
+    const chatId = config.telegram.chatId;
 
     const formData = new FormData();
     formData.append("chat_id", chatId);

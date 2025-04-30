@@ -49,6 +49,8 @@ HUSSIN-LEGACY-FAMILY-DAY/
 │   ├── akaun.js
 │   ├── aturcara.js
 │   ├── bayaran.js
+│   ├── config.js
+│   ├── config.example.js
 │   ├── kehadiran-status.js
 │   ├── kutipan.js
 │   ├── login.js
@@ -65,10 +67,19 @@ HUSSIN-LEGACY-FAMILY-DAY/
 ├── index.html
 ├── index.css
 ├── index.js
+├── .gitignore
 └── README.md
 ```
 
+## 🔐 Configuration Setup
 
+This project uses a configuration file to store sensitive information like API keys and tokens. To set up the configuration:
+
+1. Copy `js/config.example.js` to `js/config.js`
+2. Fill in your actual values in `js/config.js`
+3. The `config.js` file is already added to `.gitignore` to prevent it from being committed to GitHub
+
+**Important:** Never commit the actual `config.js` file with real credentials to version control.
 
 ## 🔧 Integrations
 

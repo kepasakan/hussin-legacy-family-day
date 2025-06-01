@@ -238,3 +238,33 @@ body {
   }
 }
 
+/* Legend Untuk warna box bulanan */
+
+.bayaran-legend {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.legend-box {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.legend-box.bayar {
+  background-color: #2e7d32;
+}
+.legend-box.belum {
+  background-color: #c62828;
+}
+.legend-box.sekarang {
+  background-color: #fbb034;
+}

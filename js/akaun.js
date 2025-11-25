@@ -33,7 +33,7 @@ async function loadDashboard() {
 }
 
 // ✅ Function bila user submit kehadiran (guna GET untuk elak CORS)
-document.getElementById("formKehadiran").addEventListener("submit", async function(e) {
+document.getElementById("formKehadiran").addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const kehadiran = document.getElementById("kehadiranSelect").value;
@@ -126,15 +126,31 @@ async function semakBayaranBulan() {
     const bulanPenuh = [
       "JAN", "FEB", "MAC", "APR",
       "MEI", "JUN", "JUL", "OGS",
-      "SEP", "OKT", "NOV", "DIS"
+      "SEP", "OKT", "NOV", "DIS",
+      "JAN26", "FEB26", "MAC26", "APR26",
+      "MEI26", "JUN26", "JUL26", "OGS26",
+      "SEP26", "OKT26", "NOV26", "DIS26"
     ];
-    const paid = (data.paid || []).map(b => b.slice(0, 3).toUpperCase());
+    // ✅ Allow full string matching for "JAN26" etc.
+    const paid = (data.paid || []).map(b => b.toUpperCase());
 
     const gridWrapper = document.createElement("div");
     gridWrapper.className = "bayaran-grid";
 
-    const currentMonthIndex = new Date().getMonth();
-    const noPayBulan = ["JAN", "FEB", "MAC", "APR" ];
+    // ✅ Calculate index based on year (2025 vs 2026)
+    const now = new Date();
+    let currentMonthIndex = now.getMonth(); // 0-11 for current year
+    const currentYear = now.getFullYear();
+
+    if (currentYear === 2026) {
+      currentMonthIndex += 12; // Shift for 2026 months
+    } else if (currentYear > 2026) {
+      currentMonthIndex = 999; // Future
+    } else if (currentYear < 2025) {
+      currentMonthIndex = -1; // Past
+    }
+
+    const noPayBulan = ["JAN", "FEB", "MAC", "APR"];
 
     bulanPenuh.forEach((bulan, index) => {
       const item = document.createElement("div");
@@ -142,7 +158,7 @@ async function semakBayaranBulan() {
       bulanText.className = "bulan-text";
       bulanText.textContent = bulan;
 
-      // ✅ Jika bulan tidak dikutip
+      // ✅ Jika bulan tidak dikutip (Only checks exact string match)
       if (noPayBulan.includes(bulan)) {
         item.className = "grid-item";
         item.style.backgroundColor = "#111";

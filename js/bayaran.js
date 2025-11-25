@@ -13,7 +13,10 @@ const bulanLoading = document.getElementById("bulanLoading");
 let selectedBulanBtn = null;
 let selectedNamaBtn = null;
 
-const bulanPenuh = ["JAN", "FEB", "MAC", "APR", "MEI", "JUN", "JUL", "OGS", "SEP", "OKT", "NOV", "DIS"];
+const bulanPenuh = [
+  "JAN", "FEB", "MAC", "APR", "MEI", "JUN", "JUL", "OGS", "SEP", "OKT", "NOV", "DIS",
+  "JAN26", "FEB26", "MAC26", "APR26", "MEI26", "JUN26", "JUL26", "OGS26", "SEP26", "OKT26", "NOV26", "DIS26"
+];
 const namaData = [
   { nama: "Keluarga Pakcik", key: "pakcik" },
   { nama: "Keluarga Pakjang", key: "pakjang" },
@@ -59,7 +62,20 @@ function renderNamaButtons() {
 // ✅ Generate butang bulan
 function renderBulanButtons(paid = [], isAfterSelection = false) {
   bulanContainer.innerHTML = "";
-  const currentMonthIndex = new Date().getMonth();
+
+  // ✅ Calculate index based on year (2025 vs 2026)
+  const now = new Date();
+  let currentMonthIndex = now.getMonth(); // 0-11 for current year
+  const currentYear = now.getFullYear();
+
+  if (currentYear === 2026) {
+    currentMonthIndex += 12; // Shift for 2026 months
+  } else if (currentYear > 2026) {
+    currentMonthIndex = 999; // Future
+  } else if (currentYear < 2025) {
+    currentMonthIndex = -1; // Past
+  }
+
   const currentMonthAbbrev = bulanPenuh[currentMonthIndex];
 
   bulanPenuh.forEach((bulan, index) => {
@@ -67,9 +83,9 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
     btn.textContent = bulan;
     btn.type = "button";
     btn.className = "bulan-btn";
-  
-    const noPayBulan = ["JAN", "FEB", "MAC", "APR" ];
-  
+
+    const noPayBulan = ["JAN", "FEB", "MAC", "APR"];
+
     if (noPayBulan.includes(bulan)) {
       btn.disabled = true;
       btn.style.backgroundColor = "#111";
@@ -80,31 +96,32 @@ function renderBulanButtons(paid = [], isAfterSelection = false) {
       btn.disabled = true;
       btn.style.opacity = 0.3;
     }
-  
+
     // Highlight the button for the current month only if its index is 4 (MEI) or above
-    if (bulan === currentMonthAbbrev && index >= 4) {
+    // Note: index 4 is MEI 2025.
+    if (index === currentMonthIndex && index >= 4) {
       btn.style.border = "2px solid #FFD700";
       btn.style.boxShadow = "0 0 8px #FFD700";
       btn.title = "Pembayaran untuk bulan ini dibuka!";
     }
-  
+
     btn.addEventListener("click", () => {
       if (!namaEl.value) {
         alert("⚠️ Sila pilih nama keluarga dahulu.");
         return;
       }
-  
+
       if (selectedBulanBtn) selectedBulanBtn.classList.remove("selected-bulan");
       btn.classList.add("selected-bulan");
       selectedBulanBtn = btn;
-  
+
       jenisEl.value = bulan;
       updateReferenceManual();
     });
-  
+
     bulanContainer.appendChild(btn);
   });
-  
+
 
   // ✅ Tambah butang TAMBAHAN (tidak akan disable walaupun pernah bayar)
   renderTambahanButton();
@@ -164,7 +181,8 @@ async function fetchBulanForKey(key) {
     const data = await res.json();
     if (data.status !== "success") throw new Error("Fetch gagal");
 
-    const paid = (data.paid || []).map(b => b.slice(0, 3).toUpperCase());
+    // ✅ Allow full string matching for "JAN26" etc.
+    const paid = (data.paid || []).map(b => b.toUpperCase());
     renderBulanButtons(paid, true);
 
   } catch (err) {

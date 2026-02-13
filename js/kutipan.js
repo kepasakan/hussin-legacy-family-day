@@ -35,14 +35,27 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
         ? `<a href="${item.receipt}" target="_blank" style="color:white; text-decoration:underline;">📎 Lihat</a>`
         : "-";
 
+      // Helper function for excel date
+      const formatBayaran = (val) => {
+        // If number and looks like a date serial (e.g. > 40000 which is year ~2009)
+        if (!isNaN(val) && parseFloat(val) > 40000) {
+          const date = new Date((val - 25569) * 86400 * 1000);
+          // Format: JAN 26
+          return date.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' }).toUpperCase().replace(" ", "");
+        }
+        return val;
+      };
+
+      const displayBayaran = formatBayaran(item.bayaran);
+
       row.innerHTML = `
         <td>${item.nama}</td>
-        <td>${item.bayaran}</td>
+        <td>${displayBayaran}</td>
         <td>RM ${item.jumlah}</td>
         <td>${resitLink}</td>
         <td>${formattedDate}</td>
       `;
-      
+
       tableBody.appendChild(row);
     });
   })
@@ -51,8 +64,8 @@ fetch("https://script.google.com/macros/s/AKfycbyBj2Pwn_jVIhHrlJNqp9pw62CV804tD5
     document.getElementById("kutipan-table-body").innerHTML = `
       <tr><td colspan="5" style="text-align:center;">Gagal dapatkan data</td></tr>`;
   });
-  
-  // Kutipan Digunakan
+
+// Kutipan Digunakan
 
 const totalKutipanEl = document.getElementById("totalKutipan");
 const jumlahDigunakanEl = document.getElementById("jumlahDigunakan");

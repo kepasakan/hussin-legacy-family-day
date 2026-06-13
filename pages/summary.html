@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ringkasan Bayaran - Hussin Legacy Family Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/summary.css" />
+</head>
+<body>
+  <div class="summary-container">
+
+    <!-- Header -->
+    <div class="page-header">
+      <a href="../index.html" class="kembali-btn">← Laman Utama</a>
+      <h1 class="page-title">📊 Ringkasan Bayaran</h1>
+      <p class="page-subtitle">Hussin Legacy Family Day 2026 — Semua Keluarga</p>
+      <button class="refresh-btn" id="refreshBtn" onclick="loadAll()">🔄 Muat Semula</button>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="stats-grid">
+      <div class="stat-card stat-green">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value" id="statLengkap">—</div>
+        <div class="stat-label">Keluarga Lengkap</div>
+      </div>
+      <div class="stat-card stat-red">
+        <div class="stat-icon">⚠️</div>
+        <div class="stat-value" id="statTunggak">—</div>
+        <div class="stat-label">Ada Tunggakan</div>
+      </div>
+      <div class="stat-card stat-gold">
+        <div class="stat-icon">💰</div>
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-label">Anggaran Dibayar</div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-bar">
+      <span class="legend-dot dot-paid"></span><span>Dibayar</span>
+      <span class="legend-dot dot-overdue"></span><span>Tunggak</span>
+      <span class="legend-dot dot-current"></span><span>Bulan Ini</span>
+      <span class="legend-dot dot-future"></span><span>Akan Datang</span>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="semua" onclick="filterCards('semua')">Semua (12)</button>
+      <button class="filter-btn" data-filter="tunggak" onclick="filterCards('tunggak')">⚠️ Ada Tunggakan</button>
+      <button class="filter-btn" data-filter="lengkap" onclick="filterCards('lengkap')">✅ Sudah Lengkap</button>
+    </div>
+
+    <!-- Global Loading -->
+    <div class="loading-wrapper" id="globalLoading">
+      <div class="spinner"></div>
+      <span>Memuatkan data semua keluarga...</span>
+    </div>
+
+    <!-- Family Cards Grid -->
+    <div class="family-grid" id="familyGrid"></div>
+
+    <footer class="summary-footer">
+      © 2026 Hussin Legacy Family Day &nbsp;·&nbsp; Data dari Google Sheets
+    </footer>
+  </div>
+
+  <script src="../js/summary.js"></script>
+</body>
+</html>

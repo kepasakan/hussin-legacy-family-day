@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ringkasan Grid - Hussin Legacy Family Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/summary2.css" />
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-nav">
+        <a href="../index.html" class="nav-btn">← Laman Utama</a>
+        <a href="summary.html" class="nav-btn">📊 Versi Kad</a>
+      </div>
+      <h1 class="page-title">📋 Ringkasan Bayaran</h1>
+      <p class="page-subtitle">Hussin Legacy Family Day 2026 — Paparan Grid</p>
+      <button class="refresh-btn" id="refreshBtn" onclick="loadAll()">🔄 Muat Semula</button>
+    </div>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+      <div class="stat-pill stat-green">
+        <span class="pill-icon">✅</span>
+        <div>
+          <div class="pill-val" id="statLengkap">—</div>
+          <div class="pill-label">Keluarga Lengkap</div>
+        </div>
+      </div>
+      <div class="stat-pill stat-red">
+        <span class="pill-icon">⚠️</span>
+        <div>
+          <div class="pill-val" id="statTunggak">—</div>
+          <div class="pill-label">Ada Tunggakan</div>
+        </div>
+      </div>
+      <div class="stat-pill stat-gold">
+        <span class="pill-icon">💰</span>
+        <div>
+          <div class="pill-val" id="statTotal">—</div>
+          <div class="pill-label">Jumlah Terkumpul</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend-strip">
+      <span class="leg leg-paid">✓ Dibayar</span>
+      <span class="leg leg-tunggak">✗ Tunggak</span>
+      <span class="leg leg-current">◉ Bulan Ini</span>
+      <span class="leg leg-future">· Akan Datang</span>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-wrap" id="globalLoading">
+      <div class="spinner"></div>
+      <span>Memuatkan data semua keluarga...</span>
+    </div>
+
+    <!-- Spreadsheet Table -->
+    <div id="tableWrapper" class="table-scroll" style="display:none;">
+      <table id="mainTable">
+        <thead>
+          <tr class="year-row">
+            <th rowspan="2" class="col-rank th-sticky-rank">#</th>
+            <th rowspan="2" class="col-family th-sticky-family">Keluarga</th>
+            <th colspan="8" class="year-header">── 2025 ──</th>
+            <th colspan="12" class="year-header">── 2026 ──</th>
+            <th rowspan="2" class="col-summary">Bulan<br>Bayar</th>
+            <th rowspan="2" class="col-rm">Jumlah</th>
+            <th rowspan="2" class="col-status">Status</th>
+          </tr>
+          <tr class="month-row" id="monthHeaderRow">
+            <!-- filled by JS -->
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+        <tfoot id="tableFoot"></tfoot>
+      </table>
+    </div>
+
+    <footer class="page-footer">
+      © 2026 Hussin Legacy Family Day &nbsp;·&nbsp; Data dari Google Sheets
+    </footer>
+  </div>
+
+  <script src="../js/summary2.js"></script>
+</body>
+</html>

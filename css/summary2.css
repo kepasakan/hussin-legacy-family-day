@@ -391,6 +391,155 @@ tfoot .col-family {
   font-size: 0.8rem;
 }
 
+/* ── Responsive Switch ── */
+@media (max-width: 767px) {
+  .desktop-only { display: none !important; }
+}
+@media (min-width: 768px) {
+  .mobile-only  { display: none !important; }
+}
+
+/* ── Mobile Card Grid ── */
+.mobile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.m-card {
+  background: #181818;
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  border-left: 4px solid transparent;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.m-card.m-lengkap { border-left-color: #2e7d32; }
+.m-card.m-tunggak { border-left-color: #c62828; }
+
+.m-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.m-rank {
+  font-size: 0.72rem;
+  color: #555;
+  font-weight: 700;
+  min-width: 22px;
+}
+
+.m-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #eee;
+  flex: 1;
+}
+
+.m-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.m-badge-lengkap {
+  background: rgba(46,125,50,0.18);
+  color: #66bb6a;
+  border: 1px solid rgba(46,125,50,0.45);
+}
+.m-badge-tunggak {
+  background: rgba(198,40,40,0.18);
+  color: #ef5350;
+  border: 1px solid rgba(198,40,40,0.45);
+}
+
+.m-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.m-progress-track {
+  flex: 1;
+  background: #2a2a2a;
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+}
+.m-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fbb034, #f59e0b);
+  border-radius: 8px;
+  min-width: 3px;
+  transition: width 0.6s ease;
+}
+.m-progress-label {
+  font-size: 0.78rem;
+  color: #777;
+  white-space: nowrap;
+}
+
+.m-rm {
+  font-size: 0.88rem;
+  color: #fbb034;
+  font-weight: 600;
+}
+.m-tambahan {
+  font-size: 0.72rem;
+  color: #64b5f6;
+  font-weight: 500;
+  margin-left: 0.4rem;
+}
+
+/* Mini month dots */
+.m-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.m-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: default;
+}
+.m-dot-paid    { background: #2e7d32; }
+.m-dot-tunggak { background: #c62828; }
+.m-dot-future  { background: #252525; border: 1px solid #333; }
+.m-dot-current {
+  background: #fbb034;
+  animation: glow-dot 1.3s ease-in-out infinite alternate;
+}
+@keyframes glow-dot {
+  from { box-shadow: 0 0 2px #fbb034; }
+  to   { box-shadow: 0 0 8px #fbb034, 0 0 14px rgba(251,176,52,0.4); }
+}
+
+/* Tunggakan pill list */
+.m-tunggak-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+.m-tunggak-label { font-size: 0.75rem; color: #666; }
+.m-tunggak-pill {
+  background: rgba(198,40,40,0.2);
+  color: #ef5350;
+  border: 1px solid rgba(198,40,40,0.4);
+  border-radius: 6px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.m-ok { font-size: 0.8rem; color: #4caf50; }
+
 /* ── Footer ── */
 .page-footer {
   text-align: center;

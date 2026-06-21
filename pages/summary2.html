@@ -60,8 +60,8 @@
       <span>Memuatkan data semua keluarga...</span>
     </div>
 
-    <!-- Spreadsheet Table -->
-    <div id="tableWrapper" class="table-scroll" style="display:none;">
+    <!-- Desktop: Spreadsheet Table -->
+    <div id="tableWrapper" class="table-scroll desktop-only" style="display:none;">
       <table id="mainTable">
         <thead>
           <tr class="year-row">
@@ -73,14 +73,15 @@
             <th rowspan="2" class="col-rm">Jumlah</th>
             <th rowspan="2" class="col-status">Status</th>
           </tr>
-          <tr class="month-row" id="monthHeaderRow">
-            <!-- filled by JS -->
-          </tr>
+          <tr class="month-row" id="monthHeaderRow"></tr>
         </thead>
         <tbody id="tableBody"></tbody>
         <tfoot id="tableFoot"></tfoot>
       </table>
     </div>
+
+    <!-- Mobile: Card Layout -->
+    <div id="mobileCards" class="mobile-only mobile-grid" style="display:none;"></div>
 
     <footer class="page-footer">
       © 2026 Hussin Legacy Family Day &nbsp;·&nbsp; Data dari Google Sheets

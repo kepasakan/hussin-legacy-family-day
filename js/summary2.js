@@ -106,7 +106,27 @@ async function loadAll() {
   buildMonthHeaders(currentIdx);
   buildTableBody(families, currentIdx, requiredMonths);
   buildTableFoot(families, currentIdx);
+  buildMobileCards(families, currentIdx, requiredMonths);
+
+  // Show correct layout based on screen size
+  revealLayout();
 }
+
+function revealLayout() {
+  const isMobile = window.innerWidth < 768;
+  const table    = document.getElementById("tableWrapper");
+  const cards    = document.getElementById("mobileCards");
+  if (isMobile) {
+    cards.style.display = "grid";
+    table.style.display = "none";
+  } else {
+    table.style.display = "block";
+    cards.style.display = "none";
+  }
+}
+
+// Re-check on resize (e.g. rotate phone)
+window.addEventListener("resize", revealLayout);
 
 function buildMonthHeaders(currentIdx) {
   const row = document.getElementById("monthHeaderRow");
@@ -284,6 +304,71 @@ function buildTableFoot(families, currentIdx) {
   tr.appendChild(sumStatus);
 
   tfoot.appendChild(tr);
+}
+
+function buildMobileCards(families, currentIdx, requiredMonths) {
+  const container = document.getElementById("mobileCards");
+  container.innerHTML = "";
+
+  families.forEach((f, rank) => {
+    const pct = requiredMonths.length > 0
+      ? Math.round((f.paidCount / requiredMonths.length) * 100)
+      : 0;
+
+    const card = document.createElement("div");
+    card.className = `m-card ${f.isLengkap ? "m-lengkap" : "m-tunggak"}`;
+
+    // Badge
+    const badge = f.error
+      ? `<span class="m-badge m-badge-tunggak">❌ Ralat</span>`
+      : f.isLengkap
+      ? `<span class="m-badge m-badge-lengkap">✅ Lengkap</span>`
+      : `<span class="m-badge m-badge-tunggak">⚠️ ${f.tunggakan.length} Tunggak</span>`;
+
+    // Mini dots — all collection months
+    const dots = collectionMonths.map((bulan, colIdx) => {
+      const fullIdx   = colIdx + 4;
+      const isPaid    = f.paid.includes(bulan);
+      const isCurrent = fullIdx === currentIdx;
+      const isPast    = fullIdx < currentIdx;
+      let cls;
+      if (isPaid)         cls = "m-dot-paid";
+      else if (isCurrent) cls = "m-dot-current";
+      else if (isPast)    cls = "m-dot-tunggak";
+      else                cls = "m-dot-future";
+      return `<span class="m-dot ${cls}" title="${bulan}"></span>`;
+    }).join("");
+
+    // Tunggakan pills
+    const tunggakanHtml = f.tunggakan.length > 0
+      ? `<div class="m-tunggak-row">
+          <span class="m-tunggak-label">Tunggak:</span>
+          ${f.tunggakan.map(b => `<span class="m-tunggak-pill">${b}</span>`).join("")}
+         </div>`
+      : `<div class="m-ok">✓ Semua bulan telah dibayar</div>`;
+
+    card.innerHTML = `
+      <div class="m-card-header">
+        <span class="m-rank">#${rank + 1}</span>
+        <span class="m-name">${f.nama.replace("Keluarga ", "Klg ")}</span>
+        ${badge}
+      </div>
+      <div class="m-progress-row">
+        <div class="m-progress-track">
+          <div class="m-progress-fill" style="width:${pct}%"></div>
+        </div>
+        <span class="m-progress-label">${f.paidCount}/${requiredMonths.length} bln</span>
+      </div>
+      <div class="m-rm">
+        💰 RM ${f.actualRM.toFixed(2)}
+        ${f.tambahan > 0 ? `<span class="m-tambahan">+RM ${f.tambahan.toFixed(2)} ikhlas</span>` : ""}
+      </div>
+      <div class="m-dots" title="Hijau=Bayar, Merah=Tunggak, Emas=Bulan ini, Gelap=Akan datang">${dots}</div>
+      ${tunggakanHtml}
+    `;
+
+    container.appendChild(card);
+  });
 }
 
 loadAll();

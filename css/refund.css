@@ -1,0 +1,466 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0f0f0f;
+  font-family: 'Poppins', sans-serif;
+  color: #d0d0d0;
+  min-height: 100vh;
+}
+
+.page-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+[hidden] { display: none !important; }
+
+/* ── Header ── */
+.page-header { text-align: center; margin-bottom: 1.25rem; }
+
+.header-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  display: inline-block;
+  background: #1e1e1e;
+  color: #fbb034;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #333;
+  transition: background 0.2s;
+}
+.nav-btn:hover { background: #2a2a2a; }
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fbb034;
+  margin-bottom: 0.2rem;
+}
+.page-subtitle { color: #777; font-size: 0.88rem; }
+
+/* ── Notis pembatalan ── */
+.notice {
+  background: linear-gradient(135deg, #1f1708 0%, #181818 60%);
+  border: 1px solid rgba(251, 176, 52, 0.35);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  margin: 0 auto 1.4rem;
+  max-width: 760px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+.notice-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #0f0f0f;
+  background: #fbb034;
+  padding: 0.15rem 0.6rem;
+  border-radius: 5px;
+  margin-bottom: 0.55rem;
+}
+.notice h2 {
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 0.45rem;
+}
+.notice p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #bdbdbd;
+}
+.notice p + p { margin-top: 0.5rem; }
+.notice strong { color: #fbb034; }
+
+/* ── Focus bar (paparan satu keluarga) ── */
+.focus-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 0.9rem;
+  font-size: 0.88rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+.focus-bar strong { color: #fff; }
+.focus-link {
+  color: #fbb034;
+  font-weight: 600;
+  text-decoration: none;
+}
+.focus-link:hover { text-decoration: underline; }
+
+/* ── Stats ── */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+.stat-pill {
+  background: #181818;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid transparent;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+.stat-gold  { border-left-color: #fbb034; }
+.stat-green { border-left-color: #2e7d32; }
+.stat-amber { border-left-color: #ef6c00; }
+.stat-blue  { border-left-color: #1e88e5; }
+
+.pill-label {
+  font-size: 0.7rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+.pill-val {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fbb034;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.stat-green .pill-val { color: #66bb6a; }
+.stat-amber .pill-val { color: #ffa726; }
+.stat-blue  .pill-val { color: #64b5f6; }
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+.progress-track {
+  flex: 1;
+  height: 10px;
+  background: #222;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2e7d32, #66bb6a);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.progress-label {
+  font-size: 0.8rem;
+  color: #999;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Loading / error ── */
+.loading-wrap {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #fbb034;
+  font-weight: 600;
+  padding: 3rem 0;
+}
+.spinner {
+  width: 26px; height: 26px;
+  border: 3px solid #2a2a2a;
+  border-top-color: #fbb034;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-box {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #ef5350;
+}
+.retry-btn {
+  margin-top: 0.8rem;
+  background: transparent;
+  color: #fbb034;
+  border: 1px solid #fbb034;
+  padding: 0.4rem 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+}
+.retry-btn:hover { background: #fbb034; color: #0f0f0f; }
+
+.empty-note {
+  text-align: center;
+  color: #999;
+  padding: 2rem 1rem;
+  grid-column: 1 / -1;
+}
+
+/* ── Grid kad keluarga ── */
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.family-grid.single {
+  grid-template-columns: 1fr;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fam-card {
+  background: #181818;
+  border: 1px solid #262626;
+  border-top: 3px solid #fbb034;
+  border-radius: 14px;
+  padding: 1rem 1.1rem 0.9rem;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+}
+.fam-card.status-sebahagian { border-top-color: #ef6c00; }
+.fam-card.status-selesai    { border-top-color: #2e7d32; }
+
+.fam-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+.fam-head h3 {
+  font-size: 1.05rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.badge-belum      { background: rgba(251,176,52,0.12); color: #fbb034; border: 1px solid rgba(251,176,52,0.35); }
+.badge-sebahagian { background: rgba(239,108,0,0.12);  color: #ffa726; border: 1px solid rgba(239,108,0,0.4); }
+.badge-selesai    { background: rgba(46,125,50,0.15);  color: #66bb6a; border: 1px solid rgba(46,125,50,0.4); }
+
+.fam-figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  background: #111;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.9rem;
+}
+.fig { display: flex; flex-direction: column; gap: 0.15rem; }
+.fig-label {
+  font-size: 0.66rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.fig-val {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #eee;
+  font-variant-numeric: tabular-nums;
+}
+.fig-green { color: #66bb6a; }
+.fig-amber { color: #ffa726; }
+
+.fam-section { margin-bottom: 0.8rem; }
+.fam-section h4,
+.fam-section summary {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* Bukti pemulangan */
+.refund-empty {
+  font-size: 0.82rem;
+  color: #888;
+  background: #141414;
+  border: 1px dashed #333;
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  line-height: 1.5;
+}
+.refund-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.refund-item {
+  background: rgba(46,125,50,0.08);
+  border: 1px solid rgba(46,125,50,0.3);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.refund-meta { display: flex; flex-direction: column; gap: 0.1rem; }
+.refund-amt  { font-size: 1rem; font-weight: 700; color: #66bb6a; font-variant-numeric: tabular-nums; }
+.refund-date { font-size: 0.78rem; color: #aaa; }
+.refund-nota { font-size: 0.78rem; color: #ddd; font-style: italic; }
+
+.refund-thumb {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+.refund-thumb img {
+  max-width: 180px;
+  max-height: 260px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  object-fit: cover;
+  background: #111;
+}
+.refund-thumb span { font-size: 0.72rem; color: #888; }
+
+/* Rekod bayaran */
+.pay-details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  background: #141414;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  margin-bottom: 0;
+  user-select: none;
+}
+.pay-details summary::-webkit-details-marker { display: none; }
+.pay-details summary::after {
+  content: "▾";
+  margin-left: auto;
+  color: #777;
+  transition: transform 0.2s;
+}
+.pay-details[open] summary::after { transform: rotate(180deg); }
+.pay-details[open] summary { border-radius: 10px 10px 0 0; }
+.pay-count {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #777;
+  white-space: nowrap;
+}
+
+.pay-list {
+  list-style: none;
+  border: 1px solid #262626;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+.pay-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.8rem;
+  border-top: 1px solid #1f1f1f;
+}
+.pay-row:first-child { border-top: none; }
+.pay-row:nth-child(even) { background: #151515; }
+.pay-month { color: #eee; font-weight: 500; }
+.pay-date  { color: #888; font-variant-numeric: tabular-nums; }
+.pay-amt   { color: #fbb034; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.pay-resit {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: #262626;
+  border: 1px solid #333;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  justify-self: end;
+}
+.pay-resit:hover { background: #333; }
+.pay-resit.none { color: #666; background: transparent; border-color: transparent; }
+
+.fam-actions { display: flex; justify-content: flex-end; }
+.copy-link {
+  background: transparent;
+  border: none;
+  color: #888;
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+.copy-link:hover { color: #fbb034; }
+
+.footnote {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 1.2rem;
+}
+
+/* ── Support & footer ── */
+.support-wrapper { text-align: center; margin: 1.6rem 0 0.5rem; }
+.support-btn {
+  background-color: #25D366;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+.support-btn:hover { background-color: #1DA851; }
+
+.page-footer {
+  text-align: center;
+  color: #444;
+  font-size: 0.8rem;
+  padding: 1.5rem 0 0.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #1a1a1a;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .pill-val { font-size: 1.1rem; }
+  .page-title { font-size: 1.45rem; }
+}
+
+@media (max-width: 420px) {
+  .pay-row {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.15rem;
+  }
+  .pay-month { grid-column: 1; grid-row: 1; }
+  .pay-amt   { grid-column: 2; grid-row: 1; justify-self: end; }
+  .pay-date  { grid-column: 1; grid-row: 2; font-size: 0.72rem; }
+  .pay-resit { grid-column: 2; grid-row: 2; }
+  .fig-val { font-size: 0.88rem; }
+  .support-btn { width: 100%; }
+}

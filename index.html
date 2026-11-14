@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hussin Legacy Family Day</title>
   <link rel="stylesheet" href="index.css">
+  <script src="js/refund-data.js" defer></script>
   <script src="index.js" defer></script>
-  <script src="js/kehadiran-status.js" defer></script>
   <script src="js/kutipan.js" defer></script>
 </head>
 <body>
@@ -23,7 +23,7 @@
       <div class="hamburger-toggle" onclick="toggleMenu()">☰ Menu</div>
       <div class="hamburger-menu" id="hamburgerMenu">
         <div class="button" onclick="window.location.href='pages/aturcara.html'">📝 ATURCARA</div>
-        <div class="button" onclick="window.location.href='pages/bayaran.html'">💳 PEMBAYARAN</div>
+        <div class="button" onclick="window.location.href='pages/refund.html'">💸 REFUND</div>
         <div class="button" onclick="window.location.href='pages/login.html'">🔐 LOG MASUK</div>
         <div class="button" onclick="window.location.href='pages/summary2.html'">📊 RINGKASAN</div>
       </div>
@@ -31,77 +31,31 @@
 
     <div class="bottom-nav">
       <div class="button" onclick="window.location.href='pages/aturcara.html'">📝 ATURCARA</div>
-      <div class="button" onclick="window.location.href='pages/bayaran.html'">💳 PEMBAYARAN</div>
+      <div class="button" onclick="window.location.href='pages/refund.html'">💸 REFUND</div>
       <div class="button" onclick="window.location.href='pages/login.html'">🔐 LOG MASUK</div>
       <div class="button" onclick="window.location.href='pages/summary2.html'">📊 RINGKASAN</div>
     </div>  
 
     <div class="sidebar">
-      
-      <!-- countdown -->
-      <h3 style="text-align: center; color: rgb(255, 255, 255); margin-bottom: 1px; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);">
-        COUNTDOWN
-      </h3>
-      
-            <div class="flip-clock">
-        <div class="unit">
-          <div class="number" id="days">00</div>
-          <div class="label">DAYS</div>
-        </div>
-        <div class="unit">
-          <div class="number" id="hours">00</div>
-          <div class="label">HOURS</div>
-        </div>
-        <div class="unit">
-          <div class="number" id="minutes">00</div>
-          <div class="label">MINUTES</div>
-        </div>
-        <div class="unit">
-          <div class="number" id="seconds">00</div>
-          <div class="label">SECONDS</div>
-        </div>
-      </div>
-      
 
-      <!--box info penting -->
-      <div class="box info-penting">
-        <h3>INFO PENTING</h3>
-        <img src="asset/JUNOPEN.png" alt="INFO PENTING" class="info-image">
+      <!-- notis pembatalan -->
+      <div class="box batal-box">
+        <span class="batal-tag">MAKLUMAN</span>
+        <h3>FAMILY DAY DIBATALKAN</h3>
+        <p>
+          Hussin Legacy Family Day 2026 telah dibatalkan.
+          Semua bayaran akan dipulangkan <strong>sepenuhnya (100%)</strong> kepada setiap keluarga.
+        </p>
+
+        <div class="refund-ringkas">
+          <div class="refund-ringkas-label">Status Pemulangan</div>
+          <div id="refundRingkas" class="refund-ringkas-val"><div class="loader"></div></div>
+          <div class="refund-ringkas-track"><div id="refundRingkasFill" class="refund-ringkas-fill"></div></div>
+        </div>
+
+        <a href="pages/refund.html" class="refund-cta">💸 Semak Status Refund</a>
       </div>
 
-      <p style="
-        text-align: center;
-        font-size: 0.85rem;
-        color: #fcfafa;
-        margin-top: -8px;
-        margin-bottom: 0.3rem;
-      ">
-        👇 Sila log masuk akaun keluarga & tandakan kehadiran di menu <strong>LOG MASUK</strong>.
-      </p>
-
-      <!-- kehadiran -->
-      <div class="box">
-        <h3>STATUS KEHADIRAN</h3>
-         <!-- ✅ Bungkus button dalam wrapper -->
-         <div class="kehadiran-login-wrapper">
-          <a href="pages/login.html" class="kehadiran-login-btn">🔐Log Masuk</a>
-        </div>
-        <div class="kehadiran-grid">
-          <div class="chip" data-key="pakcik">PAKCIK</div>
-          <div class="chip" data-key="pakjang">PAKJANG</div>
-          <div class="chip" data-key="fahmi">FAHMI</div>                 
-          <div class="chip" data-key="hafiz">HAFIZ</div>
-          <div class="chip" data-key="hanis">HANIS</div>
-          <div class="chip" data-key="wani">WANI</div>
-          <div class="chip" data-key="wan">WAN</div>
-          <div class="chip" data-key="ika">IKA</div>
-          <div class="chip" data-key="makteh">MAKTEH</div>
-          <div class="chip" data-key="yana">YANA</div>
-          <div class="chip" data-key="faiz">FAIZ</div>
-          <div class="chip" data-key="paksu">PAKSU</div>
-        </div>
-      </div>
-      
     </div>
 
     <div class="main">
@@ -124,8 +78,9 @@
             </span>
           </div>
           <div class="bayar-cta-wrapper">
-            <a href="pages/bayaran.html">
-              <button class="cta-bayar-btn">📤 Bayar Sekarang</button>
+            <div class="kutipan-tutup">🔒 Kutipan telah ditutup</div>
+            <a href="pages/refund.html">
+              <button class="cta-bayar-btn">💸 Semak Status Refund</button>
             </a>
           </div>
           
@@ -192,9 +147,10 @@
               <tr>
                 <td colspan="5" style="text-align:center;">Memuatkan data...</td>
               </tr>
-            </tbody>            
+            </tbody>
           </table>
         </div>
+        <p class="deposit-note">ℹ️ Deposit homestay RM500 telah dipulangkan oleh pemilik homestay.</p>
       </div>
       <!-- support button -->
       <div class="support-wrapper">

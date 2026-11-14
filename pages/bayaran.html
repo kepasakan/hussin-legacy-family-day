@@ -1,167 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proses Pembayaran</title>
+  <title>Kutipan Ditutup - Family Day</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/bayaran.css" />
 
+  <!--
+    Family Day 2026 telah DIBATALKAN — borang bayaran & QR ditutup.
+    Borang asal masih ada dalam git history (dan js/bayaran.js) kalau perlu dibuka semula.
+  -->
   <style>
-    .bulan-button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 0.8rem;
+    .tutup-box {
+      background: #2b2b2b;
+      border: 1px solid rgba(251, 176, 52, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      padding: 2rem 1.5rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
     }
-
-    .bulan-btn {
-      background-color: #222;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+    .tutup-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .tutup-box h1 { font-size: 1.4rem; color: #fbb034; margin: 0 0 0.6rem; }
+    .tutup-box p  { font-size: 0.92rem; line-height: 1.6; color: #ccc; margin: 0 0 0.6rem; }
+    .tutup-box p strong { color: #fff; }
+    .tutup-actions { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.4rem; }
+    .tutup-btn {
+      display: block;
+      text-decoration: none;
       font-weight: 600;
-      transition: 0.2s ease;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      transition: transform 0.2s ease;
     }
-
-    .bulan-btn:hover {
-      background-color: #444;
-    }
-
-    .selected-bulan {
-      background-color: #fbb034;
-      color: black;
-    }
+    .tutup-btn:hover { transform: scale(1.03); }
+    .tutup-btn.primary   { background: #fbb034; color: #1e1e1e; }
+    .tutup-btn.secondary { background: transparent; color: #fbb034; border: 1px solid #fbb034; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="tutup-box">
+    <div class="tutup-icon">🔒</div>
+    <h1>Kutipan Telah Ditutup</h1>
+    <p>Hussin Legacy Family Day 2026 telah <strong>dibatalkan</strong>.</p>
+    <p>
+      Sila <strong>jangan buat sebarang bayaran baru</strong>.
+      Semua bayaran yang telah dibuat akan dipulangkan sepenuhnya kepada setiap keluarga.
+    </p>
 
-    <!-- ✅ Button Back to Homepage -->
-    <div style="text-align: center; margin: 1.5rem 0;">
-      <a href="../index.html" style="text-decoration: none;">
-        <button type="button" style="
-          background-color: #fbb034;
-          color: black;
-          border: none;
-          padding: 0.6rem 1.5rem;
-          border-radius: 12px;
-          font-size: 0.95rem;
-          font-weight: 600;
-          font-family: 'Poppins', sans-serif;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          cursor: pointer;
-        ">
-          🏠 Kembali ke Laman Utama
-        </button>
-      </a>
-    </div>
-
-    <div class="form-box">
-      <div class="qr-bank">
-        <img src="../asset/qr_code.jpg" alt="QR Code Bank" class="qr-image" />
-        <table class="bank-info-table">
-          
-          <!-- ✅ QR Action Buttons -->
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
-            <!-- Download QR -->
-            <a href="../asset/qr_code.jpg" download="QR_GXBank_FamilyDay.jpg">
-              <button style="
-                padding: 0.6rem 1.2rem;
-                background-color: #fbb034;
-                color: black;
-                border: none;
-                border-radius: 10px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-              ">⬇️ Muat Turun QR</button>
-            </a>
-
-            <!-- Copy Account Number -->
-            <button onclick="copyAccount()" id="copyButton" style="
-              padding: 0.6rem 1.2rem;
-              background-color: #fbb034;
-              color: black;
-              border: none;
-              border-radius: 10px;
-              font-weight: bold;
-              cursor: pointer;
-              box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            ">
-              📋 <span id="copyText">Salin No Akaun</span>
-            </button>
-
-
-
-          <tr><td><strong>Nama</strong></td><td>: Nor Mohamad Naim</td></tr>
-          <tr><td><strong>Bank</strong></td><td>: GX Bank</td></tr>
-          <tr><td><strong>No Akaun</strong></td><td>: 8888-01189939-0</td></tr>
-          <tr><td><strong>Jenis Bayaran</strong></td><td>: Online Transfer / QR Pay</td></tr>
-        </table>
-      </div>
-
-      <form id="paymentForm">
-        <div class="form-group">
-          <label>Nama Keluarga</label>
-          <input type="hidden" id="nama" name="nama" />
-          <div id="namaContainer" class="nama-button-grid"></div>
-        </div>
-        
-      
-        <!-- ✅ Bulan/Tambahan Buttons -->
-        <div class="form-group">
-          <label>Pembayaran Bulan / Tambahan</label>
-          <input type="hidden" id="jenis" name="jenis" />
-        
-          <!-- ✅ Spinner (pindah ke luar container untuk elak terpadam) -->
-          <div id="bulanLoading" class="spinner-wrapper" style="display:none; justify-content: center; margin: 1rem 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
-                <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-              </circle>
-            </svg>
-            <span style="margin-left: 10px;">Memuatkan pilihan bulan...</span>
-          </div>
-        
-          <!-- ✅ Container untuk butang bulan -->
-          <div id="bulanContainer" class="bulan-button-grid"></div>
-          <small style="color:#fbb034; display:block; margin-top:0.8rem;">💡 Perlu bayar <strong>RM50</strong> setiap bulan. Bayaran <strong>TAMBAHAN</strong> boleh dibuat seikhlas hati.</small>
-        </div>
-        
-
-        <div class="form-group">
-          <label for="reference">Reference - *sila letak reference ini</label>
-          <input type="text" id="reference" name="reference" readonly />
-        </div>
-
-        <div class="form-group">
-          <label for="jumlah">Jumlah Bayaran (RM)</label>
-          <input type="number" id="jumlah" name="jumlah" required />
-        </div>
-
-        <div class="form-group">
-          <label for="resit">Upload Resit</label>
-          <input type="file" id="resit" name="resit" accept="image/*,application/pdf" required />
-        </div>
-
-        <button class="submit-btn" type="submit">Hantar</button>
-
-        <div id="loadingStatus" class="spinner-wrapper" style="display:none;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="35" fill="none" stroke="#fbb034" stroke-width="10" stroke-dasharray="164.9 56.9">
-              <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0 50 50;360 50 50"/>
-            </circle>
-          </svg>
-          <span>Sedang menghantar bayaran...</span>
-        </div>
-      </form>
+    <div class="tutup-actions">
+      <a href="refund.html" class="tutup-btn primary">💸 Semak Status Refund</a>
+      <a href="../index.html" class="tutup-btn secondary">🏠 Kembali ke Laman Utama</a>
     </div>
   </div>
-
-  <!-- ✅ Your Bayaran Logic -->
-  <script src="../js/bayaran.js"></script>
 </body>
 </html>

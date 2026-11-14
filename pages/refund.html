@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Refund - Hussin Legacy Family Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/refund.css" />
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div class="header-nav">
+        <a href="../index.html" class="nav-btn">← Laman Utama</a>
+      </div>
+      <h1 class="page-title">💸 Pemulangan Wang</h1>
+      <p class="page-subtitle">Hussin Legacy Family Day 2026</p>
+    </div>
+
+    <!-- Notis pembatalan -->
+    <section class="notice">
+      <span class="notice-tag">MAKLUMAN</span>
+      <h2>Family Day telah dibatalkan</h2>
+      <p>
+        Semua bayaran akan dipulangkan <strong>sepenuhnya (100%)</strong> kepada setiap keluarga.
+        Deposit homestay (RM500) telah dipulangkan oleh pemilik homestay, jadi tiada sebarang potongan.
+      </p>
+      <p>
+        Setiap keluarga boleh semak rekod bayaran beserta resit asal di bawah.
+        Bukti pemindahan semula akan dipaparkan sebaik sahaja wang dipulangkan.
+      </p>
+    </section>
+
+    <!-- Paparan satu keluarga (bila buka dari link ?key=) -->
+    <div id="focusBar" class="focus-bar" hidden>
+      Paparan untuk <strong id="focusName"></strong>
+      <a href="refund.html" class="focus-link">Lihat semua keluarga →</a>
+    </div>
+
+    <!-- Ringkasan keseluruhan -->
+    <div id="overview" hidden>
+      <div class="stats-strip">
+        <div class="stat-pill stat-gold">
+          <div class="pill-label">Perlu Dipulangkan</div>
+          <div class="pill-val" id="statPerlu">—</div>
+        </div>
+        <div class="stat-pill stat-green">
+          <div class="pill-label">Sudah Dipulangkan</div>
+          <div class="pill-val" id="statSudah">—</div>
+        </div>
+        <div class="stat-pill stat-amber">
+          <div class="pill-label">Baki</div>
+          <div class="pill-val" id="statBaki">—</div>
+        </div>
+        <div class="stat-pill stat-blue">
+          <div class="pill-label">Keluarga Selesai</div>
+          <div class="pill-val" id="statSelesai">—</div>
+        </div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-label" id="progressLabel">0%</span>
+      </div>
+    </div>
+
+    <!-- Loading / ralat -->
+    <div class="loading-wrap" id="loading">
+      <div class="spinner"></div>
+      <span>Memuatkan rekod bayaran...</span>
+    </div>
+    <div id="errorBox" class="error-box" hidden>
+      <p>❌ Gagal dapatkan rekod bayaran dari server.</p>
+      <button type="button" class="retry-btn" onclick="loadRefund()">🔄 Cuba Semula</button>
+    </div>
+
+    <!-- Kad setiap keluarga -->
+    <div id="familyGrid" class="family-grid"></div>
+
+    <p id="footnote" class="footnote" hidden></p>
+
+    <div class="support-wrapper">
+      <a href="https://wa.link/ulddw3" class="support-btn">💬 Ada pertanyaan? Hubungi bendahari</a>
+    </div>
+
+    <footer class="page-footer">
+      © 2026 Hussin Legacy Family Day &nbsp;·&nbsp; Rekod bayaran dari Google Sheets
+    </footer>
+  </div>
+
+  <script src="../js/refund-data.js"></script>
+  <script src="../js/refund.js"></script>
+</body>
+</html>

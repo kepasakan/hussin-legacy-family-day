@@ -522,3 +522,115 @@ tbody tr:hover {
     flex: 1; /* stretch both kutipan duit and jumlah digunakan boxes equally */
   }
 }
+
+/* ── Notis pembatalan & status refund (event dibatalkan) ── */
+.batal-box {
+  text-align: left;
+  border: 1px solid rgba(251, 176, 52, 0.45);
+  background: linear-gradient(160deg, #2a1f0a 0%, #1e1e1e 55%);
+  padding: 18px;
+}
+
+.batal-tag {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #1e1e1e;
+  background: #fbb034;
+  padding: 2px 9px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.batal-box h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.batal-box p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #cfcfcf;
+}
+
+.batal-box p strong { color: #fbb034; }
+
+.refund-ringkas {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 14px 0;
+}
+
+.refund-ringkas-label {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.refund-ringkas-val {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #ccc;
+  margin: 2px 0 8px;
+}
+
+.refund-ringkas-val strong { color: #66bb6a; font-size: 1.1rem; }
+
+.refund-ringkas-track {
+  height: 8px;
+  background: #333;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.refund-ringkas-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2e7d32, #66bb6a);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+.refund-cta {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #fbb034;
+  color: #1e1e1e;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease;
+}
+
+.refund-cta:hover { background-color: #ffc84a; }
+
+.kutipan-tutup {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.deposit-note {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ── Mobile: elak jadual tolak layout keluar skrin ── */
+.container > * { min-width: 0; }
+.table-container { overflow-x: auto; }

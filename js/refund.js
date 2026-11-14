@@ -138,7 +138,8 @@ async function loadRefund() {
     let status = "belum";
     if (dibayar > 0 && dipulangkan >= dibayar - 0.005) status = "selesai";
     else if (dipulangkan > 0) status = "sebahagian";
-    const tarikhPulang = refunds.length ? refunds[refunds.length - 1].tarikh : null;
+    const withDate     = refunds.filter(r => r.tarikh);
+    const tarikhPulang = withDate.length ? withDate[withDate.length - 1].tarikh : null;
     return { ...fam, payments, dibayar, refunds, dipulangkan, baki, status, tarikhPulang };
   });
 
@@ -163,7 +164,7 @@ function step(cls, icon, title, sub) {
 function stepper(f) {
   let step2, line;
   if (f.status === "selesai") {
-    step2 = step("done", "✓", "Duit dipulangkan", tarikh(f.tarikhPulang));
+    step2 = step("done", "✓", "Duit dipulangkan", f.tarikhPulang ? tarikh(f.tarikhPulang) : "Selesai");
     line = "done";
   } else if (f.status === "sebahagian") {
     step2 = step("half", "½", "Sebahagian dipulangkan", `${rm(f.dipulangkan)} dah`);
@@ -254,7 +255,7 @@ function renderSingle(f) {
   if (f.status === "selesai") {
     dot2 = `<span class="tl-dot done">✓</span>`;
     title2 = "Duit dipulangkan";
-    sub2 = `${rm(f.dipulangkan)} · ${tarikh(f.tarikhPulang)}`;
+    sub2 = f.tarikhPulang ? `${rm(f.dipulangkan)} · ${tarikh(f.tarikhPulang)}` : rm(f.dipulangkan);
   } else if (f.status === "sebahagian") {
     dot2 = `<span class="tl-dot half">½</span>`;
     title2 = "Sebahagian dipulangkan";
@@ -277,7 +278,9 @@ function renderSingle(f) {
     } else if (resit) {
       proof = `<a class="receipt-link" href="${escapeHtml(resit.href)}" target="_blank" rel="noopener">📎 Lihat resit pemindahan</a>`;
     }
-    const meta = showEntryMeta ? `<div class="r-meta"><strong>${rm(r.jumlah)}</strong> · ${tarikh(r.tarikh)}</div>` : "";
+    const meta = showEntryMeta
+      ? `<div class="r-meta"><strong>${rm(r.jumlah)}</strong>${r.tarikh ? ` · ${tarikh(r.tarikh)}` : ""}</div>`
+      : "";
     const nota = r.nota ? `<div class="r-nota">${escapeHtml(r.nota)}</div>` : "";
     return meta || nota || proof ? `<div class="refund">${meta}${nota}${proof}</div>` : "";
   }).join("");

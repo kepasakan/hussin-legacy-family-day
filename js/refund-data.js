@@ -14,8 +14,8 @@
 //        ],
 //
 //      - jumlah : RM yang dipindahkan (nombor sahaja)
-//      - tarikh : tarikh transfer, format "YYYY-MM-DD"
-//      - resit  : nama fail dalam asset/refund/  ATAU  link Google Drive
+//      - tarikh : (pilihan) tarikh transfer, format "YYYY-MM-DD"
+//      - resit  : (pilihan) nama fail dalam asset/refund/  ATAU  link Google Drive
 //      - nota   : (pilihan) contoh "Transfer ke akaun isteri"
 //
 //      Kalau transfer dua kali (contoh separuh-separuh), tambah dua baris.
@@ -34,5 +34,10 @@ const REFUND_DATA = {
   makteh:  [],
   yana:    [],
   faiz:    [],
-  paksu:   [],
+  paksu:   [
+    // Paksu bayar deposit homestay RM500 terus kepada owner (29 Apr 2025) — dikira
+    // sebagai bayaran JUN 2025 – MAC 2026. Owner dah pulangkan deposit kepada Paksu,
+    // jadi bendahari hanya perlu transfer baki RM50.
+    { jumlah: 500, nota: "Deposit homestay — dibayar terus oleh Paksu kepada owner, dan owner dah pulangkan kepada Paksu." },
+  ],
 };
